@@ -10,25 +10,41 @@ namespace Entidades
     {
 
         #region Atributos
-        String pregunta { get; set; }
-        List <clsRespuestas> listadoRespuestas { get; set; }
+        public string category { get; set; }
+        public string id { get; set; }
+        public string correctAnswer { get; set; }
+        public List <string> incorrectAnswers { get; set; }
+
+        public string question { get; set; }
+        public List<string> tags { get; set; }
+        public string type { get; set; }
+        public string difficulty { get; set; }
+        public List <string> regions { get; set; }
+        public bool isNiche { get; set; }
 
         #endregion
 
-        #region Constructor por defecto
+        #region Constructores
+
         public clsPreguntas()
         {
 
         }
-        #endregion
-
-
-        #region Constructor con parámetros
-        public clsPreguntas(string pregunta, List<clsRespuestas> listadoRespuestas)
+        public clsPreguntas(string category, string id, string correctAnswer, List<string> incorrectAnswers, string question, List<string> tags, string type, string difficulty, List<string> regions, bool isNiche)
         {
-            this.pregunta = pregunta;
-            this.listadoRespuestas = listadoRespuestas;
+            this.category = category;
+            this.id = id;
+            this.correctAnswer = correctAnswer;
+            this.incorrectAnswers = incorrectAnswers;
+            this.question = question;
+            this.tags = tags;
+            this.type = type;
+            this.difficulty = difficulty;
+            this.regions = regions;
+            this.isNiche = isNiche;
         }
+
+
         #endregion
 
     }

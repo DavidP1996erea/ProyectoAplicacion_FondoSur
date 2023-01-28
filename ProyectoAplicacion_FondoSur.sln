@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR_Proyecto", "SignalR_Proyecto\SignalR_Proyecto.csproj", "{F1B09A2B-9389-464C-AFA5-2CF476B70FE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR_Proyecto", "SignalR_Proyecto\SignalR_Proyecto.csproj", "{F1B09A2B-9389-464C-AFA5-2CF476B70FE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{03A3A011-1E77-4A83-9FE2-EC85ACD89C77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{03A3A011-1E77-4A83-9FE2-EC85ACD89C77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PregunFondoSur", "PregunFondoSur\PregunFondoSur.csproj", "{2F8C41E6-EE35-4E19-9F6C-6A1D4861F83D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PregunFondoSur", "PregunFondoSur\PregunFondoSur.csproj", "{2F8C41E6-EE35-4E19-9F6C-6A1D4861F83D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{2D1B7C24-CE6D-488D-A615-F2BCC6731C21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{2F8C41E6-EE35-4E19-9F6C-6A1D4861F83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8C41E6-EE35-4E19-9F6C-6A1D4861F83D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F8C41E6-EE35-4E19-9F6C-6A1D4861F83D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2D1B7C24-CE6D-488D-A615-F2BCC6731C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1B7C24-CE6D-488D-A615-F2BCC6731C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1B7C24-CE6D-488D-A615-F2BCC6731C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1B7C24-CE6D-488D-A615-F2BCC6731C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
