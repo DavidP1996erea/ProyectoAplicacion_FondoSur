@@ -11,6 +11,9 @@ namespace PregunFondoSur.ViewModels
 {
     public class clsPruebaRuben : clsVMBase
     {
+        /// <summary>
+        /// XD
+        /// </summary>
         public List<clsPreguntas> listadoPreguntasFilms { get; set; }
         public List<clsPreguntas> listadoPreguntasMusic { get; set; }
         public List<clsPreguntas> listadoPreguntashistory { get; set; }
