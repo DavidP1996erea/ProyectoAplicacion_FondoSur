@@ -8,13 +8,68 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
+
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
+            
+            <StackLayout
+                Margin="10"
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="10">
+                <Button
+                    x:Name="startButton"
+                    Clicked="StartButton_Clicked"
+                    CornerRadius="0"
+                    FontAttributes="Bold"
+                    Text="Start"
+                    TextColor="White" />
+                <Button
+                    x:Name="stopButton"
+                    Clicked="StopButton_Clicked"
+                    CornerRadius="0"
+                    FontAttributes="Bold"
+                    Text="Stop"
+                    TextColor="White" />
+            </StackLayout>
+
+            <Grid>
+                <Image
+                    x:Name="circleImage"
+                    Margin="10"
+                    WidthRequest="200"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"
+                    Source="ruletass.png"
+                    VerticalOptions="Center" />
+                <Label
+                    Margin="0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    Text="▼"
+                    TextColor="Gray"
+                    VerticalOptions="Start"
+                    VerticalTextAlignment="Start" />
+                <Button
+                    x:Name="centerButton"
+                    Margin="10"
+                    Padding="0"
+                    BackgroundColor="Gray"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    WidthRequest="40" />
+            </Grid>
 
 
-
+            <!--
             <ListView ItemsSource="{Binding listadoPreguntasFilms}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -28,6 +83,7 @@
             </ListView>
 
             <Button Command="{Binding btnMostrarCommand}"/>
+            -->
 
         </VerticalStackLayout>
     </ScrollView>
