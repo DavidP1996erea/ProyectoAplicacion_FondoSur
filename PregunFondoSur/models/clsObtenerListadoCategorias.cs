@@ -1,5 +1,4 @@
-﻿using Entidades;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +12,11 @@ namespace PregunFondoSur.models
         {
             List<clsCategorias> listaCategorias = new List<clsCategorias>();
 
-            listaCategorias.Add(new clsCategorias("Films", "URL", false));
-            listaCategorias.Add(new clsCategorias("Music", "URL", false));
-            listaCategorias.Add(new clsCategorias("History", "URL", false));
-            listaCategorias.Add(new clsCategorias("Food", "URL", false));
-            listaCategorias.Add(new clsCategorias("Science", "URL", false));
+            listaCategorias.Add(new clsCategorias("Films", "URL", "", "", false));
+            listaCategorias.Add(new clsCategorias("Music", "URL", "", "", false));
+            listaCategorias.Add(new clsCategorias("History", "URL", "", "", false));
+            listaCategorias.Add(new clsCategorias("Food", "URL", "", "", false));
+            listaCategorias.Add(new clsCategorias("Science", "URL", "", "", false));
 
             return listaCategorias;
         }
