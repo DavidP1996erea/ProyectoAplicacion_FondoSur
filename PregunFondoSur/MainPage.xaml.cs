@@ -26,27 +26,26 @@
 
                 int value = ((ratation - 4) / 8) + 1;
 
-                this.centerButton.Text = (value).ToString();
 
             });
         }
         #endregion
         #region StartButton_Clicked
-        private void StartButton_Clicked(object sender, EventArgs e)
+        private async void StartButton_Clicked(object sender, EventArgs e)
         {
             timer.Start();
             Rotate();
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            StopRuleta();
         }
         #endregion
         #region StopButton_Clicked
-        private async void StopButton_Clicked(object sender, EventArgs e)
+        private async void StopRuleta()
         {
             uint duration = 1 * 1000;
 
             Random random = new Random();
-            int no = random.Next(1, 49);
-
-            this.centerButton.Text = no.ToString();
+            int no = random.Next(0, 44);
 
             await this.circleImage.RotateTo((2 * 360) + (no * 8 + 4), duration, Easing.SinOut);
             this.timer.Stop();
