@@ -2,90 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:PregunFondoSur.ViewModels"
+             BackgroundColor="#444444"
              x:Class="PregunFondoSur.MainPage">
     <ContentPage.BindingContext>
         <model:clsPruebaRuben/>
     </ContentPage.BindingContext>
 
-    <ScrollView>
+    <VerticalStackLayout
+           >
+        
+        <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
+            <Border StrokeShape="RoundRectangle 40, 40, 40, 40" BackgroundColor="White" WidthRequest="300" HeightRequest="150" HorizontalOptions="Start" Margin="0, 0, 400, 0">
+                <VerticalStackLayout>
 
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-            
-            <StackLayout
-                Margin="10"
-                HorizontalOptions="Center"
-                Orientation="Horizontal"
-                Spacing="10">
-                <Button
-                    x:Name="startButton"
-                    Clicked="StartButton_Clicked"
-                    CornerRadius="0"
-                    FontAttributes="Bold"
-                    Text="Start"
-                    TextColor="White" />
-                <Button
-                    x:Name="stopButton"
-                    Clicked="StopButton_Clicked"
-                    CornerRadius="0"
-                    FontAttributes="Bold"
-                    Text="Stop"
-                    TextColor="White" />
-            </StackLayout>
+            </VerticalStackLayout>
+            </Border>
+            <Border StrokeShape="RoundRectangle 40, 40, 40, 40" BackgroundColor="White" WidthRequest="300" HeightRequest="150">
+                <VerticalStackLayout>
 
-            <Grid>
-                <Image
+                </VerticalStackLayout>
+            </Border>
+        </HorizontalStackLayout>
+
+        <Grid Margin="0, 30, 0, 0">
+            <Image
                     x:Name="circleImage"
                     Margin="10"
-                    WidthRequest="200"
-                    HeightRequest="200"
+                    WidthRequest="300"
+                    HeightRequest="300"
                     HorizontalOptions="Center"
-                    Source="ruletass.png"
+                    Source="ruleta.png"
                     VerticalOptions="Center" />
-                <Label
+            <Label
                     Margin="0"
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Center"
                     Text="▼"
-                    TextColor="Gray"
+                    TextColor="White"
                     VerticalOptions="Start"
                     VerticalTextAlignment="Start" />
-                <Button
+            <Button
                     x:Name="centerButton"
                     Margin="10"
                     Padding="0"
-                    BackgroundColor="Gray"
+                    BackgroundColor="White"
                     CornerRadius="20"
-                    FontAttributes="Bold"
-                    FontSize="18"
+                    FontSize="12"
                     HeightRequest="40"
                     HorizontalOptions="Center"
-                    TextColor="White"
+                    TextColor="Black"
+                    Text="GIRAR"
+                    Clicked="StartButton_Clicked"
                     VerticalOptions="Center"
                     WidthRequest="40" />
-            </Grid>
+        </Grid>
 
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10"  WidthRequest="50" HeightRequest="50" BackgroundColor="DeepSkyBlue">
+            <Image BackgroundColor="DeepSkyBlue" Source="salir.png" WidthRequest="40" HeightRequest="40"/>
+        </Border>
 
-            <!--
-            <ListView ItemsSource="{Binding listadoPreguntasFilms}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <HorizontalStackLayout HeightRequest="40">
-                                <Label Margin="0,10,5,0" Text="{Binding question}"/>
-                            </HorizontalStackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button Command="{Binding btnMostrarCommand}"/>
-            -->
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 
 </ContentPage>
