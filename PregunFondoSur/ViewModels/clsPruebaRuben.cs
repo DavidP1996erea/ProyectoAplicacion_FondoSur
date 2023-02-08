@@ -16,12 +16,19 @@ namespace PregunFondoSur.ViewModels
         public List<clsPreguntas> listadoPreguntashistory { get; set; }
         public List<clsPreguntas> listadoPreguntasFood { get; set; }
         public List<clsPreguntas> listadoPreguntasScience { get; set; }
+        public List<string> ListaCategorias;
         public DelegateCommand btnMostrarCommand { get; set; }
 
 
         public clsPruebaRuben()
         {
             btnMostrarCommand = new DelegateCommand(mostrarCommand_Executed);
+            ListaCategorias = new List<string>();
+            ListaCategorias.Add("pablomotos.jpeg");
+            ListaCategorias.Add("pablomotos.jpeg");
+            ListaCategorias.Add("pablomotos.jpeg");
+            ListaCategorias.Add("pablomotos.jpeg");
+            ListaCategorias.Add("pablomotos.jpeg");
         }
 
         private void mostrarCommand_Executed()

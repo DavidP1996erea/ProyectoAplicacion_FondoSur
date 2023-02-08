@@ -33,6 +33,7 @@
         #region StartButton_Clicked
         private async void StartButton_Clicked(object sender, EventArgs e)
         {
+            centerButton.IsEnabled = false;
             timer.Start();
             Rotate();
             await Task.Delay(TimeSpan.FromSeconds(1));
@@ -49,6 +50,8 @@
 
             await this.circleImage.RotateTo((2 * 360) + (no * 8 + 4), duration, Easing.SinOut);
             this.timer.Stop();
+            centerButton.IsEnabled = true;
+
         }
         #endregion
 
