@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
-    internal class clsResultados
+    internal class clsResultadosVM
     {
+
     }
 }

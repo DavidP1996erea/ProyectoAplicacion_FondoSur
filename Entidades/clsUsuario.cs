@@ -4,10 +4,10 @@
     {
 
         #region Atributos
-        String userName { get; set; }
-        String password {get; set;}
+        public String userName { get; set; }
+        public String password {get; set;}
 
-        String imagen { get; set;}
+        public String imagen { get; set;}
         #endregion
 
         #region Constructor con parámetros

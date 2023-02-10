@@ -28,19 +28,31 @@ namespace PregunFondoSur.ViewModels
             logInCommand = new DelegateCommand(logInCommand_Execute, logInCommand_CanExecute);
         }
 
+        /// <summary>
+        /// Método que revisa si el usuario ha introducido los datos necesarios en los entrys del la vista como para loggearse
+        /// Precondiciones:Ninguna
+        /// Postcondiciones:Ninguna
+        /// </summary>
+        /// <returns></returns>
         private bool logInCommand_CanExecute()
         {
             bool pulsable=false;
-            if (usuario.userName ==) { }
+            if (usuario.userName!= "" && usuario.password!="" && usuario.imagen!="") {
+                pulsable=true;
+            }
             return pulsable;
         }
 
+        /// <summary>
+        /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         private void logInCommand_Execute()
         {
             throw new NotImplementedException();
         }
         #endregion
 
-#
+
     }
 }

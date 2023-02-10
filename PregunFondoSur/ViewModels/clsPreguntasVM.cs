@@ -8,5 +8,6 @@ namespace PregunFondoSur.ViewModels
 {
     internal class clsPreguntasVM
     {
+
     }
 }
