@@ -16,7 +16,7 @@ namespace PregunFondoSur.ViewModels
         public List<clsPreguntas> listadoPreguntashistory { get; set; }
         public List<clsPreguntas> listadoPreguntasFood { get; set; }
         public List<clsPreguntas> listadoPreguntasScience { get; set; }
-        public List<string> ListaCategorias;
+        public List<string> ListaCategorias { get; set; }
         public DelegateCommand btnMostrarCommand { get; set; }
 
 
