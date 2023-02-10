@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PregunFondoSur.Vistas.PaginaEsperaUsuario"
+             xmlns:model="clr-namespace:PregunFondoSur.ViewModels.clsPaginaEspera"
+             Title="PaginaEsperaUsuario"
+             BackgroundColor="#444444">
+
+
+    <ContentPage.BindingContext>
+        <model:clsPaginaEsperaUsuarui></model:clsPaginaEsperaUsuarui>
+    </ContentPage.BindingContext>
+
+
+    <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
+        <Border StrokeShape="RoundRectangle 20, 20, 20, 20" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="0, 0,30, 0">
+
+            <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="End" Margin="10,0,0,0" HeightRequest="70" WidthRequest="400">
+
+                
+                   <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="50" HeightRequest="50" Margin="20,0,0,0"></Image>
+                <Label Text="Nicknameasdasdasd 1a"  WidthRequest="220" Margin="20, 20, 0, 0" FontSize="20"></Label>
+             
+
+
+            </HorizontalStackLayout>
+
+        </Border>
+
+
+        <Line 
+      
+      X1="0" 
+      Y1="0"
+      X2="0"
+      Y2="200"
+      Stroke="white" />
+
+        <Border StrokeShape="RoundRectangle 20, 20, 20, 20" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="30, 0,0, 0">
+
+            <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="End" Margin="10,0,0,0" HeightRequest="70" WidthRequest="400">
+                
+                <Label Text="Nicknameasdasdasd 1a"  WidthRequest="220" Margin="20, 20, 0, 0" FontSize="20"></Label>
+                <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="50" HeightRequest="50" Margin="20,0,0,0"></Image>
+
+              
+            </HorizontalStackLayout>
+
+        </Border>
+    </HorizontalStackLayout>
+    
+</ContentPage>
