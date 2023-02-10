@@ -16,7 +16,7 @@
         <Border StrokeShape="RoundRectangle 20, 20, 20, 20" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="0, 0,30, 0">
 
             <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="End" Margin="10,0,0,0" HeightRequest="70" WidthRequest="400">
-
+<!--asd-->
                 
                    <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="50" HeightRequest="50" Margin="20,0,0,0"></Image>
                 <Label Text="Nicknameasdasdasd 1a"  WidthRequest="220" Margin="20, 20, 0, 0" FontSize="20"></Label>
