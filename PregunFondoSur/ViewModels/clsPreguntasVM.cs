@@ -25,9 +25,22 @@ namespace PregunFondoSur.ViewModels.clsPreguntasVM
         #region Constructores
         public clsPreguntasVM() {
             tiempo = 60;
-            pulsarBotonCommand = new DelegateCommand();
+            pulsarBotonCommand = new DelegateCommand( pulsarBotonCommand_Executed, pulsarBotonCommand_CanExecuted);
         }
+
+
         #endregion
+
+
+        private bool pulsarBotonCommand_CanExecuted()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void pulsarBotonCommand_Executed()
+        {
+            throw new NotImplementedException();
+        }
 
         #region SignalR
         #endregion

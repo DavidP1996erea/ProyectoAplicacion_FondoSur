@@ -1,4 +1,4 @@
-﻿namespace PregunFondoSur
+﻿namespace PregunFondoSur.Vistas
 {
     public partial class EleccionCategoria : ContentPage
     {
