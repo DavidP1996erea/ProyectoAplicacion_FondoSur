@@ -1,6 +1,6 @@
 ﻿namespace PregunFondoSur
 {
-    public partial class MainPage : ContentPage
+    public partial class EleccionCategoria : ContentPage
     {
 
         #region Fields
@@ -8,7 +8,7 @@
         #endregion
 
         #region MainPage
-        public MainPage()
+        public EleccionCategoria()
         {
             InitializeComponent();
 
