@@ -6,7 +6,7 @@ using PregunFondoSur.ViewModels.Utilidades;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PregunFondoSur.ViewModels.clsPreguntasVM
+namespace PregunFondoSur.ViewModels
 {
     public class clsPreguntasVM : clsVMBase
     {
@@ -14,6 +14,8 @@ namespace PregunFondoSur.ViewModels.clsPreguntasVM
         private clsPreguntas pregunta;
         private int tiempo;
         private DelegateCommand pulsarBotonCommand;
+
+
         #endregion
 
         #region Propiedades
@@ -24,6 +26,15 @@ namespace PregunFondoSur.ViewModels.clsPreguntasVM
 
         #region Constructores
         public clsPreguntasVM() {
+
+            List <string> list = new List<string>();
+            list.Add("respuesta 1sdfkjshfbsdhlfidbsuihjfbsdfhyibsdfuoyghbdsafpihsadfbahsdfboysiahudbfsaiphdfugbsañdfhbsuadfhb sdfñhsadbf");
+            list.Add("respuesta 2");
+            list.Add("respuesta 3");
+            list.Add("respuesta 4");
+            pregunta = new clsPreguntas();
+            pregunta.incorrectAnswers = list;
+
             tiempo = 60;
             pulsarBotonCommand = new DelegateCommand( pulsarBotonCommand_Executed, pulsarBotonCommand_CanExecuted);
         }

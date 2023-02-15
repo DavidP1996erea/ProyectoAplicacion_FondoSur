@@ -49,6 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\foodbase.png" />
+	  <None Remove="Resources\Images\foodganado.png" />
+	  <None Remove="Resources\Images\historybase.png" />
+	  <None Remove="Resources\Images\historyganado.png" />
+	  <None Remove="Resources\Images\musicalbase.png" />
+	  <None Remove="Resources\Images\musicalganado.png" />
+	  <None Remove="Resources\Images\sciencebase.png" />
+	  <None Remove="Resources\Images\scienceganado.png" />
+	  <None Remove="Resources\Images\videobase.png" />
+	  <None Remove="Resources\Images\videoganado.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Entidades\Entidades.csproj" />
 	  <ProjectReference Include="..\Services\Services.csproj" />
 	</ItemGroup>
