@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PregunFondoSur.ViewModels.Utilidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
-    public class clsResultadosVM
+    public class clsResultadosVM : clsVMBase
     {
         private bool hasGanado;
         private string textoMostrar;

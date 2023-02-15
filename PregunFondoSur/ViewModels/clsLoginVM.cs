@@ -47,9 +47,13 @@ namespace PregunFondoSur.ViewModels
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        private void logInCommand_Execute()
+        private async void logInCommand_Execute()
         {
-            throw new NotImplementedException();
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Usuario", Usuario }
+            };
+            await Shell.Current.GoToAsync($"PaginaEsperaUsuario", navigationParameter);
         }
         #endregion
 
