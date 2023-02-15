@@ -12,7 +12,7 @@
     </ContentPage.BindingContext>
     
     <VerticalStackLayout >
-
+<!--asd-->
 
         <Label Margin="0,50,0,0"  HorizontalOptions="Center" VerticalOptions="Center"   Text="Pregunta bindeadaa"></Label>
 
