@@ -23,6 +23,12 @@ namespace PregunFondoSur.ViewModels
         rivalConectado = false;
         }
         #endregion
+
+        #region Metodos
+        
+
+        #endregion
+
         #region MetodosSignalR
         /// <summary>
         /// Metodos paletas2
@@ -33,7 +39,14 @@ namespace PregunFondoSur.ViewModels
         /// <summary>
         /// Metoddo paletas
         /// </summary>
-        private void recibirBool(bool rivalConenctado) { }
+        private async void recibirBool(bool rivalConenctado) {
+
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Usuario", Usuario }
+            };
+            await Shell.Current.GoToAsync($"PaginaEleccionCategoria", navigationParameter);
+        }
         #endregion
     }
 }

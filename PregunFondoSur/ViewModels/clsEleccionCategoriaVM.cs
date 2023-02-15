@@ -17,6 +17,8 @@ namespace PregunFondoSur.ViewModels
         private clsUsuario usuarioRival;
         private List<clsCategorias> listaCategoriasLocal;
         private List<clsCategorias> listaCategoriasRival;
+        private List<clsPreguntas> listaPreguntas;
+        private clsPreguntas preguntaEnviar;
         private bool tuTurno;
         //Booleano en el que se guarda si la ruleta esta girando o no para el canExecute de girarRuletaCommand
         private bool estaGirando;
@@ -106,13 +108,18 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private void girarRuletaCommand_Executed()
+        private async void girarRuletaCommand_Executed()
         {
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
-            //TODO Implementar Chuleta
 
+            //TODO Implementar Chuleta
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "preguntaEnviar", preguntaEnviar }
+            };
+            await Shell.Current.GoToAsync($"PaginaPregunta", navigationParameter);
         }
 
         /// <summary>
