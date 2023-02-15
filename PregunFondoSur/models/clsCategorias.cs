@@ -17,7 +17,6 @@ namespace PregunFondoSur.models
         private bool estaAcertada;
         #endregion
 
-
         #region Propiedades
         public string Nombre { get { return nombre; } set { nombre = value; } }
         public string ImagenMostrada { get { return imagenMostrada; } set { imagenMostrada = value; } }
