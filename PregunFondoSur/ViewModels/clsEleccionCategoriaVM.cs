@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,11 @@ namespace PregunFondoSur.ViewModels
         private clsUsuario usuarioRival;
         private List<clsCategorias> listaCategoriasLocal;
         private List<clsCategorias> listaCategoriasRival;
-        private List<clsPreguntas> listaPreguntas;
+        private List<clsPreguntas> listadoPreguntasFilms;
+        private List<clsPreguntas> listadoPreguntasMusic;
+        private List<clsPreguntas> listadoPreguntashistory;
+        private List<clsPreguntas> listadoPreguntasFood;
+        private List<clsPreguntas> listadoPreguntasScience;
         private clsPreguntas preguntaEnviar;
         private bool tuTurno;
         //Booleano en el que se guarda si la ruleta esta girando o no para el canExecute de girarRuletaCommand
@@ -81,6 +86,7 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsEleccionCategoriaVM()
         {
+            obtenerListados();
             listaCategoriasLocal = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             listaCategoriasRival = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
@@ -90,6 +96,18 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Metodos
+
+
+
+        private async void obtenerListados()
+        {
+            listadoPreguntasFilms = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFilmDAL();
+            listadoPreguntasMusic = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasMusicDAL();
+            listadoPreguntashistory = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasHistoryDAL();
+            listadoPreguntasFood = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFoodDAL();
+            listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
+        }
+
         /// <summary>
         /// 
         /// </summary>
