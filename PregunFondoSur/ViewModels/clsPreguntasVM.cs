@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PregunFondoSur.ViewModels
+namespace PregunFondoSur.ViewModels.clsPreguntasVM
 {
     public class clsPreguntasVM
     {

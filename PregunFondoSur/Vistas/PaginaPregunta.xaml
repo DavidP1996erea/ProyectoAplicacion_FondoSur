@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PregunFondoSur.Vistas.PaginaPregunta"
+             xmlns:model ="clr-namespace:PregunFondoSur.ViewModels.clsPreguntasVM"
+             Title="PaginaPregunta">
+    <VerticalStackLayout
+           >
+        <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
+            <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start" Margin="0, 0, 400, 0">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Border  WidthRequest="50" HeightRequest="50" VerticalOptions="Start" Margin="40, 15, 20, 0" HorizontalOptions="Start">
+                            <Image Source="pablomotos.jpeg" Aspect="Fill"></Image>
+                        </Border>
+                        <Label Text="Nickname 1" Margin="0, 30, 0, 0" FontSize="20"></Label>
+                    </HorizontalStackLayout>
+                    <CollectionView  ItemsSource="{Binding ListaCategorias}"  SelectionMode="None" Margin="10, 10, 10, 10" HorizontalOptions="Center" WidthRequest="400" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
+
+                        <CollectionView.ItemTemplate >
+
+                            <DataTemplate>
+
+                                <Image Source="{Binding}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemsLayout>
+
+                            <GridItemsLayout VerticalItemSpacing="15" Orientation="Vertical" Span="5"></GridItemsLayout>
+
+                        </CollectionView.ItemsLayout>
+
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+            <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="450" HeightRequest="150" >
+                <VerticalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="End">
+                        <Label Text="Nickname 2" FontSize="20" HorizontalOptions="End" Margin="0, 30, 0, 0"></Label>
+                        <Border WidthRequest="50" HeightRequest="50" VerticalOptions="Start" Margin="20, 15, 40, 0" HorizontalOptions="End">
+                            <Image Source="pablomotos.jpeg" Aspect="Fill"></Image>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <CollectionView  ItemsSource="{Binding ListaCategorias}"  SelectionMode="None" Margin="10, 10, 10, 10" HorizontalOptions="Center" WidthRequest="400" HeightRequest="90">
+
+                        <CollectionView.ItemTemplate >
+
+                            <DataTemplate>
+
+                                <Image Source="{Binding}" WidthRequest="50" HeightRequest="50" Aspect="Fill"/>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.ItemsLayout>
+
+                            <GridItemsLayout VerticalItemSpacing="15" Orientation="Vertical" Span="5"></GridItemsLayout>
+
+                        </CollectionView.ItemsLayout>
+
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </HorizontalStackLayout>
+
+      
+
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10"  WidthRequest="50" HeightRequest="50" BackgroundColor="DeepSkyBlue" VerticalOptions="End" HorizontalOptions="Start" Margin="20, 70, 0, 0">
+            <Image BackgroundColor="DeepSkyBlue" Source="salir.png" WidthRequest="40" HeightRequest="40" />
+        </Border>
+
+    </VerticalStackLayout>
+</ContentPage>
