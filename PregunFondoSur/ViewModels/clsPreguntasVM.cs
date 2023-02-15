@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
-    internal class clsPreguntasVM
+    public class clsPreguntasVM
     {
 
     }
