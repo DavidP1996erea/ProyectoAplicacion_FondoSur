@@ -7,20 +7,26 @@ namespace PregunFondoSur.ViewModels
     public class clsLoginVM : clsVMBase
     {
         #region Atributos
-        clsUsuario usuario;
-        DelegateCommand logInCommand;
+        private clsUsuario usuario;
+        private DelegateCommand logInCommand;
         #endregion
 
         #region Propiedades
-        clsUsuario Usuario { get { return usuario; } 
-            set { usuario = value;
+        public clsUsuario Usuario
+        {
+            get { return usuario; }
+            set
+            {
+                usuario = value;
                 logInCommand.RaiseCanExecuteChanged();
-            } }
-        DelegateCommand LogInCommand { get { return logInCommand; } }
+            }
+        }
+        public DelegateCommand LogInCommand { get { return logInCommand; } }
         #endregion
 
         #region Constructores
-        public clsLoginVM() {
+        public clsLoginVM()
+        {
             usuario = new clsUsuario();
             logInCommand = new DelegateCommand(logInCommand_Execute, logInCommand_CanExecute);
         }
@@ -33,9 +39,10 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private bool logInCommand_CanExecute()
         {
-            bool pulsable=false;
-            if (usuario.userName!= "" && usuario.password!="" && usuario.imagen!="") {
-                pulsable=true;
+            bool pulsable = false;
+            if (usuario.userName != "" && usuario.password != "" && usuario.imagen != "")
+            {
+                pulsable = true;
             }
             return pulsable;
         }
