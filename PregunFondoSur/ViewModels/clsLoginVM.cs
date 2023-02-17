@@ -59,7 +59,7 @@ namespace PregunFondoSur.ViewModels
             {
                 { "Usuario", Usuario }
             };
-            await Shell.Current.GoToAsync($"PaginaEsperaUsuario", navigationParameter);
+            await Shell.Current.GoToAsync($"PaginaEspera", navigationParameter);
         }
 
     }
