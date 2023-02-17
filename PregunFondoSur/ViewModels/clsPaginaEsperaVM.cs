@@ -61,9 +61,17 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private async Task recibirBool()
         {
-
-            miConexion.On<string>("recibirBool", (hayRival) =>
+            int cont = 1;
+            miConexion.On<string>("recibirBool", async (hayRival) =>
             {
+
+                if (cont > 0)
+                {
+                    cont--;
+                    await enviarBool();
+                    
+                }
+
 
                 pasarPagina();
             });
