@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace PregunFondoSur.ViewModels
 {
 
-
+    
     public class clsEleccionCategoriaVM : clsVMBase
     {
         #region Atributos
