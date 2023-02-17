@@ -69,11 +69,9 @@ namespace PregunFondoSur.ViewModels
                 {
                     cont--;
                     await enviarBool();
-                    
+                    pasarPagina();
                 }
-
-
-                pasarPagina();
+             
             });
 
             await miConexion.StartAsync();
