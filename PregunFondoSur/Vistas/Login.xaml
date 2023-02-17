@@ -3,7 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PregunFondoSur.Vistas.Login"
              BackgroundColor="#666666"
+             xmlns:model ="clr-namespace:PregunFondoSur.ViewModels"
              Title="Login">
+
+    <ContentPage.BindingContext>
+        <model:clsLoginVM/>
+    </ContentPage.BindingContext>
+    
+    
+    
     <VerticalStackLayout HorizontalOptions="Center">
         <Border StrokeShape="RoundRectangle 20, 20, 20, 20" WidthRequest="400" Margin="0,60,0,40" HeightRequest="100" Padding="2.5" BackgroundColor="White">
             <Label FontSize="36" Text="PREGUNFONDOSUR" FontAttributes="Bold" FontFamily="Arial Black" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="DodgerBlue" VerticalTextAlignment="Center"/>
@@ -18,8 +26,10 @@
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,0,0,20" HeightRequest="40" Stroke="White">
             <Entry HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="Password" IsPassword="True"/>
         </Border>
+        
+        
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="100">
-            <Button Text="SUBMIT" FontSize="15" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold"></Button>
+            <Button Text="SUBMIT" FontSize="15" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Command="{Binding LogInCommand }"></Button>
         </Border>
     </VerticalStackLayout>
 </ContentPage>

@@ -16,7 +16,7 @@ namespace PregunFondoSur.ViewModels
             set { usuario = value;
                 logInCommand.RaiseCanExecuteChanged();
             } }
-        DelegateCommand LogInCommand { get { return logInCommand; } }
+      public  DelegateCommand LogInCommand { get { return logInCommand; } }
         #endregion
 
         #region Constructores

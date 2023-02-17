@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PregunFondoSur.models;
 
-namespace PregunFondoSur.ViewModels.clsPreguntasVM
+namespace PregunFondoSur.ViewModels
 {
     public class clsPreguntasVM : clsVMBase
     {

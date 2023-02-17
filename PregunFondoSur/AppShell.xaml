@@ -3,12 +3,12 @@
     x:Class="PregunFondoSur.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="PregunFondoSur.Vistas.PaginaPregunta"
+    xmlns:local="PregunFondoSur.Vistas.Login"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:PaginaPregunta}"
+        ContentTemplate="{DataTemplate local:Login}"
         Route="PaginaEsperaUsuario" />
 
 </Shell>
