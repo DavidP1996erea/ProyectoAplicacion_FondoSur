@@ -3,31 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PregunFondoSur.Vistas.PaginaEsperaUsuario"
              xmlns:model="clr-namespace:PregunFondoSur.ViewModels"
-             Title="PaginaEsperaUsuario"
              BackgroundColor="#444444">
-
-
     <ContentPage.BindingContext>
         <model:clsPaginaEsperaVM/>
     </ContentPage.BindingContext>
 
-
     <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
+      
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="0, 0,30, 0">
-
+          
             <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="End" Margin="10,0,0,0" HeightRequest="70" WidthRequest="400">
-
-                         
+             
                 <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="70" HeightRequest="70" Margin="20,0,0,0"></Image>
+             
                 <Label Text="Nicknameasdasdasd 1a"  WidthRequest="220" Margin="20, 20, 0, 0" FontSize="20" TextColor="Black" HeightRequest="50"></Label>
-               
+           
             </HorizontalStackLayout>
-
+       
         </Border>
 
-
         <Line 
-      
       X1="0" 
       Y1="0"
       X2="0"
@@ -54,10 +49,10 @@
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
 
                 <Label Text="Esperando al rival..." TextColor="Black"  FontSize="20"></Label>
-   
+
             </HorizontalStackLayout>
 
         </Border>
     </HorizontalStackLayout>
-    
+
 </ContentPage>
