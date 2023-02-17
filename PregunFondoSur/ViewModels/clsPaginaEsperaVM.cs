@@ -62,20 +62,27 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirBool()
         {
 
-            miConexion.On<string>("recibirMensaje", async (hayRival) =>
+            miConexion.On<string>("recibirBool", (hayRival) =>
             {
 
-                var navigationParameter = new Dictionary<string, object>
-            {
-                { "Usuario", Usuario }
-            };
-                await Shell.Current.GoToAsync($"PaginaEleccionCategoria", navigationParameter);
-
+                pasarPagina();
             });
 
             await miConexion.StartAsync();
 
         }
         #endregion
+
+
+        private async void pasarPagina()
+        {
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Usuario", Usuario }
+            };
+            await Shell.Current.GoToAsync($"PaginaEleccionCategoria", navigationParameter);
+
+        }
+
     }
 }
