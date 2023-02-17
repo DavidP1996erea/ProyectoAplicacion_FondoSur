@@ -2,8 +2,7 @@
 
 namespace SignalR_Proyecto.Hubs
 {
-    public class preguntadosHub : Hub
+    public class eleccionCategoriasHub : Hub
     {
-        
     }
 }

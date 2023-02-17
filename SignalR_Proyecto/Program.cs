@@ -22,6 +22,8 @@ app.UseAuthorization();
 app.MapRazorPages(); 
 
 
-app.MapHub<preguntadosHub>("/preguntadosHub");
+app.MapHub<eleccionCategoriasHub>("/eleccionCategoriasHub");
+app.MapHub<salaEsperaHub>("/salaEsperaHub");
+
 
 app.Run();
