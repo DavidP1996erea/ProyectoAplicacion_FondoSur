@@ -1,6 +1,6 @@
 namespace PregunFondoSur.Vistas;
 
-public partial class Login : ContentView
+public partial class Login : ContentPage
 {
 	public Login()
 	{

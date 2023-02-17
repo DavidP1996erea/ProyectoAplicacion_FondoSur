@@ -6,7 +6,6 @@
         #region Atributos
         public String userName { get; set; }
         public String password {get; set;}
-
         public String imagen { get; set;}
         #endregion
 

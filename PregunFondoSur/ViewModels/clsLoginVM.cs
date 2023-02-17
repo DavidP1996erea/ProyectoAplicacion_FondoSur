@@ -1,8 +1,5 @@
 ﻿using System;
 using Entidades;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PregunFondoSur.ViewModels.Utilidades;
 
 namespace PregunFondoSur.ViewModels
@@ -43,6 +40,8 @@ namespace PregunFondoSur.ViewModels
             return pulsable;
         }
 
+        #endregion
+
         /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
@@ -55,8 +54,6 @@ namespace PregunFondoSur.ViewModels
             };
             await Shell.Current.GoToAsync($"PaginaEsperaUsuario", navigationParameter);
         }
-        #endregion
-
 
     }
 }

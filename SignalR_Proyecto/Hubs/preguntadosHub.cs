@@ -4,5 +4,6 @@ namespace SignalR_Proyecto.Hubs
 {
     public class preguntadosHub : Hub
     {
+        
     }
 }

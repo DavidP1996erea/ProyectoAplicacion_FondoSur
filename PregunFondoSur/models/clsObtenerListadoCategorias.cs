@@ -12,11 +12,11 @@ namespace PregunFondoSur.models
         {
             List<clsCategorias> listaCategorias = new List<clsCategorias>();
 
-            listaCategorias.Add(new clsCategorias("Films", "URL", "", "", false));
-            listaCategorias.Add(new clsCategorias("Music", "URL", "", "", false));
-            listaCategorias.Add(new clsCategorias("History", "URL", "", "", false));
-            listaCategorias.Add(new clsCategorias("Food", "URL", "", "", false));
-            listaCategorias.Add(new clsCategorias("Science", "URL", "", "", false));
+            listaCategorias.Add(new clsCategorias("Films", "videobase.png", "videoganado.png", "videobase.png", false));
+            listaCategorias.Add(new clsCategorias("Music", "musicalbase.png", "musicalganado.png", "musicalbase.png", false));
+            listaCategorias.Add(new clsCategorias("History", "historybase.png", "historyganado.png", "historybase.png", false));
+            listaCategorias.Add(new clsCategorias("Food", "foodbase.png", "foodganado.png", "foodbase.png", false));
+            listaCategorias.Add(new clsCategorias("Science", "sciencebase.png", "scienceganado.png", "sciencebase.png", false));
 
             return listaCategorias;
         }
