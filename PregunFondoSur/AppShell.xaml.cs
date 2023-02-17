@@ -7,7 +7,7 @@ namespace PregunFondoSur
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute("PaginaEsperaUsuario", typeof(PaginaEsperaUsuario));
+            Routing.RegisterRoute("PaginaEspera", typeof(PaginaEsperaUsuario));
             Routing.RegisterRoute("PaginaEleccionCategoria", typeof(EleccionCategoria));
             Routing.RegisterRoute("PaginaPregunta", typeof(PaginaPregunta));
         }

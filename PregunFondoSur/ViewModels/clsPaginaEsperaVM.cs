@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
+    [QueryProperty(nameof(Usuario), "Usuario")]
     public class clsPaginaEsperaVM
     {
         #region Atributos
