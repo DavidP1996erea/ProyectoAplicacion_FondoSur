@@ -17,7 +17,7 @@
                         <Border  WidthRequest="50" HeightRequest="50" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='40, 15, 20, 0'}" HorizontalOptions="Start">
                             <Image Source="pablomotos.jpeg" Aspect="Fill"></Image>
                         </Border>
-                        <Label Text="Nickname 1" Margin="0, 30, 0, 0" FontSize="20"></Label>
+                        <Label Text="{Binding UsuarioLocal.userName}" TextColor="Black" Margin="0, 30, 0, 0" FontSize="20"></Label>
                     </HorizontalStackLayout>
                     <CollectionView  ItemsSource="{Binding ListaCategoriasLocal}"  SelectionMode="None" Margin="10, 10, 10, 10" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
 
@@ -46,7 +46,7 @@
             <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=190, WinUI=450}" HeightRequest="150" >
                 <VerticalStackLayout>
                     <HorizontalStackLayout HorizontalOptions="End">
-                        <Label Text="Nickname 2" FontSize="20" HorizontalOptions="End" Margin="0, 30, 0, 0"></Label>
+                        <Label Text="{Binding UsuarioRival.userName}" TextColor="Black" FontSize="20" HorizontalOptions="End" Margin="0, 30, 0, 0"></Label>
                         <Border  WidthRequest="50" HeightRequest="50" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='20, 15, 40, 0'}" HorizontalOptions="End">
                             <Image Source="pablomotos.jpeg" Aspect="Fill"></Image>
                         </Border>

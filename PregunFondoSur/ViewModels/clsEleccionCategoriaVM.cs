@@ -127,6 +127,7 @@ namespace PregunFondoSur.ViewModels
                 {
                     cont--;           
                     UsuarioRival = datosUsuario;
+                    NotifyPropertyChanged(nameof(UsuarioRival));    
                     await enviarUsuario();
                 }
             });
