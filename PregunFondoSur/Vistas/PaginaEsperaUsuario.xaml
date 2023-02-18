@@ -8,26 +8,27 @@
         <model:clsPaginaEsperaVM/>
     </ContentPage.BindingContext>
 
-    <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
-      
-        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="0, 0,30, 0">
-          
-            <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="End" Margin="10,0,0,0" HeightRequest="70" WidthRequest="400">
-             
-                <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="70" HeightRequest="70" Margin="20,0,0,0"></Image>
-             
+    <StackLayout HeightRequest="{OnPlatform WinUI=150}" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0" Orientation="{OnPlatform Android='Vertical', WinUI='Horizontal'}" VerticalOptions="{OnPlatform Android='Center'}">
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=300, WinUI=450}" HeightRequest="150" HorizontalOptions="{OnPlatform WinUI='Start'}"  Margin="{OnPlatform WinUI='0, 0,30, 0', Android='0, 0,0, 40'}">
+
+            <HorizontalStackLayout VerticalOptions="Center"  HorizontalOptions="{OnPlatform WinUI='End', Android='Start'}" Margin="{OnPlatform WinUI='10,0,0,0', Android='15,0,15,0'}" HeightRequest="70" WidthRequest="{OnPlatform WinUI=400}">
+
+                <Image Source="pablomotos.jpeg" Aspect="Fill"  WidthRequest="70" HeightRequest="70" Margin="{OnPlatform WinUI='20,0,0,0'}"></Image>
                 <Label Text="Nicknameasdasdasd 1a"  WidthRequest="220" Margin="20, 20, 0, 0" FontSize="20" TextColor="Black" HeightRequest="50"></Label>
-           
+
             </HorizontalStackLayout>
-       
+
         </Border>
 
+
         <Line 
+      
       X1="0" 
       Y1="0"
-      X2="0"
-      Y2="200"
-      Stroke="white" />
+      X2="{OnPlatform Android=200}"
+      Y2="{OnPlatform WinUI=200}"
+      HorizontalOptions="{OnPlatform Android='Center'}"
+      Stroke="white"/>
         <!--
 
         <Border StrokeShape="RoundRectangle 20, 20, 20, 20" BackgroundColor="White" WidthRequest="450" HeightRequest="150" HorizontalOptions="Start"  Margin="30, 0,0, 0">
@@ -44,7 +45,7 @@
         -->
 
 
-        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="450" HeightRequest="150"  Margin="30, 0,0, 0">
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=300, WinUI=450}" HeightRequest="150"  Margin="{OnPlatform WinUI='30, 0,0, 0', Android='0, 40,0, 40'}">
 
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" >
 
@@ -53,6 +54,6 @@
             </HorizontalStackLayout>
 
         </Border>
-    </HorizontalStackLayout>
+    </StackLayout>
 
 </ContentPage>

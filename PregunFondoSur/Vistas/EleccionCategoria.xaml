@@ -19,13 +19,13 @@
                         </Border>
                         <Label Text="Nickname 1" Margin="0, 30, 0, 0" FontSize="20"></Label>
                     </HorizontalStackLayout>
-                    <CollectionView  ItemsSource="{Binding ListaCategoriasLocal}"  SelectionMode="None" Margin="10, 10, 10, 10" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
+                    <CollectionView  ItemsSource="{Binding ListaCategoriasLocal}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 10, 10, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
 
                         <CollectionView.ItemTemplate >
 
                             <DataTemplate>
 
-                                <Image Source="{Binding ImagenMostrada}" WidthRequest="{OnPlatform Android=40, WinUI=50}" HeightRequest="{OnPlatform Android=40, WinUI=50}" Aspect="Fill"/>
+                                <Image Source="{Binding ImagenMostrada}" WidthRequest="{OnPlatform Android=30, WinUI=50}" HeightRequest="{OnPlatform Android=30, WinUI=50}" Aspect="Fill"/>
 
                             </DataTemplate>
 
@@ -51,13 +51,13 @@
                             <Image Source="pablomotos.jpeg" Aspect="Fill"></Image>
                         </Border>
                     </HorizontalStackLayout>
-                    <CollectionView  ItemsSource="{Binding ListaCategoriasRival}"  SelectionMode="None" Margin="10, 10, 10, 10" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90">
+                    <CollectionView  ItemsSource="{Binding ListaCategoriasRival}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 10, 10, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90">
 
                         <CollectionView.ItemTemplate >
 
                             <DataTemplate>
 
-                                <Image Source="{Binding ImagenMostrada}" WidthRequest="{OnPlatform Android=40, WinUI=50}" HeightRequest="{OnPlatform Android=40, WinUI=50}" Aspect="Fill"/>
+                                <Image Source="{Binding ImagenMostrada}" WidthRequest="{OnPlatform Android=30, WinUI=50}" HeightRequest="{OnPlatform Android=30, WinUI=50}" Aspect="Fill"/>
 
                             </DataTemplate>
 
