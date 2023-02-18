@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Microsoft.AspNetCore.SignalR.Client;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
 using Services;
@@ -29,6 +30,8 @@ namespace PregunFondoSur.ViewModels
         private bool estaGirando;
         private DelegateCommand girarRuletaCommand;
         private String colorFondoUsuario;
+
+        private readonly HubConnection miConexion;
         #endregion
 
         #region Propiedades
@@ -90,15 +93,51 @@ namespace PregunFondoSur.ViewModels
             listaCategoriasLocal = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             listaCategoriasRival = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
+
+            // Se crea la conexión con el servidor
+            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
+            UsuarioLocal = new clsUsuario();
+            UsuarioLocal.userName = "Ruben londres";
+
+
+            recibirUsuario();
+            enviarUsuario();
         }
 
+        #endregion
+
+
+        #region Métodos SignalR
+
+
+        private async Task enviarUsuario()
+        {
+            await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
+        }
+
+        private async Task recibirUsuario()
+        {
+
+            int cont = 1;
+
+            miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
+
+
+                if (cont > 0)
+                {
+                    cont--;           
+                    UsuarioRival = datosUsuario;
+                    await enviarUsuario();
+                }
+            });
+
+            await miConexion.StartAsync();
+
+        }
 
         #endregion
 
         #region Metodos
-
-
-
         private async void obtenerListados()
         {
             listadoPreguntasFilms = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFilmDAL();
@@ -193,7 +232,9 @@ namespace PregunFondoSur.ViewModels
                 //notificarVictoriaEnVista
             }
 
-            #endregion
+            
         }
+
+        #endregion
     }
 }
