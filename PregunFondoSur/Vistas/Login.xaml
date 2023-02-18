@@ -18,13 +18,13 @@
         </Border>
         <Label Text="SIGN IN" FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold"/>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,40,0,20" HeightRequest="40" Stroke="White" Padding="{OnPlatform Android= 5}">
-            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="Nickname"/>
+            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="Nickname" TextColor="Black" Text="{Binding Nickname}"/>
         </Border>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,0,0,20" HeightRequest="40" Stroke="White" Padding="{OnPlatform Android= 5}">
-            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="URL Image"/>
+            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="URL Image" TextColor="Black" Text="{Binding Imagen}"/>
         </Border>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,0,0,20" HeightRequest="40" Stroke="White" Padding="{OnPlatform Android= 5}">
-            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="Password" IsPassword="True"/>
+            <Entry FontSize="15" BackgroundColor="White" HeightRequest="40" Placeholder="Password" IsPassword="True" TextColor="Black" Text="{Binding Password}"/>
         </Border>
 
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="100">

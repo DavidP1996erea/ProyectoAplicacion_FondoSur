@@ -84,6 +84,11 @@ namespace PregunFondoSur.ViewModels
             get { return colorFondoUsuario; }
             set { colorFondoUsuario = value; }
         }
+
+        public DelegateCommand GirarRuletaCommand
+        {
+            get { return girarRuletaCommand; }
+        }
         #endregion
 
         #region Constructores
@@ -154,7 +159,7 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private bool girarRuletaCommand_CanExecuted()
         {
-            bool pulsable = false;
+            bool pulsable = true;
             if (tuTurno)
             {
                 if (!estaGirando)

@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Entidades;
 using PregunFondoSur.ViewModels.Utilidades;
 
@@ -8,17 +8,42 @@ namespace PregunFondoSur.ViewModels
     {
         #region Atributos
         private clsUsuario usuario;
+        private string nickname, imagen, password;
         private DelegateCommand logInCommand;
         #endregion
 
         #region Propiedades
+
+        public string Nickname
+        {
+            get { return nickname; }
+            set { nickname = value;
+                logInCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value;
+                logInCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string Imagen
+        {
+            get { return imagen; }
+            set { imagen = value;
+                logInCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public clsUsuario Usuario
         {
             get { return usuario; }
             set
             {
                 usuario = value;
-                logInCommand.RaiseCanExecuteChanged();
             }
         }
         public DelegateCommand LogInCommand { get { return logInCommand; } }
@@ -40,7 +65,7 @@ namespace PregunFondoSur.ViewModels
         private bool logInCommand_CanExecute()
         {
             bool pulsable = false;
-            if (usuario.userName != "" && usuario.password != "" && usuario.imagen != "")
+            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null) && (Password != "" && Password != null))
             {
                 pulsable = true;
             }
@@ -55,11 +80,14 @@ namespace PregunFondoSur.ViewModels
         /// <exception cref="NotImplementedException"></exception>
         private async void logInCommand_Execute()
         {
+            Usuario.userName = Nickname;
+            Usuario.imagen = Imagen;
+            Usuario.password = Password;
             var navigationParameter = new Dictionary<string, object>
             {
                 { "Usuario", Usuario }
             };
-            await Shell.Current.GoToAsync($"PaginaEspera", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
         }
 
     }

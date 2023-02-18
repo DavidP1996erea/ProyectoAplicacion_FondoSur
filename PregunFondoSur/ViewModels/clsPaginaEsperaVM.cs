@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Microsoft.AspNetCore.SignalR.Client;
+using PregunFondoSur.ViewModels.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace PregunFondoSur.ViewModels
 {
     [QueryProperty(nameof(Usuario), "Usuario")]
-    public class clsPaginaEsperaVM
+    public class clsPaginaEsperaVM : clsVMBase
     {
         #region Atributos
         private clsUsuario usuario;
@@ -18,7 +19,13 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Propiedades
-        public clsUsuario Usuario { get { return usuario; } }
+        public clsUsuario Usuario { 
+            get { return usuario; }
+            set { usuario = value;
+                NotifyPropertyChanged();              
+            }
+        
+        }
         #endregion
 
         #region Constructores
