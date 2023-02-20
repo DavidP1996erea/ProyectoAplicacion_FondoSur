@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Android.Accessibilityservice.AccessibilityService;
+using Entidades;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using PregunFondoSur.models;
@@ -52,6 +53,7 @@ namespace PregunFondoSur.ViewModels
                 {
                     NotifyPropertyChanged();
                     enviarUsuario();
+                    iniciarTurno();
                 }
             } }
 
@@ -71,7 +73,6 @@ namespace PregunFondoSur.ViewModels
             {
                 listaCategoriasLocal = value;
                 comprobarVictoria();
-                
             }
         }
         public List<clsCategoriasMaui> ListaCategoriasRival
@@ -88,6 +89,7 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 tuTurno = value;
+                NotifyPropertyChanged();
                 girarRuletaCommand.RaiseCanExecuteChanged();
                 establecerColorFondo();
             }
@@ -122,10 +124,7 @@ namespace PregunFondoSur.ViewModels
 
 
             recibirListadoCategorias();
-
-
-
-
+           
         }
 
         #endregion
@@ -147,11 +146,24 @@ namespace PregunFondoSur.ViewModels
                     NotifyPropertyChanged(nameof(UsuarioRival));    
                 
             });
-
             await miConexion.StartAsync();
 
         }
 
+        private async Task enviarTurno(String boolTurno) {
+            await miConexion.InvokeCoreAsync("cambiarValorTurno", args: new[] { boolTurno });
+        }
+
+        private async Task recibirTurno()
+        {
+            miConexion.On<bool>("cambiarTurno", (turno) =>
+            {
+                tuTurno = turno;
+                NotifyPropertyChanged(nameof(tuTurno)); 
+            });
+
+            await miConexion.StartAsync();
+        }
 
 
 
@@ -205,6 +217,20 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+        private void iniciarTurno() {
+            if (UsuarioRival.tuTurno == false)
+            {
+                tuTurno = true;
+            }
+            else {
+                tuTurno = false;
+            }
+        }
+
+        private void finalizarTurno() {
+            tuTurno = false;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -219,8 +245,8 @@ namespace PregunFondoSur.ViewModels
                     pulsable = true;
                 }
             }
+            finalizarTurno();
             return pulsable;
-
         }
 
         private async void girarRuletaCommand_Executed()
@@ -239,6 +265,9 @@ namespace PregunFondoSur.ViewModels
             };
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
+            tuTurno = false;
+            enviarTurno("true");
+
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
         }
 
