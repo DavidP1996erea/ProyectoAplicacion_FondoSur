@@ -1,5 +1,4 @@
-﻿using Android.Accessibilityservice.AccessibilityService;
-using Entidades;
+﻿using Entidades;
 using Microsoft.AspNetCore.SignalR.Client;
 using Models;
 using PregunFondoSur.models;
@@ -64,7 +63,7 @@ namespace PregunFondoSur.ViewModels
                 {
                     NotifyPropertyChanged();
                     enviarUsuario();
-                    iniciarTurno();
+                    //iniciarTurno();
                 }
             } }
 
@@ -228,15 +227,15 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private void iniciarTurno() {
-            if (UsuarioRival.tuTurno == false)
-            {
-                tuTurno = true;
-            }
-            else {
-                tuTurno = false;
-            }
-        }
+        //private void iniciarTurno() {
+        //    if (UsuarioRival.tuTurno == false)
+        //    {
+        //        tuTurno = true;
+        //    }
+        //    else {
+        //        tuTurno = false;
+        //    }
+        //}
 
         private void finalizarTurno() {
             tuTurno = false;
