@@ -31,9 +31,20 @@ namespace PregunFondoSur.ViewModels
         private String colorFondoUsuario;
 
         private readonly HubConnection miConexion;
+        private int categoriaDeLaRuleta;
         #endregion
 
         #region Propiedades
+
+        public int CategoriaDelaRuleta
+        {
+            get { return categoriaDeLaRuleta; }
+            set { categoriaDeLaRuleta = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         //TODO ARREGLAR
         public clsCategoriasMaui CategoriaAcertada
@@ -256,6 +267,7 @@ namespace PregunFondoSur.ViewModels
 
             ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             enviarListadoCategorias();
+            
 
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
@@ -265,10 +277,11 @@ namespace PregunFondoSur.ViewModels
             };
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
-            tuTurno = false;
-            enviarTurno("true");
+            
+            // llamr mereto aqui
 
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+           
         }
 
         /// <summary>
@@ -326,6 +339,44 @@ namespace PregunFondoSur.ViewModels
 
 
         }
+
+
+
+        private clsPreguntas preguntaSeleccionada()
+        {
+            Random random = new Random();
+            clsPreguntas preguntaElegida = new clsPreguntas();
+
+            int idPregunta = random.Next(0, 39);
+
+            if (CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
+            {
+               
+                while (listadoPreguntashistory[idPregunta].isNiche)
+                {
+                    idPregunta = random.Next(0, 39);
+                }
+                preguntaElegida = listadoPreguntashistory[idPregunta];
+            }
+            else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
+            {
+
+            }else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
+            {
+
+            }else if(CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
+            {
+
+            }else if(CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
+            {
+
+            }
+
+
+            return preguntaElegida;
+        }
+
+
 
         #endregion
     }

@@ -1,10 +1,13 @@
-﻿namespace PregunFondoSur.Vistas
+﻿using PregunFondoSur.ViewModels;
+
+namespace PregunFondoSur.Vistas
 {
     public partial class EleccionCategoria : ContentPage
     {
 
         #region Fields
         System.Timers.Timer timer = new System.Timers.Timer();
+         
         #endregion
 
         #region MainPage
@@ -47,6 +50,12 @@
 
             Random random = new Random();
             int no = random.Next(0, 44);
+
+            // Se bindea el resultado del random a una propiedad del ViewModel
+
+            var eleccionCategoriaVM = (clsEleccionCategoriaVM)BindingContext;
+            eleccionCategoriaVM.CategoriaDelaRuleta = no;
+
 
             await this.circleImage.RotateTo((2 * 360) + (no * 8 + 4), duration, Easing.SinOut);
             this.timer.Stop();
