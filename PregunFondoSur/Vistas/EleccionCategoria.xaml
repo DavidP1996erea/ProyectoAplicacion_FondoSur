@@ -14,10 +14,10 @@
             <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=190, WinUI=450}" HeightRequest="150" HorizontalOptions="Start" Margin="{OnPlatform Android='0, 0, 10, 0', WinUI='0, 0, 400, 0'}">
                 <VerticalStackLayout>
                     <HorizontalStackLayout>
-                        <Image Source="{Binding UsuarioLocal.imagen}"  MaximumWidthRequest="75" MaximumHeightRequest="75" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='40, 15, 20, 0'}" HorizontalOptions="Start"></Image>
+                        <Image Source="{Binding UsuarioLocal.imagen}"  WidthRequest="75" HeightRequest="60" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='40, 15, 20, 0'}" HorizontalOptions="Start"></Image>
                         <Label Text="{Binding UsuarioLocal.userName}" TextColor="Black" Margin="0, 30, 0, 0" FontSize="25" FontFamily="Lilita"></Label>
                     </HorizontalStackLayout>
-                    <CollectionView  ItemsSource="{Binding ListaCategoriasLocal}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 10, 10, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
+                    <CollectionView  ItemsSource="{Binding ListaCategoriasLocal}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 0, 0, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90" ItemsUpdatingScrollMode="KeepItemsInView">
 
                         <CollectionView.ItemTemplate >
 
@@ -44,10 +44,10 @@
             <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=190, WinUI=450}" HeightRequest="150" >
                 <VerticalStackLayout>
                     <HorizontalStackLayout HorizontalOptions="End">
-                        <Label Text="{Binding UsuarioRival.userName}" TextColor="Black" FontSize="20" HorizontalOptions="End" Margin="0, 30, 0, 0" FontFamily="Lilita"></Label>
-                        <Image Source="{Binding UsuarioRival.imagen}" MaximumWidthRequest="75" MaximumHeightRequest="75" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='20, 15, 40, 0'}" HorizontalOptions="End"></Image>
+                        <Label Text="{Binding UsuarioRival.userName}" TextColor="Black" FontSize="25" HorizontalOptions="End" Margin="0, 30, 0, 0" FontFamily="Lilita"></Label>
+                        <Image Source="{Binding UsuarioRival.imagen}" WidthRequest="70" HeightRequest="60" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='20, 15, 40, 0'}" HorizontalOptions="End"></Image>
                     </HorizontalStackLayout>
-                    <CollectionView  ItemsSource="{Binding ListaCategoriasRival}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 10, 10, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90">
+                    <CollectionView  ItemsSource="{Binding ListaCategoriasRival}"  SelectionMode="None" Margin="{OnPlatform Android='10, 20, 10, 10', WinUI='10, 0, 0, 10'}" HorizontalOptions="Center" WidthRequest="{OnPlatform Android=170, WinUI=400}" HeightRequest="90">
 
                         <CollectionView.ItemTemplate >
 
