@@ -6,6 +6,8 @@
         #region Atributos
         public String userName { get; set; }
         public String imagen { get; set;}
+
+        public bool tuTurno { get; set;}
         #endregion
 
         #region Constructor con parámetros
