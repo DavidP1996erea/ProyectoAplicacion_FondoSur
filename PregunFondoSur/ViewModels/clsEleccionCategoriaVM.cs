@@ -30,9 +30,20 @@ namespace PregunFondoSur.ViewModels
         private String colorFondoUsuario;
 
         private readonly HubConnection miConexion;
+        private int categoriaDeLaRuleta;
         #endregion
 
         #region Propiedades
+
+        public int CategoriaDelaRuleta
+        {
+            get { return categoriaDeLaRuleta; }
+            set { categoriaDeLaRuleta = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         //TODO ARREGLAR
         public clsCategoriasMaui CategoriaAcertada
@@ -230,6 +241,7 @@ namespace PregunFondoSur.ViewModels
 
             ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             enviarListadoCategorias();
+            
 
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
@@ -239,7 +251,11 @@ namespace PregunFondoSur.ViewModels
             };
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
+            
+            // llamr mereto aqui
+
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+           
         }
 
         /// <summary>
@@ -298,6 +314,34 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+
+
+        private clsPreguntas preguntaSeleccionada()
+        {
+            clsPreguntas preguntaElegida = new clsPreguntas();
+
+            if(CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
+            {
+                
+
+
+            }else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
+            {
+
+            }else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
+            {
+
+            }else if(CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
+            {
+
+            }else if(CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
+            {
+
+            }
+
+
+            return preguntaElegida;
+        }
         #endregion
     }
 }
