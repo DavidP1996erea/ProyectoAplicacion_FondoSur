@@ -318,14 +318,21 @@ namespace PregunFondoSur.ViewModels
 
         private clsPreguntas preguntaSeleccionada()
         {
+            Random random = new Random();
             clsPreguntas preguntaElegida = new clsPreguntas();
 
-            if(CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
+            int idPregunta = random.Next(0, 39);
+
+            if (CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
             {
-                
-
-
-            }else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
+               
+                while (listadoPreguntashistory[idPregunta].isNiche)
+                {
+                    idPregunta = random.Next(0, 39);
+                }
+                preguntaElegida = listadoPreguntashistory[idPregunta];
+            }
+            else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
             {
 
             }else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
@@ -342,6 +349,9 @@ namespace PregunFondoSur.ViewModels
 
             return preguntaElegida;
         }
+
+
+
         #endregion
     }
 }
