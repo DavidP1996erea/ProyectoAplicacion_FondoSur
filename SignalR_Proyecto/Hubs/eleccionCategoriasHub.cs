@@ -1,6 +1,6 @@
 ﻿using Entidades;
 using Microsoft.AspNetCore.SignalR;
-
+using Models;
 
 namespace SignalR_Proyecto.Hubs
 {
@@ -15,10 +15,10 @@ namespace SignalR_Proyecto.Hubs
 
 
 
-        public async Task enviarListadoCategorias(List<clsCategorias> datosUsuario)
+        public async Task enviarListadoCategorias(List<clsCategorias> listadoCategorias)
         {
 
-            await Clients.Others.SendAsync("recibirListadoCategorias", datosUsuario);
+            await Clients.Others.SendAsync("recibirListadoCategorias", listadoCategorias);
 
         }
 

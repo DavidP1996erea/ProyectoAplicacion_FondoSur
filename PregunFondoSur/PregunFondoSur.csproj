@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\FredokaOne-Regular.ttf" />
+	  <None Remove="Resources\Fonts\LilitaOne-Regular.ttf" />
+	  <None Remove="Resources\Fonts\MavenPro-VariableFont_wght.ttf" />
+	  <None Remove="Resources\Fonts\SecularOne-Regular.ttf" />
 	  <None Remove="Resources\Images\foodbase.png" />
 	  <None Remove="Resources\Images\foodganado.png" />
 	  <None Remove="Resources\Images\historybase.png" />
@@ -67,6 +71,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Entidades\Entidades.csproj" />
+	  <ProjectReference Include="..\Models\Models.csproj" />
 	  <ProjectReference Include="..\Services\Services.csproj" />
 	</ItemGroup>
 
@@ -78,6 +83,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\PaginaEsperaUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Vistas\PaginaFinalizacion.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\PaginaPregunta.xaml">

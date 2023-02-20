@@ -3,22 +3,19 @@ using Microsoft.AspNetCore.SignalR.Client;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
 
-    
+    [QueryProperty(nameof(UsuarioLocal), "usuarioLocal")]
+    [QueryProperty(nameof(CategoriaAcertada), "categoria")]
     public class clsEleccionCategoriaVM : clsVMBase
     {
         #region Atributos
+        private clsUsuario usuarioLocal;
         private clsUsuario usuarioRival;
-        private List<clsCategorias> listaCategoriasLocal;
-        private List<clsCategorias> listaCategoriasRival;
+        private List<clsCategoriasMaui> listaCategoriasLocal;
+        private List<clsCategoriasMaui> listaCategoriasRival;
         private List<clsPreguntas> listadoPreguntasFilms;
         private List<clsPreguntas> listadoPreguntasMusic;
         private List<clsPreguntas> listadoPreguntashistory;
@@ -37,7 +34,7 @@ namespace PregunFondoSur.ViewModels
         #region Propiedades
 
         //TODO ARREGLAR
-        public clsCategorias CategoriaAcertada
+        public clsCategoriasMaui CategoriaAcertada
         {
             get { return CategoriaAcertada; }
             set
@@ -46,21 +43,37 @@ namespace PregunFondoSur.ViewModels
                 asignarCategoriaAcertada();
             }
         }
-        public clsUsuario UsuarioLocal { get; set; }
+        public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
+            
+            set { usuarioLocal = value;
+              
+                if (usuarioLocal != null)
+                {
+                    NotifyPropertyChanged();
+                    enviarUsuario();
+                }
+            } }
 
         public clsUsuario UsuarioRival
         {
             get { return usuarioRival; }
-            set { usuarioRival = value; }
-        }
-        public List<clsCategorias> ListaCategoriasLocal
-        {
-            get { return listaCategoriasLocal; }
-            set { listaCategoriasLocal = value;
-                comprobarVictoria();
+            set
+            {
+                usuarioRival = value;
+                NotifyPropertyChanged();
             }
         }
-        public List<clsCategorias> ListaCategoriasRival
+        public List<clsCategoriasMaui> ListaCategoriasLocal
+        {
+            get { return listaCategoriasLocal; }
+            set
+            {
+                listaCategoriasLocal = value;
+                comprobarVictoria();
+                enviarListadoCategorias();
+            }
+        }
+        public List<clsCategoriasMaui> ListaCategoriasRival
         {
             get { return listaCategoriasRival; }
             set { listaCategoriasRival = value; }
@@ -84,6 +97,11 @@ namespace PregunFondoSur.ViewModels
             get { return colorFondoUsuario; }
             set { colorFondoUsuario = value; }
         }
+
+        public DelegateCommand GirarRuletaCommand
+        {
+            get { return girarRuletaCommand; }
+        }
         #endregion
 
         #region Constructores
@@ -96,12 +114,17 @@ namespace PregunFondoSur.ViewModels
 
             // Se crea la conexión con el servidor
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
-            UsuarioLocal = new clsUsuario();
-            UsuarioLocal.userName = "Ruben londres";
 
 
             recibirUsuario();
             enviarUsuario();
+
+
+            recibirListadoCategorias();
+
+
+
+
         }
 
         #endregion
@@ -117,24 +140,44 @@ namespace PregunFondoSur.ViewModels
 
         private async Task recibirUsuario()
         {
-
-            int cont = 1;
-
             miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
-
-
-                if (cont > 0)
-                {
-                    cont--;           
+      
                     UsuarioRival = datosUsuario;
                     NotifyPropertyChanged(nameof(UsuarioRival));    
-                    await enviarUsuario();
-                }
+                
             });
 
             await miConexion.StartAsync();
 
         }
+
+
+
+
+        private async Task enviarListadoCategorias()
+        {
+            await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { ListaCategoriasLocal });
+        }
+
+        private async Task recibirListadoCategorias()
+        {
+
+
+            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", async (listadoCategorias) =>
+            {
+
+                ListaCategoriasRival = listadoCategorias;
+
+
+            });
+
+            await miConexion.StartAsync();
+
+        }
+
+
+
+
 
         #endregion
 
@@ -146,6 +189,7 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntashistory = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasHistoryDAL();
             listadoPreguntasFood = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFoodDAL();
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
+
         }
 
         /// <summary>
@@ -154,7 +198,7 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private bool girarRuletaCommand_CanExecuted()
         {
-            bool pulsable = false;
+            bool pulsable = true;
             if (tuTurno)
             {
                 if (!estaGirando)
@@ -171,20 +215,23 @@ namespace PregunFondoSur.ViewModels
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
-
+            ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
             {
-                { "preguntaEnviar", preguntaEnviar }
+                { "pregunta", preguntaEnviar }
+
             };
-            await Shell.Current.GoToAsync($"PaginaPregunta", navigationParameter);
+
+            await Task.Delay(TimeSpan.FromMilliseconds(2300));
+            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
         }
 
         /// <summary>
         /// Método que ajusta el color del recuadro del usuario en funcion al booleano TuTurno, el cual almacena si es el turno
         /// del usuario local o no.
         /// Precondiciones: Ninguna
-        /// Postcondiciones: Ninguna
+        /// Postcondiciones: Ninguna  
         /// </summary>
         private void establecerColorFondo()
         {
@@ -207,7 +254,7 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void asignarCategoriaAcertada()
         {
-            foreach (clsCategorias categoria in listaCategoriasLocal)
+            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
             {
                 if (CategoriaAcertada.Nombre == categoria.Nombre)
                 {
@@ -220,7 +267,7 @@ namespace PregunFondoSur.ViewModels
         private void comprobarVictoria()
         {
             int cantidadAcertadas = 0;
-            foreach (clsCategorias categoria in listaCategoriasLocal)
+            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
             {
                 if (categoria.EstaAcertada)
                 {
@@ -233,7 +280,7 @@ namespace PregunFondoSur.ViewModels
                 //notificarVictoriaEnVista
             }
 
-            
+
         }
 
         #endregion

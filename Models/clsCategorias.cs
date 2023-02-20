@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PregunFondoSur.models
+namespace Models
 {
-    public class clsCategorias
+    public class clsCategorias 
     {
 
         #region Atributos

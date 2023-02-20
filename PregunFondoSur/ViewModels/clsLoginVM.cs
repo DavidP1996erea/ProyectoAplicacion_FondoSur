@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Entidades;
 using PregunFondoSur.ViewModels.Utilidades;
 
@@ -8,17 +8,34 @@ namespace PregunFondoSur.ViewModels
     {
         #region Atributos
         private clsUsuario usuario;
+        private string nickname, imagen;
         private DelegateCommand logInCommand;
         #endregion
 
         #region Propiedades
+
+        public string Nickname
+        {
+            get { return nickname; }
+            set { nickname = value;
+                logInCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string Imagen
+        {
+            get { return imagen; }
+            set { imagen = value;
+                logInCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public clsUsuario Usuario
         {
             get { return usuario; }
             set
             {
                 usuario = value;
-                logInCommand.RaiseCanExecuteChanged();
             }
         }
         public DelegateCommand LogInCommand { get { return logInCommand; } }
@@ -40,10 +57,11 @@ namespace PregunFondoSur.ViewModels
         private bool logInCommand_CanExecute()
         {
             bool pulsable = false;
-            if (usuario.userName != "" && usuario.password != "" && usuario.imagen != "")
+            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null))
             {
                 pulsable = true;
             }
+            NotifyPropertyChanged("Usuario");
             return pulsable;
         }
 
@@ -52,14 +70,15 @@ namespace PregunFondoSur.ViewModels
         /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private async void logInCommand_Execute()
         {
+            Usuario.userName = Nickname;
+            Usuario.imagen = Imagen;
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Usuario", Usuario }
+                {"Usuario", Usuario }
             };
-            await Shell.Current.GoToAsync($"PaginaEspera", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
         }
 
     }
