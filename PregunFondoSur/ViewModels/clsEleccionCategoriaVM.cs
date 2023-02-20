@@ -220,7 +220,10 @@ namespace PregunFondoSur.ViewModels
             var navigationParameter = new Dictionary<string, object>
             {
                 { "pregunta", preguntaEnviar }
+
             };
+
+            await Task.Delay(TimeSpan.FromMilliseconds(2300));
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
         }
 
