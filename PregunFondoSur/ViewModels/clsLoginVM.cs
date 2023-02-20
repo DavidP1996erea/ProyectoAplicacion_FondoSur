@@ -8,7 +8,7 @@ namespace PregunFondoSur.ViewModels
     {
         #region Atributos
         private clsUsuario usuario;
-        private string nickname, imagen, password;
+        private string nickname, imagen;
         private DelegateCommand logInCommand;
         #endregion
 
@@ -18,14 +18,6 @@ namespace PregunFondoSur.ViewModels
         {
             get { return nickname; }
             set { nickname = value;
-                logInCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public string Password
-        {
-            get { return password; }
-            set { password = value;
                 logInCommand.RaiseCanExecuteChanged();
             }
         }
@@ -65,10 +57,11 @@ namespace PregunFondoSur.ViewModels
         private bool logInCommand_CanExecute()
         {
             bool pulsable = false;
-            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null) && (Password != "" && Password != null))
+            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null))
             {
                 pulsable = true;
             }
+            NotifyPropertyChanged("Usuario");
             return pulsable;
         }
 
@@ -77,15 +70,13 @@ namespace PregunFondoSur.ViewModels
         /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private async void logInCommand_Execute()
         {
             Usuario.userName = Nickname;
             Usuario.imagen = Imagen;
-            Usuario.password = Password;
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Usuario", Usuario }
+                {"Usuario", Usuario }
             };
             await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
         }
