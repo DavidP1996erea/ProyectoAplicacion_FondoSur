@@ -140,19 +140,11 @@ namespace PregunFondoSur.ViewModels
 
         private async Task recibirUsuario()
         {
-
-            int cont = 1;
-
             miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
-
-
-                if (cont > 0)
-                {
-                    cont--;           
+      
                     UsuarioRival = datosUsuario;
                     NotifyPropertyChanged(nameof(UsuarioRival));    
-                    await enviarUsuario();
-                }
+                
             });
 
             await miConexion.StartAsync();
