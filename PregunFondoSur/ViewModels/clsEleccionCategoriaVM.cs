@@ -8,6 +8,7 @@ namespace PregunFondoSur.ViewModels
 {
 
     [QueryProperty(nameof(UsuarioLocal), "usuarioLocal")]
+    [QueryProperty(nameof(CategoriaAcertada), "categoria")]
     public class clsEleccionCategoriaVM : clsVMBase
     {
         #region Atributos
