@@ -37,8 +37,6 @@ namespace PregunFondoSur.ViewModels
             // Se crea la conexión con el servidor
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/salaEsperaHub").Build();
 
-
-
             recibirBool();
             enviarBool();
         }
@@ -91,9 +89,9 @@ namespace PregunFondoSur.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Usuario", Usuario }
+                { "usuarioLocal", usuario }
             };
-            await Shell.Current.GoToAsync($"PaginaEleccionCategoria", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaEleccionCategoria", navigationParameter);
 
         }
 

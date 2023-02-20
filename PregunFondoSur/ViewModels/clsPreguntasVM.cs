@@ -59,7 +59,13 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private void volverAEleccionCategoria(clsCategorias categoriaAcertada) { }
+        private async void volverAEleccionCategoria(clsCategorias categoriaAcertada) {
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "categoria", categoriaAcertada }
+            };
+            await Shell.Current.GoToAsync("PaginaEleccionCategoria", navigationParameter);
+        }
         #endregion
 
         #region Metodos SignalR

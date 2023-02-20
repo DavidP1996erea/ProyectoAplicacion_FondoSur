@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 namespace PregunFondoSur.ViewModels
 {
 
-    [QueryProperty(nameof(UsuarioLocal), "Usuario")]
-    [QueryProperty(nameof(CategoriaAcertada), "categoria")]
+    [QueryProperty(nameof(UsuarioLocal), "usuarioLocal")]
     public class clsEleccionCategoriaVM : clsVMBase
     {
         #region Atributos
+        private clsUsuario usuarioLocal;
         private clsUsuario usuarioRival;
         private List<clsCategorias> listaCategoriasLocal;
         private List<clsCategorias> listaCategoriasRival;
@@ -47,12 +47,18 @@ namespace PregunFondoSur.ViewModels
                 asignarCategoriaAcertada();
             }
         }
-        public clsUsuario UsuarioLocal { get; set; }
+        public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
+            
+            set { usuarioLocal = value;
+                NotifyPropertyChanged();
+            } }
 
         public clsUsuario UsuarioRival
         {
             get { return usuarioRival; }
-            set { usuarioRival = value; }
+            set { usuarioRival = value;
+                NotifyPropertyChanged();
+            }
         }
         public List<clsCategorias> ListaCategoriasLocal
         {
@@ -102,8 +108,6 @@ namespace PregunFondoSur.ViewModels
 
             // Se crea la conexión con el servidor
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
-            UsuarioLocal = new clsUsuario();
-            UsuarioLocal.userName = "Ruben londres";
 
 
             recibirUsuario();
@@ -183,7 +187,7 @@ namespace PregunFondoSur.ViewModels
             {
                 { "pregunta", preguntaEnviar }
             };
-            await Shell.Current.GoToAsync($"PaginaPregunta", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
         }
 
         /// <summary>
