@@ -65,10 +65,11 @@ namespace PregunFondoSur.ViewModels
         private bool logInCommand_CanExecute()
         {
             bool pulsable = false;
-            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null) && (Password != "" && Password != null))
+            if (usuario.userName!="")
             {
                 pulsable = true;
             }
+            NotifyPropertyChanged("Usuario");
             return pulsable;
         }
 
@@ -77,7 +78,6 @@ namespace PregunFondoSur.ViewModels
         /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         private async void logInCommand_Execute()
         {
             Usuario.userName = Nickname;
@@ -85,7 +85,7 @@ namespace PregunFondoSur.ViewModels
             Usuario.password = Password;
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Usuario", Usuario }
+                {"Usuario", Usuario }
             };
             await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
         }

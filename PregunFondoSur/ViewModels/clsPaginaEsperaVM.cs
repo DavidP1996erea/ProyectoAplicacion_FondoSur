@@ -19,13 +19,7 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Propiedades
-        public clsUsuario Usuario { 
-            get { return usuario; }
-            set { usuario = value;
-                NotifyPropertyChanged();              
-            }
-        
-        }
+        public clsUsuario Usuario { get { return usuario; } set { usuario = value; } }
         #endregion
 
         #region Constructores
