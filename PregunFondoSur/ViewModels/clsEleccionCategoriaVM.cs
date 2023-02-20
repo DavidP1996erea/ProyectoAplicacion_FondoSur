@@ -57,14 +57,18 @@ namespace PregunFondoSur.ViewModels
         public clsUsuario UsuarioRival
         {
             get { return usuarioRival; }
-            set { usuarioRival = value;
+            set
+            {
+                usuarioRival = value;
                 NotifyPropertyChanged();
             }
         }
         public List<clsCategoriasMaui> ListaCategoriasLocal
         {
             get { return listaCategoriasLocal; }
-            set { listaCategoriasLocal = value;
+            set
+            {
+                listaCategoriasLocal = value;
                 comprobarVictoria();
                 enviarListadoCategorias();
             }
@@ -117,10 +121,10 @@ namespace PregunFondoSur.ViewModels
 
 
             recibirListadoCategorias();
-           
 
-          
-            
+
+
+
         }
 
         #endregion
@@ -137,16 +141,18 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirUsuario()
         {
 
-      
+            int cont = 1;
 
             miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
 
 
-           
+                if (cont > 0)
+                {
+                    cont--;           
                     UsuarioRival = datosUsuario;
                     NotifyPropertyChanged(nameof(UsuarioRival));    
-                  
-                
+                    await enviarUsuario();
+                }
             });
 
             await miConexion.StartAsync();
@@ -165,7 +171,8 @@ namespace PregunFondoSur.ViewModels
         {
 
 
-            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", async (listadoCategorias) => {
+            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", async (listadoCategorias) =>
+            {
 
                 ListaCategoriasRival = listadoCategorias;
 
@@ -190,6 +197,7 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntashistory = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasHistoryDAL();
             listadoPreguntasFood = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFoodDAL();
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
+
         }
 
         /// <summary>
@@ -277,7 +285,7 @@ namespace PregunFondoSur.ViewModels
                 //notificarVictoriaEnVista
             }
 
-            
+
         }
 
         #endregion
