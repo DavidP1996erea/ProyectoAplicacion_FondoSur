@@ -228,7 +228,7 @@ namespace PregunFondoSur.ViewModels
         /// Método que ajusta el color del recuadro del usuario en funcion al booleano TuTurno, el cual almacena si es el turno
         /// del usuario local o no.
         /// Precondiciones: Ninguna
-        /// Postcondiciones: Ninguna
+        /// Postcondiciones: Ninguna  
         /// </summary>
         private void establecerColorFondo()
         {
