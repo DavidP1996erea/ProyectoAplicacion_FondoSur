@@ -18,10 +18,10 @@
         </Border>
         <Label Text="SIGN IN" FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontFamily="Lilita"/>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,40,0,20" HeightRequest="40" Stroke="White">
-            <Entry Text="{Binding Nickname}" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="Nickname" FontFamily="Maven"/>
+            <Entry Text="{Binding Nickname}" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="Nickname" FontFamily="Maven"/>
         </Border>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,0,0,20" HeightRequest="40" Stroke="White">
-            <Entry Text="{Binding Imagen}" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="URL Image" FontFamily="Maven"/>
+            <Entry Text="{Binding Imagen}" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="URL Image" FontFamily="Maven"/>
         </Border>
 
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="90">
