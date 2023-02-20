@@ -14,7 +14,7 @@
     <VerticalStackLayout >
 <!--asd-->
 
-        <Label Margin="0,50,0,0"  HorizontalOptions="Center" VerticalOptions="Center"   Text="Pregunta bindeadaa"></Label>
+        <Label Margin="0,50,0,0"  HorizontalOptions="Center" VerticalOptions="Center"   Text="{Binding Pregunta.question}"></Label>
 
         <CollectionView ItemsSource="{Binding Pregunta.incorrectAnswers}"
                 SelectionMode="Single"

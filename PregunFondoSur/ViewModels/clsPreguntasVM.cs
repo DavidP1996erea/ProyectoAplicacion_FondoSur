@@ -19,7 +19,7 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Propiedades
-        public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value; } }
+        public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value; NotifyPropertyChanged(); } }
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
         public DelegateCommand PulsarBotonCommand { get { return pulsarBotonCommand; } }
         #endregion

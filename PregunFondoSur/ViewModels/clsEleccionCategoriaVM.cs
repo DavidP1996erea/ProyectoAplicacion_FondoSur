@@ -241,17 +241,16 @@ namespace PregunFondoSur.ViewModels
 
             ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             enviarListadoCategorias();
-            
 
+
+            await Task.Delay(TimeSpan.FromMilliseconds(2300));
+            preguntaEnviar = generarPregunta();
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
             {
                 { "pregunta", preguntaEnviar }
 
-            };
-
-            await Task.Delay(TimeSpan.FromMilliseconds(2300));
-            
+            };  
             // llamr mereto aqui
 
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
@@ -316,41 +315,52 @@ namespace PregunFondoSur.ViewModels
 
 
 
-        private clsPreguntas preguntaSeleccionada()
+        private clsPreguntas generarPregunta()
         {
-            Random random = new Random();
             clsPreguntas preguntaElegida = new clsPreguntas();
 
-            int idPregunta = random.Next(0, 39);
 
             if (CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
             {
-               
-                while (listadoPreguntashistory[idPregunta].isNiche)
-                {
-                    idPregunta = random.Next(0, 39);
-                }
-                preguntaElegida = listadoPreguntashistory[idPregunta];
+                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntashistory);
             }
             else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
             {
-
-            }else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
+                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntasScience);
+            }
+            else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
             {
-
-            }else if(CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
+                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntasFood);
+            }
+            else if(CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
             {
-
-            }else if(CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
+                preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasMusic);
+            }
+            else if(CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
             {
-
+                preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasFilms);
             }
 
 
             return preguntaElegida;
         }
 
+        private static clsPreguntas devolverPreguntaPorCategoria(List<clsPreguntas> listadoPreguntas) {
 
+            Random random = new Random();
+            clsPreguntas preguntaSeleccionada = new clsPreguntas();
+            int idPregunta = random.Next(0, 39);
+
+
+            while (listadoPreguntas[idPregunta].isNiche)
+            {
+                idPregunta = random.Next(0, 39);
+            }
+
+            preguntaSeleccionada = listadoPreguntas[idPregunta];
+
+            return preguntaSeleccionada;
+        }
 
         #endregion
     }
