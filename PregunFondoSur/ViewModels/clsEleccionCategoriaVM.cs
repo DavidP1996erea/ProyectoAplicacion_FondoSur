@@ -170,23 +170,16 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirListadoCategorias()
         {
 
-         
-
-
             miConexion.On<List<clsCategorias>>("recibirListadoCategorias", (listadoCategorias) =>
             {
 
-                List<clsCategoriasMaui> listadoCategoriasRecibir = new List<clsCategoriasMaui>();
 
                 for (int i = 0; i < listadoCategorias.Count; i++)
                 {
 
-                    listadoCategoriasRecibir.Add((clsCategoriasMaui)listadoCategorias[i]);
+                    ListaCategoriasRival[i].ImagenMostrada = listadoCategorias[i].ImagenMostrada;
 
                 }
-
-                ListaCategoriasRival = new List<clsCategoriasMaui>();
-                ListaCategoriasRival =  listadoCategoriasRecibir;
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
 
             });
