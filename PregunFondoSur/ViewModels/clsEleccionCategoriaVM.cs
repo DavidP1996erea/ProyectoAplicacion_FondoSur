@@ -229,8 +229,8 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
 
         }
-/*
-        private void cambiarTurno() {
+
+        private void iniciarTurno() {
             if (UsuarioRival.tuTurno == false)
             {
                 tuTurno = true;
