@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Microsoft.AspNetCore.SignalR.Client;
+using Models;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
 using Services;
@@ -156,15 +157,23 @@ namespace PregunFondoSur.ViewModels
 
         private async Task enviarListadoCategorias()
         {
-            await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { ListaCategoriasLocal });
+            List<clsCategorias> listadoCategoriasEnviar= new List<clsCategorias>(); 
+
+            for(int i = 0; i< ListaCategoriasLocal.Count; i++) {
+
+                listadoCategoriasEnviar.Add(ListaCategoriasLocal[i]);
+            
+            }
+            await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { listadoCategoriasEnviar });
         }
 
         private async Task recibirListadoCategorias()
         {
 
 
-            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", async (listadoCategorias) =>
+            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", (listadoCategorias) =>
             {
+
 
                 ListaCategoriasRival = listadoCategorias;
 
