@@ -63,7 +63,7 @@ namespace PregunFondoSur.ViewModels
                 {
                     NotifyPropertyChanged();
                     enviarUsuario();
-                    //iniciarTurno();
+                    
                 }
             } }
 
@@ -132,6 +132,7 @@ namespace PregunFondoSur.ViewModels
             recibirUsuario();
             enviarUsuario();
 
+   
 
             recibirListadoCategorias();
            
@@ -150,26 +151,28 @@ namespace PregunFondoSur.ViewModels
 
         private async Task recibirUsuario()
         {
-            miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
+            miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
       
                     UsuarioRival = datosUsuario;
-                    NotifyPropertyChanged(nameof(UsuarioRival));    
-                
+                    NotifyPropertyChanged(nameof(UsuarioRival));
+
+                    
+
             });
             await miConexion.StartAsync();
 
         }
 
-        private async Task enviarTurno(String boolTurno) {
-            await miConexion.InvokeCoreAsync("cambiarValorTurno", args: new[] { boolTurno });
+        private async Task enviarCambiarValorTurno() {
+            await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "True" });
         }
 
-        private async Task recibirTurno()
+        private async Task recibirCambiarTurno()
         {
-            miConexion.On<bool>("cambiarTurno", (turno) =>
+            miConexion.On<bool>("recibirCambiarTurno", (turno) =>
             {
-                tuTurno = turno;
-                NotifyPropertyChanged(nameof(tuTurno)); 
+                
+                 
             });
 
             await miConexion.StartAsync();
@@ -227,15 +230,15 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        //private void iniciarTurno() {
-        //    if (UsuarioRival.tuTurno == false)
-        //    {
-        //        tuTurno = true;
-        //    }
-        //    else {
-        //        tuTurno = false;
-        //    }
-        //}
+        private void iniciarTurno() {
+            if (UsuarioRival.tuTurno == false)
+            {
+                tuTurno = true;
+            }
+            else {
+                tuTurno = false;
+            }
+        }
 
         private void finalizarTurno() {
             tuTurno = false;
@@ -266,7 +269,7 @@ namespace PregunFondoSur.ViewModels
 
             ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             enviarListadoCategorias();
-
+            
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
             preguntaEnviar = generarPregunta();
@@ -275,8 +278,9 @@ namespace PregunFondoSur.ViewModels
             {
                 { "pregunta", preguntaEnviar }
 
-            };  
-            // llamr mereto aqui
+            };
+
+           
 
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
            
