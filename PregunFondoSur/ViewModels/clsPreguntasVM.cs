@@ -9,6 +9,7 @@ using PregunFondoSur.models;
 
 namespace PregunFondoSur.ViewModels
 {
+    [QueryProperty(nameof(Pregunta), "pregunta")]
     public class clsPreguntasVM : clsVMBase
     {
         #region Atributos

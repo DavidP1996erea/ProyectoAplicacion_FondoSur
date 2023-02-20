@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace PregunFondoSur.ViewModels
 {
 
-    
+    [QueryProperty(nameof(UsuarioLocal), "Usuario")]
+    [QueryProperty(nameof(CategoriaAcertada), "categoria")]
     public class clsEleccionCategoriaVM : clsVMBase
     {
         #region Atributos
@@ -180,7 +181,7 @@ namespace PregunFondoSur.ViewModels
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
             {
-                { "preguntaEnviar", preguntaEnviar }
+                { "pregunta", preguntaEnviar }
             };
             await Shell.Current.GoToAsync($"PaginaPregunta", navigationParameter);
         }
