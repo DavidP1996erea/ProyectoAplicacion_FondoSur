@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.SignalR.Client;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
@@ -18,8 +13,8 @@ namespace PregunFondoSur.ViewModels
         #region Atributos
         private clsUsuario usuarioLocal;
         private clsUsuario usuarioRival;
-        private List<clsCategorias> listaCategoriasLocal;
-        private List<clsCategorias> listaCategoriasRival;
+        private List<clsCategoriasMaui> listaCategoriasLocal;
+        private List<clsCategoriasMaui> listaCategoriasRival;
         private List<clsPreguntas> listadoPreguntasFilms;
         private List<clsPreguntas> listadoPreguntasMusic;
         private List<clsPreguntas> listadoPreguntashistory;
@@ -38,7 +33,7 @@ namespace PregunFondoSur.ViewModels
         #region Propiedades
 
         //TODO ARREGLAR
-        public clsCategorias CategoriaAcertada
+        public clsCategoriasMaui CategoriaAcertada
         {
             get { return CategoriaAcertada; }
             set
@@ -60,14 +55,15 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        public List<clsCategorias> ListaCategoriasLocal
+        public List<clsCategoriasMaui> ListaCategoriasLocal
         {
             get { return listaCategoriasLocal; }
             set { listaCategoriasLocal = value;
                 comprobarVictoria();
+                enviarListadoCategorias();
             }
         }
-        public List<clsCategorias> ListaCategoriasRival
+        public List<clsCategoriasMaui> ListaCategoriasRival
         {
             get { return listaCategoriasRival; }
             set { listaCategoriasRival = value; }
@@ -112,6 +108,13 @@ namespace PregunFondoSur.ViewModels
 
             recibirUsuario();
             enviarUsuario();
+
+
+            recibirListadoCategorias();
+           
+
+          
+            
         }
 
         #endregion
@@ -145,6 +148,33 @@ namespace PregunFondoSur.ViewModels
             await miConexion.StartAsync();
 
         }
+
+
+
+
+        private async Task enviarListadoCategorias()
+        {
+            await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { ListaCategoriasLocal });
+        }
+
+        private async Task recibirListadoCategorias()
+        {
+
+
+            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", async (listadoCategorias) => {
+
+                ListaCategoriasRival = listadoCategorias;
+
+
+            });
+
+            await miConexion.StartAsync();
+
+        }
+
+
+
+
 
         #endregion
 
@@ -181,7 +211,7 @@ namespace PregunFondoSur.ViewModels
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
-
+            ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
             {
@@ -217,7 +247,7 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void asignarCategoriaAcertada()
         {
-            foreach (clsCategorias categoria in listaCategoriasLocal)
+            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
             {
                 if (CategoriaAcertada.Nombre == categoria.Nombre)
                 {
@@ -230,7 +260,7 @@ namespace PregunFondoSur.ViewModels
         private void comprobarVictoria()
         {
             int cantidadAcertadas = 0;
-            foreach (clsCategorias categoria in listaCategoriasLocal)
+            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
             {
                 if (categoria.EstaAcertada)
                 {

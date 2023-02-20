@@ -67,6 +67,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Entidades\Entidades.csproj" />
+	  <ProjectReference Include="..\Models\Models.csproj" />
 	  <ProjectReference Include="..\Services\Services.csproj" />
 	</ItemGroup>
 

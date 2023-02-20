@@ -43,11 +43,11 @@ namespace PregunFondoSur.ViewModels
         { 
            bool acertado=false;
             //TODO recoger la pregunta y validar si esta bien o mal
-            clsCategorias categoriaAcertada=new clsCategorias();
+            clsCategoriasMaui categoriaAcertada=new clsCategoriasMaui();
             if (acertado) {
                 String nombreCategoria = pregunta.category;
-                List<clsCategorias> categorias = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
-                foreach (clsCategorias categoria in categorias)
+                List<clsCategoriasMaui> categorias = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
+                foreach (clsCategoriasMaui categoria in categorias)
                 {
                     if (categoria.Nombre==nombreCategoria) {
                         categoriaAcertada = categoria;
@@ -59,16 +59,13 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private async void volverAEleccionCategoria(clsCategorias categoriaAcertada) {
-            var navigationParameter = new Dictionary<string, object>
-            {
-                { "categoria", categoriaAcertada }
-            };
-            await Shell.Current.GoToAsync("PaginaEleccionCategoria", navigationParameter);
-        }
+        private void volverAEleccionCategoria(clsCategoriasMaui categoriaAcertada) { }
         #endregion
 
         #region Metodos SignalR
+
+
+
         #endregion
     }
 }
