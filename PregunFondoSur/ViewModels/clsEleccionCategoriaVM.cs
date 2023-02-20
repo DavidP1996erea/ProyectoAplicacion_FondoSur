@@ -71,7 +71,7 @@ namespace PregunFondoSur.ViewModels
             {
                 listaCategoriasLocal = value;
                 comprobarVictoria();
-                enviarListadoCategorias();
+                
             }
         }
         public List<clsCategoriasMaui> ListaCategoriasRival
@@ -170,13 +170,23 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirListadoCategorias()
         {
 
+         
 
-            miConexion.On<List<clsCategoriasMaui>>("recibirListadoCategorias", (listadoCategorias) =>
+
+            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", (listadoCategorias) =>
             {
 
+                List<clsCategoriasMaui> listadoCategoriasRecibir = new List<clsCategoriasMaui>();
 
-                ListaCategoriasRival = listadoCategorias;
+                for (int i = 0; i < listadoCategorias.Count; i++)
+                {
 
+                    listadoCategoriasRecibir.Add((clsCategoriasMaui)listadoCategorias[i]);
+
+                }
+
+                ListaCategoriasRival= listadoCategoriasRecibir;
+                NotifyPropertyChanged(nameof(ListaCategoriasRival));
 
             });
 
@@ -225,6 +235,8 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand.RaiseCanExecuteChanged();
 
             ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
+            enviarListadoCategorias();
+
             //TODO Implementar Chuleta
             var navigationParameter = new Dictionary<string, object>
             {
