@@ -1,6 +1,6 @@
 ﻿using Entidades;
 using Microsoft.AspNetCore.SignalR;
-
+using PregunFondoSur.models;
 
 namespace SignalR_Proyecto.Hubs
 {
