@@ -185,7 +185,8 @@ namespace PregunFondoSur.ViewModels
 
                 }
 
-                ListaCategoriasRival= listadoCategoriasRecibir;
+                ListaCategoriasRival = new List<clsCategoriasMaui>();
+                ListaCategoriasRival =  listadoCategoriasRecibir;
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
 
             });
