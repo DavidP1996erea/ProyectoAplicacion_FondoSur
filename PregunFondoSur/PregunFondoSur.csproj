@@ -67,6 +67,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Entidades\Entidades.csproj" />
+	  <ProjectReference Include="..\Models\Models.csproj" />
 	  <ProjectReference Include="..\Services\Services.csproj" />
 	</ItemGroup>
 
@@ -83,6 +84,10 @@
 	  <MauiXaml Update="Vistas\PaginaPregunta.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="models\" />
 	</ItemGroup>
 
 </Project>
