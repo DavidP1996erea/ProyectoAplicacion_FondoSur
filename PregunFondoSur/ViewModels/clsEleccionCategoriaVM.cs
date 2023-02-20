@@ -126,11 +126,11 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
 
             // Se crea la conexión con el servidor
-            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/eleccionCategoriasHub").Build();
 
 
             recibirUsuario();
-            enviarUsuario();
+          
 
    
 
@@ -162,7 +162,7 @@ namespace PregunFondoSur.ViewModels
             await miConexion.StartAsync();
 
         }
-
+        /*
         private async Task enviarCambiarValorTurno() {
             await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "True" });
         }
@@ -177,7 +177,7 @@ namespace PregunFondoSur.ViewModels
 
             await miConexion.StartAsync();
         }
-
+        */
 
 
         private async Task enviarListadoCategorias()
@@ -229,7 +229,7 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
 
         }
-
+/*
         private void cambiarTurno() {
             if (UsuarioRival.tuTurno == false)
             {
@@ -239,7 +239,7 @@ namespace PregunFondoSur.ViewModels
                 tuTurno = false;
             }
         }
-
+*/
         private void finalizarTurno() {
             tuTurno = false;
         }
@@ -250,7 +250,7 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private bool girarRuletaCommand_CanExecuted()
         {
-            bool pulsable = true;
+            bool pulsable = false;
             if (tuTurno)
             {
                 if (!estaGirando)

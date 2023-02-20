@@ -10,8 +10,15 @@ namespace SignalR_Proyecto.Hubs
         public async Task enviarUsuario(clsUsuario datosUsuario)
         {
            
+            datosUsuario.tuTurno = true;
+
+
+            if (clsUsuariosPartida.listadoUsuariosPartida[0]==null) {
+               datosUsuario.tuTurno=false;
+               clsUsuariosPartida.listadoUsuariosPartida.Add(datosUsuario);
+            }
             
-            await Clients.Others.SendAsync("recibirUsuario", datosUsuario);
+            await Clients.All.SendAsync("recibirUsuario", datosUsuario);
 
         }
 
