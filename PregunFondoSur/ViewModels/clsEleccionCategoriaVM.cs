@@ -156,20 +156,22 @@ namespace PregunFondoSur.ViewModels
 
         private async Task recibirUsuario()
         {
+            int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
-      
-                if(UsuarioLocal.userName==datosUsuario.userName)
+                if (cont > 0)
                 {
-                    UsuarioLocal = datosUsuario;
-                    NotifyPropertyChanged(nameof(UsuarioLocal));
+                    if (UsuarioLocal.userName == datosUsuario.userName)
+                    {
+                        UsuarioLocal = datosUsuario;
+                        NotifyPropertyChanged(nameof(UsuarioLocal));
+                    }
+                    else
+                    {
+                        UsuarioRival = datosUsuario;
+                        NotifyPropertyChanged(nameof(UsuarioRival));
+                    }
+                    cont--;
                 }
-                else
-                {
-                    UsuarioRival = datosUsuario;
-                    NotifyPropertyChanged(nameof(UsuarioRival));
-                }
-                    
-
                     
 
             });
