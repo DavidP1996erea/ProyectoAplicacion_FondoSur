@@ -62,7 +62,9 @@ namespace PregunFondoSur.ViewModels
                 if (usuarioLocal != null)
                 {
                     NotifyPropertyChanged();
+              
                     enviarUsuario();
+                    girarRuletaCommand.RaiseCanExecuteChanged();
                     
                 }
             } }
@@ -121,12 +123,13 @@ namespace PregunFondoSur.ViewModels
         public clsEleccionCategoriaVM()
         {
             obtenerListados();
+
             listaCategoriasLocal = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             listaCategoriasRival = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
-            girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
 
+            girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
             // Se crea la conexión con el servidor
-            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/eleccionCategoriasHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
 
 
             recibirUsuario();
@@ -135,7 +138,9 @@ namespace PregunFondoSur.ViewModels
    
 
             recibirListadoCategorias();
-           
+
+
+
         }
 
         #endregion
@@ -153,8 +158,17 @@ namespace PregunFondoSur.ViewModels
         {
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
       
+                if(UsuarioLocal.userName==datosUsuario.userName)
+                {
+                    UsuarioLocal = datosUsuario;
+                    NotifyPropertyChanged(nameof(UsuarioLocal));
+                }
+                else
+                {
                     UsuarioRival = datosUsuario;
                     NotifyPropertyChanged(nameof(UsuarioRival));
+                }
+                    
 
                     
 
@@ -239,7 +253,7 @@ namespace PregunFondoSur.ViewModels
                 tuTurno = false;
             }
         }
-*/
+
         private void finalizarTurno() {
             tuTurno = false;
         }
@@ -251,14 +265,19 @@ namespace PregunFondoSur.ViewModels
         private bool girarRuletaCommand_CanExecuted()
         {
             bool pulsable = false;
-            if (tuTurno)
+
+            if (UsuarioLocal != null)
             {
-                if (!estaGirando)
+                if (UsuarioLocal.tuTurno)
                 {
+
                     pulsable = true;
+
                 }
+
             }
-            finalizarTurno();
+           
+            
             return pulsable;
         }
 

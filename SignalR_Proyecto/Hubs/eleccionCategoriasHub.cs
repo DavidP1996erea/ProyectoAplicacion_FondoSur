@@ -5,19 +5,24 @@ using SignalR_Proyecto.Models;
 
 namespace SignalR_Proyecto.Hubs
 {
+
     public class eleccionCategoriasHub : Hub
     {
+
+      
+
         public async Task enviarUsuario(clsUsuario datosUsuario)
         {
-           
-            datosUsuario.tuTurno = true;
+            datosUsuario.tuTurno = false;
+          
 
+            if (clsUsuariosPartida.ListadoUsuariosPartida.Count==0) {
+               datosUsuario.tuTurno=true;
 
-            if (clsUsuariosPartida.listadoUsuariosPartida[0]==null) {
-               datosUsuario.tuTurno=false;
-               clsUsuariosPartida.listadoUsuariosPartida.Add(datosUsuario);
             }
-            
+
+            clsUsuariosPartida.ListadoUsuariosPartida.Add(datosUsuario);
+
             await Clients.All.SendAsync("recibirUsuario", datosUsuario);
 
         }
