@@ -16,12 +16,12 @@ namespace SignalR_Proyecto.Hubs
             datosUsuario.tuTurno = false;
           
 
-            if (clsUsuariosPartida.ListadoUsuariosPartida.Count==0) {
+            if (clsUsuariosPartida.ListadoUsuariosPartida.Count==0)
+            {
                datosUsuario.tuTurno=true;
-
+               clsUsuariosPartida.ListadoUsuariosPartida.Add(datosUsuario);
             }
 
-            clsUsuariosPartida.ListadoUsuariosPartida.Add(datosUsuario);
 
             await Clients.All.SendAsync("recibirUsuario", datosUsuario);
 
