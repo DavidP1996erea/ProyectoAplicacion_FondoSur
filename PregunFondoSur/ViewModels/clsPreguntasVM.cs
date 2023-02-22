@@ -23,7 +23,7 @@ namespace PregunFondoSur.ViewModels
         public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value;
                 obtenerListadoRespuestas(listadoRespuestas, pregunta); NotifyPropertyChanged(); } }
 
-        private List<String> ListadoRespuestas { get { return listadoRespuestas; } set { listadoRespuestas = value; NotifyPropertyChanged(); }  }
+        public List<String> ListadoRespuestas { get { return listadoRespuestas; } set { listadoRespuestas = value; NotifyPropertyChanged(); }  }
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
 
         #endregion
@@ -75,16 +75,15 @@ namespace PregunFondoSur.ViewModels
         }
 
 
-        private static List<String> obtenerListadoRespuestas(List<String> listadoRespuestas, clsPreguntas pregunta)
+        private void obtenerListadoRespuestas(List<String> listadoRespuestas, clsPreguntas pregunta)
         {
             listadoRespuestas.Add(pregunta.incorrectAnswers[0]);
             listadoRespuestas.Add(pregunta.incorrectAnswers[1]);
             listadoRespuestas.Add(pregunta.incorrectAnswers[2]);
             listadoRespuestas.Add(pregunta.correctAnswer);
 
-
-
-            return randomizar(listadoRespuestas);
+            ListadoRespuestas = new List<string>(randomizar(listadoRespuestas));
+            
 
         }
 
