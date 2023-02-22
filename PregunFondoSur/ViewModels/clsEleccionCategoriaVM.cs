@@ -139,8 +139,7 @@ namespace PregunFondoSur.ViewModels
    
 
             recibirListadoCategorias();
-
-          
+            recibirCambiarTurno();
         }
 
         #endregion
@@ -298,8 +297,8 @@ namespace PregunFondoSur.ViewModels
 
             };
 
-           
 
+            enviarCambiarValorTurno();
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
            
         }
