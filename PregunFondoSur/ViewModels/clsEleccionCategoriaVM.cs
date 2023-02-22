@@ -130,7 +130,7 @@ namespace PregunFondoSur.ViewModels
 
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
             // Se crea la conexión con el servidor
-            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/eleccionCategoriasHub").Build();
 
 
             recibirUsuario();
@@ -141,7 +141,6 @@ namespace PregunFondoSur.ViewModels
             recibirListadoCategorias();
 
           
-
         }
 
         #endregion
@@ -180,22 +179,26 @@ namespace PregunFondoSur.ViewModels
             await miConexion.StartAsync();
 
         }
-        /*
+        
         private async Task enviarCambiarValorTurno() {
-            await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "True" });
+            UsuarioLocal.tuTurno = false;
+            NotifyPropertyChanged(nameof(UsuarioLocal));
+            await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "true" });
         }
 
         private async Task recibirCambiarTurno()
         {
-            miConexion.On<bool>("recibirCambiarTurno", (turno) =>
+            miConexion.On<String>("recibirCambiarTurno", (turno) =>
             {
-                
-                 
+                clsUsuario usuarioTemporal = UsuarioLocal;
+                usuarioTemporal.tuTurno = true;
+                UsuarioLocal = usuarioTemporal;
+                NotifyPropertyChanged(nameof(UsuarioLocal));
             });
 
             await miConexion.StartAsync();
         }
-        */
+        
 
 
         private async Task enviarListadoCategorias()
@@ -248,15 +251,7 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private void iniciarTurno() {
-            if (UsuarioRival.tuTurno == false)
-            {
-                tuTurno = true;
-            }
-            else {
-                tuTurno = false;
-            }
-        }
+        
 
         private void finalizarTurno() {
             tuTurno = false;
@@ -302,6 +297,8 @@ namespace PregunFondoSur.ViewModels
                 { "pregunta", preguntaEnviar }
 
             };
+
+           
 
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
            

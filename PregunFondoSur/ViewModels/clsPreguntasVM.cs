@@ -66,6 +66,35 @@ namespace PregunFondoSur.ViewModels
             };
             await Shell.Current.GoToAsync("..", navigationParameter);
         }
+
+
+        private List<String> obtenerListadoRespuestas()
+        {
+            List<String> respuestas = new List<String>();
+            respuestas.Add(pregunta.incorrectAnswers[0]);
+            respuestas.Add(pregunta.incorrectAnswers[1]);
+            respuestas.Add(pregunta.incorrectAnswers[2]);
+            respuestas.Add(pregunta.correctAnswer);
+
+
+
+            return randomizar(respuestas);
+
+        }
+
+        public static List<string> randomizar(List<string> list)
+        {
+            List<string> randomizedList = new List<string>();
+            Random rnd = new Random();
+            while (list.Count > 0)
+            {
+                int index = rnd.Next(0, list.Count); //pick a random item from the master list
+                randomizedList.Add(list[index]); //place it at the end of the randomized list
+                list.RemoveAt(index); //remove to avoid duplicates
+            }
+            return randomizedList;
+        }
+
         #endregion
 
         #region Metodos SignalR

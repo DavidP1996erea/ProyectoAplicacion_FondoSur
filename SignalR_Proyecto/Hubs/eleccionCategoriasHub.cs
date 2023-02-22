@@ -34,11 +34,8 @@ namespace SignalR_Proyecto.Hubs
 
         public async Task enviarCambiarValorTurno(String miTurno)
         {
-            bool turno = false;
-            if (miTurno == "true") {
-                turno = true;
-            }
-            await Clients.Others.SendAsync("recibirCambiarTurno", turno);
+            
+            await Clients.Others.SendAsync("recibirCambiarTurno", miTurno);
         }
 
     }
