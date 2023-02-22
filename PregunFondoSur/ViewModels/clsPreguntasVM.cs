@@ -20,7 +20,8 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Propiedades
-        public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value; NotifyPropertyChanged(); } }
+        public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value;
+                obtenerListadoRespuestas(listadoRespuestas, pregunta); NotifyPropertyChanged(); } }
 
         private List<String> ListadoRespuestas { get { return listadoRespuestas; } set { listadoRespuestas = value; NotifyPropertyChanged(); }  }
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
@@ -32,7 +33,6 @@ namespace PregunFondoSur.ViewModels
         {
             tiempo = 60;
             listadoRespuestas = new List<String>();
-            obtenerListadoRespuestas(listadoRespuestas, pregunta);
         }
 
 
