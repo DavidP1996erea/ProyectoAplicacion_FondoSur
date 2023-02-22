@@ -10,12 +10,13 @@
     <ContentPage.BindingContext>
         <model:clsPreguntasVM/>
     </ContentPage.BindingContext>
-    
+
     <VerticalStackLayout >
-<!--asd-->
 
-        <Label Margin="0,50,0,0"  HorizontalOptions="Center" VerticalOptions="Center"   Text="{Binding Pregunta.question}"></Label>
-
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="100" BackgroundColor="White">
+            <Label FontSize="48" Text="¡¡¡YOU ARE THE WINNER!!!" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Gold" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
+        </Border>
+        
         <Border>
             <VerticalStackLayout WidthRequest="700" BackgroundColor="White" HeightRequest="400">
 
