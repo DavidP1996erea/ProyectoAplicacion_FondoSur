@@ -129,7 +129,7 @@ namespace PregunFondoSur.ViewModels
             listaCategoriasRival = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
 
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
-            // Se crea la conexión con el servidor
+            // Se crea la conexión con el servidor.
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
 
 
