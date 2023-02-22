@@ -45,7 +45,7 @@ namespace PregunFondoSur.ViewModels
 
 
 
-        //TODO ARREGLAR
+        //TODO ARREGLAR.
         public clsCategoriasMaui CategoriaAcertada
         {
             get { return CategoriaAcertada; }
