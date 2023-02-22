@@ -6,6 +6,7 @@ using PregunFondoSur.ViewModels.Utilidades;
 using System.Text;
 using System.Threading.Tasks;
 using PregunFondoSur.models;
+using System.Windows.Input;
 
 namespace PregunFondoSur.ViewModels
 {
@@ -15,6 +16,9 @@ namespace PregunFondoSur.ViewModels
         #region Atributos
         private clsPreguntas pregunta;
         private List<String> listadoRespuestas;
+        private String respuestaSeleccionada;
+        private DelegateCommand<string> pulsarBotonCommand;
+        private int idBoton;
         private int tiempo;
 
         #endregion
@@ -24,6 +28,17 @@ namespace PregunFondoSur.ViewModels
                 obtenerListadoRespuestas(listadoRespuestas, pregunta); NotifyPropertyChanged(); } }
 
         public List<String> ListadoRespuestas { get { return listadoRespuestas; } set { listadoRespuestas = value; NotifyPropertyChanged(); }  }
+        public int IdBoton { 
+            get { return idBoton; } 
+            set { idBoton = value; }
+        }
+
+        public DelegateCommand<string> PulsarBotonCommand
+        {
+            get { return pulsarBotonCommand; }
+            set { pulsarBotonCommand = value; }
+        }
+
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
 
         #endregion
@@ -33,7 +48,9 @@ namespace PregunFondoSur.ViewModels
         {
             tiempo = 60;
             listadoRespuestas = new List<String>();
+            pulsarBotonCommand = new DelegateCommand<string>(pulsarBotonCommand_Executed);
         }
+
 
 
         #endregion
@@ -100,6 +117,23 @@ namespace PregunFondoSur.ViewModels
             return randomizedList;
         }
 
+        private void pulsarBotonCommand_Executed(string parametro)
+        {
+            int posicion = int.Parse(parametro);
+            respuestaSeleccionada = listadoRespuestas[posicion];
+            comprobarSiCorrecto();
+        }
+        private void comprobarSiCorrecto()
+        {
+            if (respuestaSeleccionada == pregunta.correctAnswer)
+            {
+                Console.WriteLine("acertada");
+            }
+            else
+            {
+                Console.WriteLine("Fallado");
+            }
+        }
         #endregion
 
         #region Metodos SignalR
