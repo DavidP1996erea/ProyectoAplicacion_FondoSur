@@ -2,11 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PregunFondoSur.Vistas.PaginaFinalizacion"
+             BackgroundColor="#666666"
              Title="PaginaFinalizacion">
-    <VerticalStackLayout>
-        <Label 
-            Text=""
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout HorizontalOptions="Center">
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="100" BackgroundColor="White">
+            <Label FontSize="48" Text="¡¡¡YOU ARE THE WINNER!!!" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Gold" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
+        </Border>
+
+        <HorizontalStackLayout>
+            <Border WidthRequest="450" HeightRequest="300" BackgroundColor="White" Margin="0, 40, 40, 0" StrokeShape="RoundRectangle 10, 10, 10, 10">
+                <HorizontalStackLayout>
+                    <Label Text="Correct Answers" FontSize="25" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="Black"  VerticalTextAlignment="Center" Margin="15, 10, 0, 0" ></Label>
+                </HorizontalStackLayout>
+            </Border>
+            <Border WidthRequest="450" HeightRequest="300" BackgroundColor="White" Margin="0, 40, 0, 0" StrokeShape="RoundRectangle 10, 10, 10, 10">
+                <HorizontalStackLayout>
+                    <Label Text="Correct Answers" FontSize="25" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="Black"  VerticalTextAlignment="Center" Margin="15, 10, 0, 0" ></Label>
+                </HorizontalStackLayout>
+            </Border>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
