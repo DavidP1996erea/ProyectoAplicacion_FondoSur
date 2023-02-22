@@ -130,7 +130,7 @@ namespace PregunFondoSur.ViewModels
 
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
             // Se crea la conexión con el servidor.
-            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/eleccionCategoriasHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
 
 
             recibirUsuario();
