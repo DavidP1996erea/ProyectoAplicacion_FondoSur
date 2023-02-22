@@ -15,6 +15,7 @@ namespace PregunFondoSur.ViewModels
         #region Atributos
         private clsUsuario usuarioLocal;
         private clsUsuario usuarioRival;
+        private clsCategoriasMaui categoriaAcertada;
         private List<clsCategoriasMaui> listaCategoriasLocal;
         private List<clsCategoriasMaui> listaCategoriasRival;
         private List<clsPreguntas> listadoPreguntasFilms;
@@ -48,10 +49,10 @@ namespace PregunFondoSur.ViewModels
         //TODO ARREGLAR.
         public clsCategoriasMaui CategoriaAcertada
         {
-            get { return CategoriaAcertada; }
+            get { return categoriaAcertada; }
             set
             {
-                CategoriaAcertada = value;
+                categoriaAcertada = value;
                 asignarCategoriaAcertada();
             }
         }
@@ -139,7 +140,7 @@ namespace PregunFondoSur.ViewModels
 
             recibirListadoCategorias();
 
-
+          
 
         }
 
@@ -302,8 +303,6 @@ namespace PregunFondoSur.ViewModels
 
             };
 
-           
-
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
            
         }
@@ -335,14 +334,14 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void asignarCategoriaAcertada()
         {
-            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
+            for(int i=0; i<listaCategoriasLocal.Count; i++)
             {
-                if (CategoriaAcertada.Nombre == categoria.Nombre)
+                if (categoriaAcertada.Nombre.Contains(listaCategoriasLocal[i].Nombre));
                 {
-                    categoria.EstaAcertada = true;
-                    categoria.ImagenMostrada = categoria.ImagenAcertada;
+                    listaCategoriasLocal[i] = categoriaAcertada;
                 }
             }
+            NotifyPropertyChanged(nameof(ListaCategoriasLocal));
         }
 
         private void comprobarVictoria()

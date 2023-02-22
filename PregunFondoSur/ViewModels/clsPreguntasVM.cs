@@ -15,48 +15,48 @@ namespace PregunFondoSur.ViewModels
         #region Atributos
         private clsPreguntas pregunta;
         private int tiempo;
-        private DelegateCommand pulsarBotonCommand;
+       
         #endregion
 
         #region Propiedades
         public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value; NotifyPropertyChanged(); } }
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
-        public DelegateCommand PulsarBotonCommand { get { return pulsarBotonCommand; } }
+      
         #endregion
 
         #region Constructores
         public clsPreguntasVM() {
             tiempo = 60;
-            pulsarBotonCommand = new DelegateCommand(pulsarBotonCommand_Execute, pulsarBotonCommand_CanExecute);
+     
         }
 
 
         #endregion
 
         #region Metodos
-        private bool pulsarBotonCommand_CanExecute()
-        {
-            return true;
+
+        private void acertarCategoria(String nombreCategoria)
+        { 
+            clsCategoriasMaui categoriaResultado = obtenerCategoriaPorNombre(nombreCategoria);
+            categoriaResultado.ImagenMostrada = categoriaResultado.ImagenAcertada;
+            categoriaResultado.EstaAcertada = true;
+      
+            volverAEleccionCategoria(categoriaResultado);
         }
 
-        private void pulsarBotonCommand_Execute()
-        { 
-           bool acertado=false;
-            //TODO recoger la pregunta y validar si esta bien o mal
-            clsCategoriasMaui categoriaAcertada=new clsCategoriasMaui();
-            if (acertado) {
-                String nombreCategoria = pregunta.category;
-                List<clsCategoriasMaui> categorias = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
-                foreach (clsCategoriasMaui categoria in categorias)
+        private clsCategoriasMaui obtenerCategoriaPorNombre(String nombreCategoria) {
+            clsCategoriasMaui categoriaAcertada = new clsCategoriasMaui();
+            List<clsCategoriasMaui> categorias = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
+            foreach (clsCategoriasMaui categoria in categorias)
+            {
+                if (categoria.Nombre.Contains(nombreCategoria))
                 {
-                    if (categoria.Nombre==nombreCategoria) {
-                        categoriaAcertada = categoria;
-                    }
+
+                    
+                    categoriaAcertada = categoria;
                 }
-                volverAEleccionCategoria(categoriaAcertada);
             }
-
-
+            return categoriaAcertada;
         }
 
         private async void volverAEleccionCategoria(clsCategoriasMaui categoriaAcertada) {
@@ -64,7 +64,7 @@ namespace PregunFondoSur.ViewModels
             {
                 { "categoria", categoriaAcertada }
             };
-            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+            await Shell.Current.GoToAsync("..", navigationParameter);
         }
         #endregion
 
