@@ -14,20 +14,25 @@ namespace PregunFondoSur.ViewModels
     {
         #region Atributos
         private clsPreguntas pregunta;
+        private List<String> listadoRespuestas;
         private int tiempo;
-       
+
         #endregion
 
         #region Propiedades
         public clsPreguntas Pregunta { get { return pregunta; } set { pregunta = value; NotifyPropertyChanged(); } }
+
+        private List<String> ListadoRespuestas { get { return listadoRespuestas; } set { listadoRespuestas = value; NotifyPropertyChanged(); }  }
         public int Tempo { get { return tiempo; } set { tiempo = value; } }
-      
+
         #endregion
 
         #region Constructores
-        public clsPreguntasVM() {
+        public clsPreguntasVM()
+        {
             tiempo = 60;
-     
+            listadoRespuestas = new List<String>();
+            obtenerListadoRespuestas(listadoRespuestas, pregunta);
         }
 
 
@@ -36,15 +41,16 @@ namespace PregunFondoSur.ViewModels
         #region Metodos
 
         private void acertarCategoria(String nombreCategoria)
-        { 
+        {
             clsCategoriasMaui categoriaResultado = obtenerCategoriaPorNombre(nombreCategoria);
             categoriaResultado.ImagenMostrada = categoriaResultado.ImagenAcertada;
             categoriaResultado.EstaAcertada = true;
-      
+
             volverAEleccionCategoria(categoriaResultado);
         }
 
-        private clsCategoriasMaui obtenerCategoriaPorNombre(String nombreCategoria) {
+        private clsCategoriasMaui obtenerCategoriaPorNombre(String nombreCategoria)
+        {
             clsCategoriasMaui categoriaAcertada = new clsCategoriasMaui();
             List<clsCategoriasMaui> categorias = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             foreach (clsCategoriasMaui categoria in categorias)
@@ -52,14 +58,15 @@ namespace PregunFondoSur.ViewModels
                 if (categoria.Nombre.Contains(nombreCategoria))
                 {
 
-                    
+
                     categoriaAcertada = categoria;
                 }
             }
             return categoriaAcertada;
         }
 
-        private async void volverAEleccionCategoria(clsCategoriasMaui categoriaAcertada) {
+        private async void volverAEleccionCategoria(clsCategoriasMaui categoriaAcertada)
+        {
             var navigationParameter = new Dictionary<string, object>
             {
                 { "categoria", categoriaAcertada }
@@ -68,17 +75,16 @@ namespace PregunFondoSur.ViewModels
         }
 
 
-        private List<String> obtenerListadoRespuestas()
+        private static List<String> obtenerListadoRespuestas(List<String> listadoRespuestas, clsPreguntas pregunta)
         {
-            List<String> respuestas = new List<String>();
-            respuestas.Add(pregunta.incorrectAnswers[0]);
-            respuestas.Add(pregunta.incorrectAnswers[1]);
-            respuestas.Add(pregunta.incorrectAnswers[2]);
-            respuestas.Add(pregunta.correctAnswer);
+            listadoRespuestas.Add(pregunta.incorrectAnswers[0]);
+            listadoRespuestas.Add(pregunta.incorrectAnswers[1]);
+            listadoRespuestas.Add(pregunta.incorrectAnswers[2]);
+            listadoRespuestas.Add(pregunta.correctAnswer);
 
 
 
-            return randomizar(respuestas);
+            return randomizar(listadoRespuestas);
 
         }
 
