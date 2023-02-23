@@ -344,7 +344,7 @@ namespace PregunFondoSur.ViewModels
                 UsuarioLocal.tuTurno = true;
                 establecerColorFondo();
                 girarRuletaCommand.RaiseCanExecuteChanged();
-                comprobarFinalizarPartida();
+                await comprobarFinalizarPartida();
             }
             else
             {
@@ -400,7 +400,7 @@ namespace PregunFondoSur.ViewModels
             return preguntaSeleccionada;
         }
 
-        public void comprobarFinalizarPartida()
+        public async Task comprobarFinalizarPartida()
         {
             int contadorPreguntasAcertadas = 0;
             for(int i =0; i<listaCategoriasLocal.Count; i++)
