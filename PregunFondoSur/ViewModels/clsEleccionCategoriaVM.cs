@@ -338,7 +338,7 @@ namespace PregunFondoSur.ViewModels
                 List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
-                await enviarListadoCategorias();
+                enviarListadoCategorias();
             }
             await enviarCambiarValorTurno();
         }
