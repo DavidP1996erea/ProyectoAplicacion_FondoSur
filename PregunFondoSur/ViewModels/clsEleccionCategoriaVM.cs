@@ -333,6 +333,7 @@ namespace PregunFondoSur.ViewModels
             else
             {
                 await enviarCambiarValorTurno();
+                establecerColorFondo();
             }
         }
 
