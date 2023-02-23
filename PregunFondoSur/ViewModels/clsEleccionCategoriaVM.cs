@@ -24,11 +24,10 @@ namespace PregunFondoSur.ViewModels
         private List<clsPreguntas> listadoPreguntasFood;
         private List<clsPreguntas> listadoPreguntasScience;
         private clsPreguntas preguntaEnviar;
-        private bool tuTurno;
         //Booleano en el que se guarda si la ruleta esta girando o no para el canExecute de girarRuletaCommand
         private bool estaGirando;
         private DelegateCommand girarRuletaCommand;
-        private String colorFondoUsuario;
+        private Color colorFondoUsuario;
 
         private readonly HubConnection miConexion;
         private int categoriaDeLaRuleta;
@@ -43,7 +42,6 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
 
 
         //TODO ARREGLAR.
@@ -63,7 +61,7 @@ namespace PregunFondoSur.ViewModels
                 if (usuarioLocal != null)
                 {
                     NotifyPropertyChanged();
-              
+                    establecerColorFondo();
                     enviarUsuario();
                     girarRuletaCommand.RaiseCanExecuteChanged();
                     
@@ -85,7 +83,6 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 listaCategoriasLocal = value;
-                comprobarVictoria();
             }
         }
         public List<clsCategoriasMaui> ListaCategoriasRival
@@ -93,25 +90,11 @@ namespace PregunFondoSur.ViewModels
             get { return listaCategoriasRival; }
             set { listaCategoriasRival = value; }
         }
-        /// <summary>
-        /// oaoao
-        /// </summary>
-        public bool TuTurno
-        {
-            get { return tuTurno; }
-            set
-            {
-                tuTurno = value;
-                NotifyPropertyChanged();
-                girarRuletaCommand.RaiseCanExecuteChanged();
-                establecerColorFondo();
-            }
-        }
 
-        public String ColorFondoUsuario
+        public Color ColorFondoUsuario
         {
             get { return colorFondoUsuario; }
-            set { colorFondoUsuario = value; }
+            set { colorFondoUsuario = value; NotifyPropertyChanged(); }
         }
 
         public DelegateCommand GirarRuletaCommand
@@ -132,12 +115,7 @@ namespace PregunFondoSur.ViewModels
             // Se crea la conexión con el servidor.
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
 
-
             recibirUsuario();
-          
-
-   
-
             recibirListadoCategorias();
             recibirCambiarTurno();
         }
@@ -233,6 +211,22 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+        private async Task enviarBoolFinPartida()
+        {
+            await miConexion.InvokeCoreAsync("enviarBoolFinPartida", args: new[] { "true" });
+        }
+
+        private async Task recibirBoolFinPartida()
+        {
+            int cont = 2;
+            miConexion.On<clsUsuario>("recibirBoolFinPartida", (partidaAcabada) => {
+
+                finalizarJuego();
+
+            });
+            await miConexion.StartAsync();
+
+        }
 
 
 
@@ -250,10 +244,16 @@ namespace PregunFondoSur.ViewModels
         }
 
         
-
-        private void finalizarTurno() {
-            tuTurno = false;
+       private async void finalizarJuego()
+        {
+            clsDatosResultadoPartida datosPartida=new clsDatosResultadoPartida(usuarioLocal, usuarioRival, listaCategoriasLocal, listaCategoriasRival);
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "datosPartida", datosPartida }
+            };
+            await Shell.Current.GoToAsync("PaginaFinalizacion", navigationParameter);
         }
+
 
         /// <summary>
         /// 
@@ -295,7 +295,7 @@ namespace PregunFondoSur.ViewModels
             };
 
 
-            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter); 
            
         }
 
@@ -307,13 +307,15 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void establecerColorFondo()
         {
-            if (TuTurno)
+            if (usuarioLocal.tuTurno)
             {
-                colorFondoUsuario = "#00000000";
+                ColorFondoUsuario = Color.Parse("White");
+                NotifyPropertyChanged(nameof(ColorFondoUsuario));
             }
             else
             {
-                colorFondoUsuario = "#88888888";
+                ColorFondoUsuario = Color.Parse("Gray");
+                NotifyPropertyChanged(nameof(ColorFondoUsuario));
             }
         }
 
@@ -338,31 +340,18 @@ namespace PregunFondoSur.ViewModels
                 List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
-                await enviarListadoCategorias();
+                enviarListadoCategorias();
+                UsuarioLocal.tuTurno = true;
+                establecerColorFondo();
+                girarRuletaCommand.RaiseCanExecuteChanged();
+                await comprobarFinalizarPartida();
             }
-            await enviarCambiarValorTurno();
-        }
-
-        private void comprobarVictoria()
-        {
-            int cantidadAcertadas = 0;
-            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
+            else
             {
-                if (categoria.EstaAcertada)
-                {
-                    cantidadAcertadas++;
-                }
+                await enviarCambiarValorTurno();
+                establecerColorFondo();
             }
-            if (cantidadAcertadas == listaCategoriasLocal.Count)
-            {
-                //notificarVictoriaSignalR
-                //notificarVictoriaEnVista
-            }
-
-
         }
-
-
 
         private clsPreguntas generarPregunta()
         {
@@ -409,6 +398,22 @@ namespace PregunFondoSur.ViewModels
             preguntaSeleccionada = listadoPreguntas[idPregunta];
 
             return preguntaSeleccionada;
+        }
+
+        public async Task comprobarFinalizarPartida()
+        {
+            int contadorPreguntasAcertadas = 0;
+            for(int i =0; i<listaCategoriasLocal.Count; i++)
+            {
+                if (listaCategoriasLocal[i].EstaAcertada)
+                {
+                    contadorPreguntasAcertadas++;
+                }
+            }
+            if(contadorPreguntasAcertadas == 5)
+            {
+                finalizarJuego();
+            }
         }
 
         #endregion

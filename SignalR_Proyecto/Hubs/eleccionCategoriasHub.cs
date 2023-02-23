@@ -38,5 +38,13 @@ namespace SignalR_Proyecto.Hubs
             await Clients.Others.SendAsync("recibirCambiarTurno", miTurno);
         }
 
+
+        public async Task enviarBoolFinPartida(string partidaAcabada)
+        {
+            
+            await Clients.Others.SendAsync("recibirBoolFinPartida", partidaAcabada);
+
+        }
+
     }
 }
