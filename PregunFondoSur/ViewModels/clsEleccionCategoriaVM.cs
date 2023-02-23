@@ -102,6 +102,7 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 tuTurno = value;
+                establecerColorFondo();
                 NotifyPropertyChanged();
                 girarRuletaCommand.RaiseCanExecuteChanged();
                 establecerColorFondo();
@@ -340,7 +341,10 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
                 enviarListadoCategorias();
             }
-            await enviarCambiarValorTurno();
+            else
+            {
+                await enviarCambiarValorTurno();
+            }
         }
 
         private void comprobarVictoria()

@@ -11,7 +11,7 @@
     <VerticalStackLayout
            >
         <HorizontalStackLayout HeightRequest="150" HorizontalOptions="CenterAndExpand" Margin="0, 30, 0, 0">
-            <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform Android=190, WinUI=450}" HeightRequest="150" HorizontalOptions="Start" Margin="{OnPlatform Android='0, 0, 10, 0', WinUI='0, 0, 400, 0'}">
+            <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="{Binding ColorFondoUsuario}" WidthRequest="{OnPlatform Android=190, WinUI=450}" HeightRequest="150" HorizontalOptions="Start" Margin="{OnPlatform Android='0, 0, 10, 0', WinUI='0, 0, 400, 0'}">
                 <VerticalStackLayout>
                     <HorizontalStackLayout>
                         <Image Source="{Binding UsuarioLocal.imagen}"  WidthRequest="75" HeightRequest="60" VerticalOptions="Start" Margin="{OnPlatform Android='10, 15, 10, 0', WinUI='40, 15, 20, 0'}" HorizontalOptions="Start"></Image>
