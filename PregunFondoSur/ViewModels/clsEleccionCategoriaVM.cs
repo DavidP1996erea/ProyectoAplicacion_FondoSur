@@ -24,11 +24,10 @@ namespace PregunFondoSur.ViewModels
         private List<clsPreguntas> listadoPreguntasFood;
         private List<clsPreguntas> listadoPreguntasScience;
         private clsPreguntas preguntaEnviar;
-        private bool tuTurno;
         //Booleano en el que se guarda si la ruleta esta girando o no para el canExecute de girarRuletaCommand
         private bool estaGirando;
         private DelegateCommand girarRuletaCommand;
-        private String colorFondoUsuario;
+        private Color colorFondoUsuario;
 
         private readonly HubConnection miConexion;
         private int categoriaDeLaRuleta;
@@ -43,7 +42,6 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
 
 
         //TODO ARREGLAR.
@@ -63,7 +61,7 @@ namespace PregunFondoSur.ViewModels
                 if (usuarioLocal != null)
                 {
                     NotifyPropertyChanged();
-              
+                    establecerColorFondo();
                     enviarUsuario();
                     girarRuletaCommand.RaiseCanExecuteChanged();
                     
@@ -93,26 +91,11 @@ namespace PregunFondoSur.ViewModels
             get { return listaCategoriasRival; }
             set { listaCategoriasRival = value; }
         }
-        /// <summary>
-        /// oaoao
-        /// </summary>
-        public bool TuTurno
-        {
-            get { return tuTurno; }
-            set
-            {
-                tuTurno = value;
-                establecerColorFondo();
-                NotifyPropertyChanged();
-                girarRuletaCommand.RaiseCanExecuteChanged();
-                establecerColorFondo();
-            }
-        }
 
-        public String ColorFondoUsuario
+        public Color ColorFondoUsuario
         {
             get { return colorFondoUsuario; }
-            set { colorFondoUsuario = value; }
+            set { colorFondoUsuario = value; NotifyPropertyChanged(); }
         }
 
         public DelegateCommand GirarRuletaCommand
@@ -133,12 +116,7 @@ namespace PregunFondoSur.ViewModels
             // Se crea la conexión con el servidor.
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
 
-
             recibirUsuario();
-          
-
-   
-
             recibirListadoCategorias();
             recibirCambiarTurno();
         }
@@ -262,10 +240,6 @@ namespace PregunFondoSur.ViewModels
         }
 
 
-        private void finalizarTurno() {
-            tuTurno = false;
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -295,7 +269,6 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand.RaiseCanExecuteChanged();
 
             
-            
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
             preguntaEnviar = generarPregunta();
@@ -321,11 +294,13 @@ namespace PregunFondoSur.ViewModels
         {
             if (usuarioLocal.tuTurno)
             {
-                colorFondoUsuario = "#00000000";
+                ColorFondoUsuario = Color.Parse("White");
+                NotifyPropertyChanged(nameof(ColorFondoUsuario));
             }
             else
             {
-                colorFondoUsuario = "#88888888";
+                ColorFondoUsuario = Color.Parse("Gray");
+                NotifyPropertyChanged(nameof(ColorFondoUsuario));
             }
         }
 
