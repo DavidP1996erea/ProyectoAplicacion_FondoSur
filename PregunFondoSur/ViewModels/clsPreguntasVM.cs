@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PregunFondoSur.models;
 using System.Windows.Input;
+using PregunFondoSur.Vistas;
 
 namespace PregunFondoSur.ViewModels
 {
@@ -88,7 +89,7 @@ namespace PregunFondoSur.ViewModels
             {
                 { "categoria", categoriaAcertada }
             };
-            await Shell.Current.GoToAsync("PaginaEleccionCategoria", navigationParameter);
+            await Shell.Current.GoToAsync("..", navigationParameter);
         }
 
 
@@ -123,7 +124,7 @@ namespace PregunFondoSur.ViewModels
             respuestaSeleccionada = listadoRespuestas[posicion];
             comprobarSiCorrecto();
         }
-        private void comprobarSiCorrecto()
+        private async Task comprobarSiCorrecto()
         {
             if (respuestaSeleccionada == pregunta.correctAnswer)
             {
@@ -131,7 +132,7 @@ namespace PregunFondoSur.ViewModels
             }
             else
             {
-                Console.WriteLine("Fallado");
+                await Shell.Current.GoToAsync("..");
             }
         }
         #endregion

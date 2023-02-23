@@ -247,7 +247,6 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntashistory = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasHistoryDAL();
             listadoPreguntasFood = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFoodDAL();
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
-
         }
 
         
@@ -284,8 +283,6 @@ namespace PregunFondoSur.ViewModels
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
-            ListaCategoriasLocal[2].ImagenMostrada = ListaCategoriasLocal[2].ImagenAcertada;
-            enviarListadoCategorias();
             
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
@@ -298,7 +295,6 @@ namespace PregunFondoSur.ViewModels
             };
 
 
-            enviarCambiarValorTurno();
             await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
            
         }
@@ -330,14 +326,21 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void asignarCategoriaAcertada()
         {
-            for(int i=0; i<listaCategoriasLocal.Count; i++)
+            if (categoriaAcertada.EstaAcertada)
             {
-                if (categoriaAcertada.Nombre.Contains(listaCategoriasLocal[i].Nombre))
+                for (int i = 0; i < listaCategoriasLocal.Count; i++)
                 {
-                    listaCategoriasLocal[i] = categoriaAcertada;
+                    if (categoriaAcertada.Nombre.Contains(listaCategoriasLocal[i].Nombre))
+                    {
+                        listaCategoriasLocal[i] = categoriaAcertada;
+                    }
                 }
+                List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
+                listaCategoriasLocal = listaAuxiliar;
+                NotifyPropertyChanged(nameof(ListaCategoriasLocal));
+                enviarListadoCategorias();
             }
-            NotifyPropertyChanged(nameof(ListaCategoriasLocal));
+            enviarCambiarValorTurno();
         }
 
         private void comprobarVictoria()
