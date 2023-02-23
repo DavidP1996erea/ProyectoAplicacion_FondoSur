@@ -329,6 +329,7 @@ namespace PregunFondoSur.ViewModels
                 UsuarioLocal.tuTurno = true;
                 establecerColorFondo();
                 girarRuletaCommand.RaiseCanExecuteChanged();
+                comprobarFinalizarPartida();
             }
             else
             {
@@ -336,27 +337,6 @@ namespace PregunFondoSur.ViewModels
                 establecerColorFondo();
             }
         }
-
-        private void comprobarVictoria()
-        {
-            int cantidadAcertadas = 0;
-            foreach (clsCategoriasMaui categoria in listaCategoriasLocal)
-            {
-                if (categoria.EstaAcertada)
-                {
-                    cantidadAcertadas++;
-                }
-            }
-            if (cantidadAcertadas == listaCategoriasLocal.Count)
-            {
-                //notificarVictoriaSignalR
-                //notificarVictoriaEnVista
-            }
-
-
-        }
-
-
 
         private clsPreguntas generarPregunta()
         {
@@ -403,6 +383,22 @@ namespace PregunFondoSur.ViewModels
             preguntaSeleccionada = listadoPreguntas[idPregunta];
 
             return preguntaSeleccionada;
+        }
+
+        public void comprobarFinalizarPartida()
+        {
+            int contadorPreguntasAcertadas = 0;
+            for(int i =0; i<listaCategoriasLocal.Count; i++)
+            {
+                if (listaCategoriasLocal[i].EstaAcertada)
+                {
+                    contadorPreguntasAcertadas++;
+                }
+            }
+            if(contadorPreguntasAcertadas == 5)
+            {
+                finalizarJuego();
+            }
         }
 
         #endregion
