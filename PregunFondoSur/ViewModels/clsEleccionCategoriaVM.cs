@@ -83,7 +83,6 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 listaCategoriasLocal = value;
-                comprobarVictoria();
             }
         }
         public List<clsCategoriasMaui> ListaCategoriasRival
@@ -212,6 +211,22 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+        private async Task enviarBoolFinPartida()
+        {
+            await miConexion.InvokeCoreAsync("enviarBoolFinPartida", args: new[] { "true" });
+        }
+
+        private async Task recibirBoolFinPartida()
+        {
+            int cont = 2;
+            miConexion.On<clsUsuario>("recibirBoolFinPartida", (partidaAcabada) => {
+
+                finalizarJuego();
+
+            });
+            await miConexion.StartAsync();
+
+        }
 
 
 
