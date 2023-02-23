@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PregunFondoSur.Vistas.PaginaFinalizacion"
+             xmlns:model="clr-namespace:PregunFondoSur.ViewModels"
              BackgroundColor="#666666"
              Title="PaginaFinalizacion">
+    <ContentPage.BindingContext>
+        <model:clsResultadosVM/>
+    </ContentPage.BindingContext>
     <VerticalStackLayout HorizontalOptions="Center">
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="100" BackgroundColor="White">
             <Label FontSize="48" Text="¡¡¡YOU ARE THE WINNER!!!" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Gold" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>

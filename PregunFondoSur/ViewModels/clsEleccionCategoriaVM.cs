@@ -250,6 +250,16 @@ namespace PregunFondoSur.ViewModels
         }
 
         
+       private async void finalizarJuego()
+        {
+            clsDatosResultadoPartida datosPartida=new clsDatosResultadoPartida(usuarioLocal, usuarioRival, listaCategoriasLocal, listaCategoriasRival);
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "datosPartida", datosPartida }
+            };
+            await Shell.Current.GoToAsync("PaginaFinalizacion", navigationParameter);
+        }
+
 
         private void finalizarTurno() {
             tuTurno = false;
@@ -284,6 +294,7 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand.RaiseCanExecuteChanged();
 
             
+            
 
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
             preguntaEnviar = generarPregunta();
@@ -295,7 +306,7 @@ namespace PregunFondoSur.ViewModels
             };
 
 
-            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter); 
            
         }
 
