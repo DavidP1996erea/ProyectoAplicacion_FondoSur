@@ -88,7 +88,7 @@ namespace PregunFondoSur.ViewModels
         public List<clsCategoriasMaui> ListaCategoriasRival
         {
             get { return listaCategoriasRival; }
-            set { listaCategoriasRival = value; }
+            set { listaCategoriasRival = value; comprobarFinalizarPartida(listaCategoriasRival); }
         }
 
         public Color ColorFondoUsuario
@@ -199,8 +199,9 @@ namespace PregunFondoSur.ViewModels
 
                 for (int i = 0; i < listadoCategorias.Count; i++)
                 {
-
                     ListaCategoriasRival[i].ImagenMostrada = listadoCategorias[i].ImagenMostrada;
+                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);
+                    ListaCategoriasRival = listaAuxiliar;
 
                 }
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
@@ -211,22 +212,7 @@ namespace PregunFondoSur.ViewModels
 
         }
 
-        private async Task enviarBoolFinPartida()
-        {
-            await miConexion.InvokeCoreAsync("enviarBoolFinPartida", args: new[] { "true" });
-        }
-
-        private async Task recibirBoolFinPartida()
-        {
-            int cont = 2;
-            miConexion.On<clsUsuario>("recibirBoolFinPartida", (partidaAcabada) => {
-
-                finalizarJuego();
-
-            });
-            await miConexion.StartAsync();
-
-        }
+       
 
 
 
@@ -340,11 +326,12 @@ namespace PregunFondoSur.ViewModels
                 List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
-                enviarListadoCategorias();
+                await enviarListadoCategorias();
                 UsuarioLocal.tuTurno = true;
                 establecerColorFondo();
                 girarRuletaCommand.RaiseCanExecuteChanged();
-                await comprobarFinalizarPartida();
+                await Task.Delay(TimeSpan.FromMilliseconds(300));
+                comprobarFinalizarPartida(listaCategoriasLocal);
             }
             else
             {
@@ -400,12 +387,12 @@ namespace PregunFondoSur.ViewModels
             return preguntaSeleccionada;
         }
 
-        public async Task comprobarFinalizarPartida()
+        public void comprobarFinalizarPartida(List<clsCategoriasMaui> listaCategoria)
         {
             int contadorPreguntasAcertadas = 0;
-            for(int i =0; i<listaCategoriasLocal.Count; i++)
+            for(int i =0; i< listaCategoria.Count; i++)
             {
-                if (listaCategoriasLocal[i].EstaAcertada)
+                if (listaCategoria[i].EstaAcertada)
                 {
                     contadorPreguntasAcertadas++;
                 }
