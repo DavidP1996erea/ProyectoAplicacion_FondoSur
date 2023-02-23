@@ -326,6 +326,7 @@ namespace PregunFondoSur.ViewModels
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
                 enviarListadoCategorias();
+                girarRuletaCommand.RaiseCanExecuteChanged();
             }
             else
             {
