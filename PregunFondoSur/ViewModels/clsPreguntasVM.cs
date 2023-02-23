@@ -88,7 +88,7 @@ namespace PregunFondoSur.ViewModels
             {
                 { "categoria", categoriaAcertada }
             };
-            await Shell.Current.GoToAsync("..", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaEleccionCategoria", navigationParameter);
         }
 
 
@@ -110,9 +110,9 @@ namespace PregunFondoSur.ViewModels
             Random rnd = new Random();
             while (list.Count > 0)
             {
-                int index = rnd.Next(0, list.Count); //pick a random item from the master list
-                randomizedList.Add(list[index]); //place it at the end of the randomized list
-                list.RemoveAt(index); //remove to avoid duplicates
+                int index = rnd.Next(0, list.Count); 
+                randomizedList.Add(list[index]); 
+                list.RemoveAt(index); 
             }
             return randomizedList;
         }
@@ -127,7 +127,7 @@ namespace PregunFondoSur.ViewModels
         {
             if (respuestaSeleccionada == pregunta.correctAnswer)
             {
-                Console.WriteLine("acertada");
+                acertarCategoria(pregunta.category);
             }
             else
             {
@@ -136,11 +136,7 @@ namespace PregunFondoSur.ViewModels
         }
         #endregion
 
-        #region Metodos SignalR
 
-
-
-        #endregion
     }
 }
 

@@ -332,7 +332,7 @@ namespace PregunFondoSur.ViewModels
         {
             for(int i=0; i<listaCategoriasLocal.Count; i++)
             {
-                if (categoriaAcertada.Nombre.Contains(listaCategoriasLocal[i].Nombre));
+                if (categoriaAcertada.Nombre.Contains(listaCategoriasLocal[i].Nombre))
                 {
                     listaCategoriasLocal[i] = categoriaAcertada;
                 }
