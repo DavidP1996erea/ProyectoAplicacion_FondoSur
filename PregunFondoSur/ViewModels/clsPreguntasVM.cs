@@ -58,11 +58,16 @@ namespace PregunFondoSur.ViewModels
 
         #region Metodos
 
-        private void acertarCategoria(String nombreCategoria)
+        private void acertarCategoria(String nombreCategoria, bool acertado)
         {
+
             clsCategoriasMaui categoriaResultado = obtenerCategoriaPorNombre(nombreCategoria);
-            categoriaResultado.ImagenMostrada = categoriaResultado.ImagenAcertada;
-            categoriaResultado.EstaAcertada = true;
+            if (acertado)
+            {
+                categoriaResultado.ImagenMostrada = categoriaResultado.ImagenAcertada;
+                categoriaResultado.EstaAcertada = true;
+            }
+            
 
             volverAEleccionCategoria(categoriaResultado);
         }
@@ -128,11 +133,11 @@ namespace PregunFondoSur.ViewModels
         {
             if (respuestaSeleccionada == pregunta.correctAnswer)
             {
-                acertarCategoria(pregunta.category);
+                acertarCategoria(pregunta.category, true);
             }
             else
             {
-                await Shell.Current.GoToAsync("..");
+                acertarCategoria(pregunta.category, false);
             }
         }
         #endregion

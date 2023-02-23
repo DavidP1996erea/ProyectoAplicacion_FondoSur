@@ -53,7 +53,7 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 categoriaAcertada = value;
-                asignarCategoriaAcertada();
+                asignarCategoriaAcertadaAsync();
             }
         }
         public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
@@ -102,6 +102,7 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 tuTurno = value;
+                establecerColorFondo();
                 NotifyPropertyChanged();
                 girarRuletaCommand.RaiseCanExecuteChanged();
                 establecerColorFondo();
@@ -318,7 +319,7 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void establecerColorFondo()
         {
-            if (TuTurno)
+            if (usuarioLocal.tuTurno)
             {
                 colorFondoUsuario = "#00000000";
             }
@@ -335,7 +336,7 @@ namespace PregunFondoSur.ViewModels
         /// Precondiciones: Ninguna
         /// Postcondiciones: Ninguna
         /// </summary>
-        private void asignarCategoriaAcertada()
+        private async Task asignarCategoriaAcertadaAsync()
         {
             if (categoriaAcertada.EstaAcertada)
             {
@@ -351,7 +352,10 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
                 enviarListadoCategorias();
             }
-            enviarCambiarValorTurno();
+            else
+            {
+                await enviarCambiarValorTurno();
+            }
         }
 
         private void comprobarVictoria()
