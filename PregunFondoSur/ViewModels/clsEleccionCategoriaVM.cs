@@ -308,7 +308,7 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         private void establecerColorFondo()
         {
-            if (TuTurno)
+            if (usuarioLocal.tuTurno)
             {
                 colorFondoUsuario = "#00000000";
             }
