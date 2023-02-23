@@ -327,6 +327,7 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
                 enviarListadoCategorias();
                 UsuarioLocal.tuTurno = true;
+                establecerColorFondo();
                 girarRuletaCommand.RaiseCanExecuteChanged();
             }
             else
