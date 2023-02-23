@@ -53,7 +53,7 @@ namespace PregunFondoSur.ViewModels
             set
             {
                 categoriaAcertada = value;
-                asignarCategoriaAcertada();
+                asignarCategoriaAcertadaAsync();
             }
         }
         public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
@@ -324,7 +324,7 @@ namespace PregunFondoSur.ViewModels
         /// Precondiciones: Ninguna
         /// Postcondiciones: Ninguna
         /// </summary>
-        private void asignarCategoriaAcertada()
+        private async Task asignarCategoriaAcertadaAsync()
         {
             if (categoriaAcertada.EstaAcertada)
             {
@@ -338,9 +338,9 @@ namespace PregunFondoSur.ViewModels
                 List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
-                enviarListadoCategorias();
+                await enviarListadoCategorias();
             }
-            enviarCambiarValorTurno();
+            await enviarCambiarValorTurno();
         }
 
         private void comprobarVictoria()
