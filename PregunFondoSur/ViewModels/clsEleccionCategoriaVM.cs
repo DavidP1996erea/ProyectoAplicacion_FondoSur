@@ -135,22 +135,28 @@ namespace PregunFondoSur.ViewModels
         {
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
-                if (cont > 0)
+                if (datosUsuario == null)
                 {
-                    if (UsuarioLocal.userName == datosUsuario.userName)
-                    {
-                        UsuarioLocal = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioLocal));
-                        
-                    }
-                    else
-                    {
-                        UsuarioRival = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioRival));
-                    }
-                    cont--;
+                    enviarUsuario();
                 }
-                    
+                else
+                {
+                    if (cont > 0)
+                    {
+                        if (UsuarioLocal.userName == datosUsuario.userName)
+                        {
+                            UsuarioLocal = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioLocal));
+
+                        }
+                        else
+                        {
+                            UsuarioRival = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioRival));
+                        }
+                        cont--;
+                    }
+                }
 
             });
             await miConexion.StartAsync();
@@ -188,32 +194,34 @@ namespace PregunFondoSur.ViewModels
             
             }
             await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { listadoCategoriasEnviar });
-        }
+        }//Sapoo
 
-        private async Task recibirListadoCategorias()
-        {
+        private async Task recibirListadoCategorias()//Sapoo
+        {//Sapoo
 
             miConexion.On<List<clsCategorias>>("recibirListadoCategorias", async (listadoCategorias) =>
-            {
+            {//Sapoo
 
 
                 for (int i = 0; i < listadoCategorias.Count; i++)
                 {
                     ListaCategoriasRival[i].ImagenMostrada = listadoCategorias[i].ImagenMostrada;
-                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);
+                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);//Sapo
+                    //Sapoo
                     ListaCategoriasRival = listaAuxiliar;
+                    //Sapoo
 
                 }
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
-                comprobarFinalizarPartidaRival(listadoCategorias);
-
+                comprobarFinalizarPartidaRival(listadoCategorias);//Sapo
+                //Sapoo
             });
 
             await miConexion.StartAsync();
-
+            //Sapo
         }
 
-       
+
 
 
 
