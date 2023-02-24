@@ -130,6 +130,10 @@ namespace PregunFondoSur.ViewModels
         {
 
             await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
+            if (miConexion.State == HubConnectionState.Disconnected)
+            {
+                enviarUsuario();
+            }
         }
 
         private async Task recibirUsuario()
@@ -157,8 +161,8 @@ namespace PregunFondoSur.ViewModels
                         }
                         cont--;
                     }
-                
 
+                }
             });
             await miConexion.StartAsync();
 

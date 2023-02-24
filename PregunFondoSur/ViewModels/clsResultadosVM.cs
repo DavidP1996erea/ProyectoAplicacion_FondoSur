@@ -64,6 +64,7 @@ namespace PregunFondoSur.ViewModels
             {
                 listadoCategoriasLocal = value;
                 NotifyPropertyChanged(nameof(ListadoCategoriasLocal));
+                comprobarGanado();
             }
         }
         public List<clsCategoriasMaui> ListadoCategoriasRival
@@ -97,7 +98,7 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsResultadosVM()
         {
-            comprobarGanado();
+          
         }
         #endregion
 
