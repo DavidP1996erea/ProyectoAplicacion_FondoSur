@@ -193,7 +193,7 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirListadoCategorias()
         {
 
-            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", (listadoCategorias) =>
+            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", async (listadoCategorias) =>
             {
 
 
@@ -204,8 +204,8 @@ namespace PregunFondoSur.ViewModels
                     ListaCategoriasRival = listaAuxiliar;
 
                 }
-                comprobarFinalizarPartida(ListaCategoriasRival);
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
+                comprobarFinalizarPartidaRival(listadoCategorias);
 
             });
 
@@ -403,6 +403,23 @@ namespace PregunFondoSur.ViewModels
                 finalizarJuego();
             }
         }
+
+        public void comprobarFinalizarPartidaRival(List<clsCategorias> listaCategoria)
+        {
+            int contadorPreguntasAcertadas = 0;
+            for (int i = 0; i < listaCategoria.Count; i++)
+            {
+                if (listaCategoria[i].EstaAcertada)
+                {
+                    contadorPreguntasAcertadas++;
+                }
+            }
+            if (contadorPreguntasAcertadas == 5)
+            {
+                finalizarJuego();
+            }
+        }
+
 
         #endregion
     }
