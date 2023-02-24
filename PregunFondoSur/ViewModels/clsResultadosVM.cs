@@ -98,7 +98,7 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsResultadosVM()
         {
-          
+            
         }
         #endregion
 
@@ -115,14 +115,14 @@ namespace PregunFondoSur.ViewModels
             }
             if (contadorCategoriasAcertadas == 5)
             {
-                mensajeGanadoPerdido = "Felicidades Has Ganado";
-                imagenResultadoLocal = "medal.png";
-                imagenResultadoRival = "platmedal.png";
+                MensajeGanadoPerdido = "Felicidades Has Ganado";
+                ImagenResultadoLocal = "medal.png";
+                ImagenResultadoRival = "platmedal.png";
             }
             else{
-                mensajeGanadoPerdido = "Lo Sentimos, Has Perdido";
-                imagenResultadoRival = "medal.png";
-                imagenResultadoLocal = "platmedal.png";
+                MensajeGanadoPerdido = "Lo Sentimos, Has Perdido";
+                ImagenResultadoRival = "medal.png";
+                ImagenResultadoLocal = "platmedal.png";
             }
             NotifyPropertyChanged(MensajeGanadoPerdido);
             NotifyPropertyChanged(ImagenResultadoLocal);
