@@ -10,26 +10,26 @@
     </ContentPage.BindingContext>
     <VerticalStackLayout HorizontalOptions="Center">
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="100" BackgroundColor="White">
-            <Label FontSize="48" Text="¡¡¡YOU ARE THE WINNER!!!" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Gold" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
+            <Label FontSize="48" Text="{Binding MensajeGanadoPerdido}" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="Gold" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
         </Border>
 
         <HorizontalStackLayout>
             <Border WidthRequest="350" HeightRequest="300" BackgroundColor="White" Margin="0, 60, 0, 0" StrokeShape="RoundRectangle 10, 10, 10, 10">
                 <VerticalStackLayout HorizontalOptions="Center">
                     <HorizontalStackLayout HorizontalOptions="Center" Margin="20, 0, 20, 0">
-                        <Image Source="pablomotos.jpeg" HeightRequest="70" WidthRequest="70" Margin="0, 10, 0, 0" VerticalOptions="Start" HorizontalOptions="Start"></Image>
-                        <Label Text="Jugador 1" FontSize="25" FontFamily="Lilita" TextColor="Black" Margin="15, 30, 0, 0" ></Label>
+                        <Image Source="{Binding UsuarioLocal.imagen}" HeightRequest="70" WidthRequest="70" Margin="0, 10, 0, 0" VerticalOptions="Start" HorizontalOptions="Start"></Image>
+                        <Label Text="{Binding UsuarioLocal.userName}" FontSize="25" FontFamily="Lilita" TextColor="Black" Margin="15, 30, 0, 0" ></Label>
                     </HorizontalStackLayout>
-                    <Image Source="medal.png" HeightRequest="150" WidthRequest="150" Margin="0, 10, 0, 0"></Image>
+                    <Image Source="{Binding ImagenResultadoLocal}" HeightRequest="150" WidthRequest="150" Margin="0, 10, 0, 0"></Image>
                 </VerticalStackLayout>
             </Border>
             <Border WidthRequest="290" HeightRequest="230" BackgroundColor="White" Margin="40, 127, 0, 0" StrokeShape="RoundRectangle 10, 10, 10, 10">
                 <VerticalStackLayout HorizontalOptions="Center">
                     <HorizontalStackLayout HorizontalOptions="Center" Margin="16, 0, 16, 0">
-                        <Image Source="town.jpg" HeightRequest="60" WidthRequest="60" Margin="0, 8, 0, 0" VerticalOptions="Start" HorizontalOptions="Start"></Image>
-                        <Label Text="Jugador 2" FontSize="21" FontFamily="Lilita" TextColor="Black" Margin="12, 23, 0, 0" ></Label>
+                        <Image Source="{Binding UsuarioRival.imagen}" HeightRequest="60" WidthRequest="60" Margin="0, 8, 0, 0" VerticalOptions="Start" HorizontalOptions="Start"></Image>
+                        <Label Text="{Binding UsuarioRival.userName}" FontSize="21" FontFamily="Lilita" TextColor="Black" Margin="12, 23, 0, 0" ></Label>
                     </HorizontalStackLayout>
-                    <Image Source="platmedal.png" HeightRequest="110" WidthRequest="110" Margin="0, 9, 0, 0"></Image>
+                    <Image Source="{Binding ImagenResultadoRival}" HeightRequest="110" WidthRequest="110" Margin="0, 9, 0, 0"></Image>
                 </VerticalStackLayout>
             </Border>
         </HorizontalStackLayout>
