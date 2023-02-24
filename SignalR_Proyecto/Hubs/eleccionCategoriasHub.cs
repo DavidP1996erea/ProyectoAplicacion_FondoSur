@@ -41,7 +41,7 @@ namespace SignalR_Proyecto.Hubs
 
         public async Task enviarBoolFinPartida(string partidaAcabada)
         {
-            
+
             await Clients.Others.SendAsync("recibirBoolFinPartida", partidaAcabada);
 
         }

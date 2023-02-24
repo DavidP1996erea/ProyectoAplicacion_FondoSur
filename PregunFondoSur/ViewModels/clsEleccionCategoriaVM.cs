@@ -121,7 +121,7 @@ namespace PregunFondoSur.ViewModels
         }
 
         #endregion
-
+        //xd
 
         #region Métodos SignalR
 
