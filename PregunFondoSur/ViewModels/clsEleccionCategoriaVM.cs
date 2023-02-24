@@ -88,7 +88,7 @@ namespace PregunFondoSur.ViewModels
         public List<clsCategoriasMaui> ListaCategoriasRival
         {
             get { return listaCategoriasRival; }
-            set { listaCategoriasRival = value; comprobarFinalizarPartida(listaCategoriasRival); }
+            set { listaCategoriasRival = value; }
         }
 
         public Color ColorFondoUsuario
@@ -204,6 +204,7 @@ namespace PregunFondoSur.ViewModels
                     ListaCategoriasRival = listaAuxiliar;
 
                 }
+                comprobarFinalizarPartida(ListaCategoriasRival);
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
 
             });
