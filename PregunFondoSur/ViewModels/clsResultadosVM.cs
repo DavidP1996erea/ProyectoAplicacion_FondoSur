@@ -80,18 +80,18 @@ namespace PregunFondoSur.ViewModels
         public String MensajeGanadoPerdido
         {
             get { return mensajeGanadoPerdido; }
-            set { mensajeGanadoPerdido = value; }
+            set { mensajeGanadoPerdido = value; NotifyPropertyChanged(); }
         }
 
         public String ImagenResultadoLocal
         {
             get { return imagenResultadoLocal; }
-            set { imagenResultadoLocal = value; }
+            set { imagenResultadoLocal = value; NotifyPropertyChanged(); }
         }
         public String ImagenResultadoRival
         {
             get { return imagenResultadoRival; }
-            set { imagenResultadoRival = value; }
+            set { imagenResultadoRival = value; NotifyPropertyChanged(); }
         }
         #endregion
 
