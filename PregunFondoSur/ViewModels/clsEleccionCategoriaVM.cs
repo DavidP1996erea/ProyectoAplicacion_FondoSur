@@ -140,8 +140,7 @@ namespace PregunFondoSur.ViewModels
         {
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
-                else
-                {
+               
                     if (cont > 0)
                     {
                         if (UsuarioLocal.userName == datosUsuario.userName)
@@ -157,7 +156,7 @@ namespace PregunFondoSur.ViewModels
                         }
                         cont--;
                     }
-                }
+                
 
             });
             await miConexion.StartAsync();
