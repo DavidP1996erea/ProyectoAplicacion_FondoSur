@@ -140,10 +140,6 @@ namespace PregunFondoSur.ViewModels
         {
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
-                if (miConexion.State == HubConnectionState.Disconnected)
-                {
-                    enviarUsuario();
-                }
                 else
                 {
                     if (cont > 0)
