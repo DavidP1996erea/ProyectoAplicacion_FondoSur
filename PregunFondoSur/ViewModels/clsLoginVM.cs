@@ -1,5 +1,7 @@
 ﻿
 using Entidades;
+using Microsoft.VisualBasic;
+using Models;
 using PregunFondoSur.ViewModels.Utilidades;
 
 namespace PregunFondoSur.ViewModels
@@ -10,6 +12,7 @@ namespace PregunFondoSur.ViewModels
         private clsUsuario usuario;
         private string nickname, imagen;
         private DelegateCommand logInCommand;
+        private DelegateCommand crearSalaCommand;
         #endregion
 
         #region Propiedades
@@ -39,6 +42,7 @@ namespace PregunFondoSur.ViewModels
             }
         }
         public DelegateCommand LogInCommand { get { return logInCommand; } }
+        public DelegateCommand CrearSalaCommand { get { return crearSalaCommand; } }
         #endregion
 
         #region Constructores
@@ -46,7 +50,10 @@ namespace PregunFondoSur.ViewModels
         {
             usuario = new clsUsuario();
             logInCommand = new DelegateCommand(logInCommand_Execute, logInCommand_CanExecute);
+            crearSalaCommand = new DelegateCommand(crearSalaCommand_Execute);
         }
+
+     
 
         /// <summary>
         /// Método que revisa si el usuario ha introducido los datos necesarios en los entrys del la vista como para loggearse
@@ -80,6 +87,15 @@ namespace PregunFondoSur.ViewModels
             };
             await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
         }
+
+
+        private async void crearSalaCommand_Execute()
+        {
+            string nombreSala = await App.Current.MainPage.DisplayPromptAsync("Crear sala", "Introduce el nombre de la sala");
+            Usuario.nombreSala = nombreSala;
+            clsListadoSalas.ListadoSalas.Add(usuario.nombreSala);
+        }
+
 
     }
 }

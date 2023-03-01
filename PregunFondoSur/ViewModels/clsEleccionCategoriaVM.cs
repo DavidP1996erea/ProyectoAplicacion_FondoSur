@@ -121,37 +121,48 @@ namespace PregunFondoSur.ViewModels
         }
 
         #endregion
-
+      
 
         #region Métodos SignalR
 
 
         private async Task enviarUsuario()
         {
+
             await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
+            if (miConexion.State == HubConnectionState.Disconnected)
+            {
+                enviarUsuario();
+            }
         }
 
         private async Task recibirUsuario()
         {
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario",  (datosUsuario) => {
-                if (cont > 0)
+                if (miConexion.State == HubConnectionState.Disconnected)
                 {
-                    if (UsuarioLocal.userName == datosUsuario.userName)
-                    {
-                        UsuarioLocal = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioLocal));
-                        
-                    }
-                    else
-                    {
-                        UsuarioRival = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioRival));
-                    }
-                    cont--;
+                    enviarUsuario();
                 }
-                    
+                else
+                {
+                    if (cont > 0)
+                    {
+                        if (UsuarioLocal.userName == datosUsuario.userName)
+                        {
+                            UsuarioLocal = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioLocal));
 
+                        }
+                        else
+                        {
+                            UsuarioRival = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioRival));
+                        }
+                        cont--;
+                    }
+
+                }
             });
             await miConexion.StartAsync();
 
@@ -188,45 +199,34 @@ namespace PregunFondoSur.ViewModels
             
             }
             await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { listadoCategoriasEnviar });
-        }
+        }//Sapoo
 
-        private async Task recibirListadoCategorias()
-        {
+        private async Task recibirListadoCategorias()//Sapoo
+        {//Sapoo
 
-            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", (listadoCategorias) =>
-            {
+            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", async (listadoCategorias) =>
+            {//Sapoo
 
 
                 for (int i = 0; i < listadoCategorias.Count; i++)
                 {
-
                     ListaCategoriasRival[i].ImagenMostrada = listadoCategorias[i].ImagenMostrada;
+                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);//Sapo
+                    //Sapoo
+                    ListaCategoriasRival = listaAuxiliar;
+                    //Sapoo
 
                 }
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
-
+                comprobarFinalizarPartidaRival(listadoCategorias);//Sapo
+                //Sapoo
             });
 
             await miConexion.StartAsync();
-
+            //Sapo
         }
 
-        private async Task enviarBoolFinPartida()
-        {
-            await miConexion.InvokeCoreAsync("enviarBoolFinPartida", args: new[] { "true" });
-        }
 
-        private async Task recibirBoolFinPartida()
-        {
-            int cont = 2;
-            miConexion.On<clsUsuario>("recibirBoolFinPartida", (partidaAcabada) => {
-
-                finalizarJuego();
-
-            });
-            await miConexion.StartAsync();
-
-        }
 
 
 
@@ -340,11 +340,12 @@ namespace PregunFondoSur.ViewModels
                 List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(listaCategoriasLocal);
                 listaCategoriasLocal = listaAuxiliar;
                 NotifyPropertyChanged(nameof(ListaCategoriasLocal));
-                enviarListadoCategorias();
+                await enviarListadoCategorias();
                 UsuarioLocal.tuTurno = true;
                 establecerColorFondo();
                 girarRuletaCommand.RaiseCanExecuteChanged();
-                comprobarFinalizarPartida();
+                await Task.Delay(TimeSpan.FromMilliseconds(300));
+                comprobarFinalizarPartida(listaCategoriasLocal);
             }
             else
             {
@@ -400,12 +401,12 @@ namespace PregunFondoSur.ViewModels
             return preguntaSeleccionada;
         }
 
-        public void comprobarFinalizarPartida()
+        public void comprobarFinalizarPartida(List<clsCategoriasMaui> listaCategoria)
         {
             int contadorPreguntasAcertadas = 0;
-            for(int i =0; i<listaCategoriasLocal.Count; i++)
+            for(int i =0; i< listaCategoria.Count; i++)
             {
-                if (listaCategoriasLocal[i].EstaAcertada)
+                if (listaCategoria[i].EstaAcertada)
                 {
                     contadorPreguntasAcertadas++;
                 }
@@ -415,6 +416,23 @@ namespace PregunFondoSur.ViewModels
                 finalizarJuego();
             }
         }
+
+        public void comprobarFinalizarPartidaRival(List<clsCategorias> listaCategoria)
+        {
+            int contadorPreguntasAcertadas = 0;
+            for (int i = 0; i < listaCategoria.Count; i++)
+            {
+                if (listaCategoria[i].EstaAcertada)
+                {
+                    contadorPreguntasAcertadas++;
+                }
+            }
+            if (contadorPreguntasAcertadas == 5)
+            {
+                finalizarJuego();
+            }
+        }
+
 
         #endregion
     }

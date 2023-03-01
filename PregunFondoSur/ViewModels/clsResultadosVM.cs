@@ -19,20 +19,34 @@ namespace PregunFondoSur.ViewModels
         private clsUsuario usuarioRival;
         private List<clsCategoriasMaui> listadoCategoriasLocal;
         private List<clsCategoriasMaui> listadoCategoriasRival;
+        private String mensajeGanadoPerdido;
+        private String imagenResultadoLocal;
+        private String imagenResultadoRival;
         #endregion
 
         #region Propiedades
-        public clsDatosResultadoPartida DatosPartida { get { return datosPartida; } 
-            set { datosPartida = value;
+        public clsDatosResultadoPartida DatosPartida
+        {
+            get { return datosPartida; }
+            set
+            {
+                datosPartida = value;
                 UsuarioLocal = datosPartida.usuarioLocal;
                 UsuarioRival = datosPartida.usuarioRival;
                 ListadoCategoriasLocal = datosPartida.categoriasUsuarioLocal;
                 ListadoCategoriasRival = datosPartida.categoriasUsuarioRival;
-                   NotifyPropertyChanged(nameof(DatosPartida));
-            } }
-        public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
-            set { usuarioLocal = value;
-                NotifyPropertyChanged(nameof(UsuarioLocal));} }
+                NotifyPropertyChanged(nameof(DatosPartida));
+            }
+        }
+        public clsUsuario UsuarioLocal
+        {
+            get { return usuarioLocal; }
+            set
+            {
+                usuarioLocal = value;
+                NotifyPropertyChanged(nameof(UsuarioLocal));
+            }
+        }
 
         public clsUsuario UsuarioRival
         {
@@ -50,6 +64,7 @@ namespace PregunFondoSur.ViewModels
             {
                 listadoCategoriasLocal = value;
                 NotifyPropertyChanged(nameof(ListadoCategoriasLocal));
+                comprobarGanado();
             }
         }
         public List<clsCategoriasMaui> ListadoCategoriasRival
@@ -61,16 +76,61 @@ namespace PregunFondoSur.ViewModels
                 NotifyPropertyChanged(nameof(ListadoCategoriasRival));
             }
         }
+
+        public String MensajeGanadoPerdido
+        {
+            get { return mensajeGanadoPerdido; }
+            set { mensajeGanadoPerdido = value; NotifyPropertyChanged(); }
+        }
+
+        public String ImagenResultadoLocal
+        {
+            get { return imagenResultadoLocal; }
+            set { imagenResultadoLocal = value; NotifyPropertyChanged(); }
+        }
+        public String ImagenResultadoRival
+        {
+            get { return imagenResultadoRival; }
+            set { imagenResultadoRival = value; NotifyPropertyChanged(); }
+        }
         #endregion
 
         #region Constructores
         public clsResultadosVM()
         {
-
+            
         }
-        #endregion 
+        #endregion
 
+        #region Metodos
+        public void comprobarGanado()
+        {
+            int contadorCategoriasAcertadas = 0;
+            for ( int i =0; i < listadoCategoriasLocal.Count; i++)
+            {
+                if (listadoCategoriasLocal[i].EstaAcertada)
+                {
+                    contadorCategoriasAcertadas++;
+                }
+            }
+            if (contadorCategoriasAcertadas == 5)
+            {
+                MensajeGanadoPerdido = "Felicidades Has Ganado";
+                ImagenResultadoLocal = "medal.png";
+                ImagenResultadoRival = "platmedal.png";
+            }
+            else{
+                MensajeGanadoPerdido = "Lo Sentimos, Has Perdido";
+                ImagenResultadoRival = "medal.png";
+                ImagenResultadoLocal = "platmedal.png";
+            }
+            NotifyPropertyChanged(MensajeGanadoPerdido);
+            NotifyPropertyChanged(ImagenResultadoLocal);
+            NotifyPropertyChanged(ImagenResultadoRival);
+            
+        }
 
-     
+        #endregion
+
     }
 }

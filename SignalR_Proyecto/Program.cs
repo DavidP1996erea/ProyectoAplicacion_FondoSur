@@ -24,6 +24,6 @@ app.MapRazorPages();
 
 app.MapHub<eleccionCategoriasHub>("/eleccionCategoriasHub");
 app.MapHub<salaEsperaHub>("/salaEsperaHub");
-
+app.MapHub<salasHub>("/salasHub");
 
 app.Run();
