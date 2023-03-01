@@ -22,29 +22,23 @@ namespace SignalR_Proyecto.Hubs
                clsUsuariosPartida.ListadoUsuariosPartida.Add(datosUsuario);
             }
 
-
-            await Clients.All.SendAsync("recibirUsuario", datosUsuario);
+            await Groups.AddToGroupAsync(Context.ConnectionId, datosUsuario.nombreSala);
+            await Clients.Group(datosUsuario.nombreSala).SendAsync("recibirUsuario", datosUsuario);
 
         }
 
-        public async Task enviarListadoCategorias(List<clsCategorias> listadoCategorias)
+        public async Task enviarListadoCategorias(List<clsCategorias> listadoCategorias, String nombreSala)
         {
-            await Clients.Others.SendAsync("recibirListadoCategorias", listadoCategorias);
+            await Groups.AddToGroupAsync(Context.ConnectionId, nombreSala);
+            await Clients.OthersInGroup(nombreSala).SendAsync("recibirListadoCategorias", listadoCategorias);
         }
 
-        public async Task enviarCambiarValorTurno(String miTurno)
+        public async Task enviarCambiarValorTurno(String miTurno, String nombreSala)
         {
-            
-            await Clients.Others.SendAsync("recibirCambiarTurno", miTurno);
+            await Groups.AddToGroupAsync(Context.ConnectionId, nombreSala);
+            await Clients.OthersInGroup(nombreSala).SendAsync("recibirCambiarTurno", miTurno);
         }
 
-
-        public async Task enviarBoolFinPartida(string partidaAcabada)
-        {
-
-            await Clients.Others.SendAsync("recibirBoolFinPartida", partidaAcabada);
-
-        }
 
     }
 }

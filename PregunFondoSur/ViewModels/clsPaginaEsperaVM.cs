@@ -23,7 +23,12 @@ namespace PregunFondoSur.ViewModels
             set { 
                 usuario = value;
                 NotifyPropertyChanged();
-            } }
+                if(usuario!= null)
+                {
+                    enviarBool();
+                }
+            } 
+        }
         #endregion
 
         #region Constructores
@@ -33,10 +38,10 @@ namespace PregunFondoSur.ViewModels
 
 
             // Se crea la conexión con el servidor
-            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/salaEsperaHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/salaEsperaHub").Build();
 
             recibirBool();
-            enviarBool();
+            
         }
 
 
@@ -54,7 +59,7 @@ namespace PregunFondoSur.ViewModels
         private async Task enviarBool()
         {
 
-            await miConexion.InvokeCoreAsync("enviarBool", args: new[] { "true" });
+            await miConexion.InvokeCoreAsync("enviarBool", args: new[] { Usuario });
 
         }
 
@@ -65,14 +70,17 @@ namespace PregunFondoSur.ViewModels
         private async Task recibirBool()
         {
             int cont = 1;
-            miConexion.On<string>("recibirBool", async (hayRival) =>
+            miConexion.On<clsUsuario>("recibirBool", async (usuarioEspera) =>
             {
 
-                if (cont > 0)
+                if (usuario.userName != usuarioEspera.userName)
                 {
-                    cont--;
-                    await enviarBool();
-                    pasarPagina();
+                    if (cont > 0)
+                    {
+                        cont--;
+                        await enviarBool();
+                        await pasarPagina();
+                    }
                 }
              
             });
@@ -83,7 +91,7 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
 
-        private async void pasarPagina()
+        private async Task pasarPagina()
         {
             var navigationParameter = new Dictionary<string, object>
             {

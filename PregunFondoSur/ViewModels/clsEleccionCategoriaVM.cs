@@ -171,7 +171,7 @@ namespace PregunFondoSur.ViewModels
         private async Task enviarCambiarValorTurno() {
             UsuarioLocal.tuTurno = false;
             NotifyPropertyChanged(nameof(UsuarioLocal));
-            await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "true" });
+            await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "true", UsuarioLocal.nombreSala });
         }
 
         private async Task recibirCambiarTurno()
@@ -198,32 +198,28 @@ namespace PregunFondoSur.ViewModels
                 listadoCategoriasEnviar.Add(ListaCategoriasLocal[i]);
             
             }
-            await miConexion.InvokeCoreAsync("enviarListadoCategorias", args: new[] { listadoCategoriasEnviar });
-        }//Sapoo
+            await miConexion.InvokeAsync("EnviarListadoCategorias", listadoCategoriasEnviar, UsuarioLocal.nombreSala);
+        }
 
-        private async Task recibirListadoCategorias()//Sapoo
-        {//Sapoo
+        private async Task recibirListadoCategorias()
+        {
 
-            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", async (listadoCategorias) =>
-            {//Sapoo
+            miConexion.On<List<clsCategorias>>("recibirListadoCategorias", (listadoCategorias) =>
+            {
 
 
                 for (int i = 0; i < listadoCategorias.Count; i++)
                 {
                     ListaCategoriasRival[i].ImagenMostrada = listadoCategorias[i].ImagenMostrada;
-                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);//Sapo
-                    //Sapoo
+                    List<clsCategoriasMaui> listaAuxiliar = new List<clsCategoriasMaui>(ListaCategoriasRival);
                     ListaCategoriasRival = listaAuxiliar;
-                    //Sapoo
 
                 }
                 NotifyPropertyChanged(nameof(ListaCategoriasRival));
-                comprobarFinalizarPartidaRival(listadoCategorias);//Sapo
-                //Sapoo
+                comprobarFinalizarPartidaRival(listadoCategorias);
             });
 
             await miConexion.StartAsync();
-            //Sapo
         }
 
 

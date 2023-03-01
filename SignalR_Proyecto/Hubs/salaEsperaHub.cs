@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Entidades;
+using Microsoft.AspNetCore.SignalR;
 using SignalR_Proyecto.Models;
 
 namespace SignalR_Proyecto.Hubs
@@ -7,10 +8,11 @@ namespace SignalR_Proyecto.Hubs
     {
 
         
-        public async Task enviarBool(string hayRival)
+        public async Task enviarBool(clsUsuario usuarioEspera)
         {
             clsUsuariosPartida.ListadoUsuariosPartida.Clear();
-            await Clients.Others.SendAsync("recibirBool", hayRival);
+            await Groups.AddToGroupAsync(Context.ConnectionId, usuarioEspera.nombreSala);
+            await Clients.Group(usuarioEspera.nombreSala).SendAsync("recibirBool", usuarioEspera);
 
         }
 
