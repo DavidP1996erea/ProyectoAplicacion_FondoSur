@@ -6,7 +6,7 @@
         #region Atributos
         public String userName { get; set; }
         public String imagen { get; set;}
-
+        public String nombreSala {get; set;}
         public bool tuTurno { get; set;}
         #endregion
 

@@ -27,5 +27,9 @@
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="90">
             <Button Text="PLAY" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Command="{Binding LogInCommand}"></Button>
         </Border>
+
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="90">
+            <Button Text="crear sla" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Command="{Binding CrearSalaCommand}"></Button>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>
