@@ -9,8 +9,10 @@ namespace SignalR_Proyecto.Hubs
 
 
         public async Task crearSala(string nombreSala)
-        {         
-            clsListadoSalas.ListadoSalas.Add(nombreSala);
+        {
+            List<String> list = clsListadoSalas.ListadoSalas;
+            
+            list.Add(nombreSala);
 
             await Clients.Others.SendAsync("recibirCrearSala", nombreSala);
          }
@@ -19,9 +21,8 @@ namespace SignalR_Proyecto.Hubs
         public async Task enviarListadoSalas(List<string> listadoSalas)
         {
             listadoSalas = new List<string>(clsListadoSalas.ListadoSalas);
-            listadoSalas.Add("sala1");
 
-            await Clients.Others.SendAsync("recibirListadoSalas", listadoSalas);
+            await Clients.All.SendAsync("recibirListadoSalas", listadoSalas);
         }
 
     }

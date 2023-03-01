@@ -11,10 +11,11 @@
         #endregion
 
         #region Constructor con parámetros
-        public clsUsuario(string userName, string imagen)
+        public clsUsuario(string userName, string imagen, string nombreSala)
         {
             this.userName = userName;
             this.imagen = imagen;   
+            this.nombreSala= nombreSala;
         }
         #endregion
 

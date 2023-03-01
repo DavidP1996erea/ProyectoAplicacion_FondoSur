@@ -14,8 +14,7 @@
 
         <ListView 
                 
-                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" WidthRequest="370" HeightRequest="400"
-                     >
+                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" WidthRequest="370" HeightRequest="400">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
