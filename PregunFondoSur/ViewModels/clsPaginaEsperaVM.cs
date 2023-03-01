@@ -38,7 +38,7 @@ namespace PregunFondoSur.ViewModels
 
 
             // Se crea la conexión con el servidor
-            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/salaEsperaHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/salaEsperaHub").Build();
 
             recibirBool();
             

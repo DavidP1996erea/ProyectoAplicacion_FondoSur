@@ -45,7 +45,7 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsPaginaListadoSalas()
         {
-            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/salasHub").Build();
+            miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/salasHub").Build();
 
             recibirListadoSalas();
             enviarListadoSalas();
