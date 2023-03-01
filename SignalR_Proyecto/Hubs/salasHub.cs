@@ -12,7 +12,7 @@ namespace SignalR_Proyecto.Hubs
         {         
             clsListadoSalas.ListadoSalas.Add(nombreSala);
 
-            await Clients.All.SendAsync("recibirCrearSala", nombreSala);
+            await Clients.Others.SendAsync("recibirCrearSala", nombreSala);
          }
 
 

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class clsListadoSalas
+    public static class clsListadoSalas
     {
 
         #region Atributos
 
-        private static List<string> listadoSalas;
+        private static List<string> listadoSalas = new List<string>();
 
         #endregion
 
@@ -25,15 +25,6 @@ namespace Models
         }
         #endregion
 
-
-        #region Constructor por defecto
-
-        public clsListadoSalas()
-        {
-            listadoSalas = new List<string>();
-        }
-
-        #endregion
 
     }
 }
