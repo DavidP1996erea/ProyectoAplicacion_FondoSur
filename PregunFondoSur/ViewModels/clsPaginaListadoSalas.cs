@@ -31,12 +31,19 @@ namespace PregunFondoSur.ViewModels
             miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/salasHub").Build();
 
             recibirListadoSalas();
-
+            enviarListadoSalas();
         }
 
         #endregion
 
         #region Métodos SignalR
+
+        private async Task enviarListadoSalas()
+        {
+            List<String> lista = new List<string>();
+            await miConexion.InvokeCoreAsync("enviarListadoSalas", args: new[] { lista });
+        }
+
         private async Task recibirListadoSalas()
         {
             miConexion.On<List<string>>("recibirListadoSalas", (listadoSalas) =>
