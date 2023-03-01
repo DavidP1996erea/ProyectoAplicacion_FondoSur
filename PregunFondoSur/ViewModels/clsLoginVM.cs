@@ -1,5 +1,6 @@
 ﻿
 using Entidades;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.VisualBasic;
 using Models;
 using PregunFondoSur.ViewModels.Utilidades;
@@ -13,6 +14,7 @@ namespace PregunFondoSur.ViewModels
         private string nickname, imagen;
         private DelegateCommand logInCommand;
         private DelegateCommand crearSalaCommand;
+        private readonly HubConnection miConexion;
         #endregion
 
         #region Propiedades
@@ -20,7 +22,9 @@ namespace PregunFondoSur.ViewModels
         public string Nickname
         {
             get { return nickname; }
-            set { nickname = value;
+            set
+            {
+                nickname = value;
                 logInCommand.RaiseCanExecuteChanged();
             }
         }
@@ -28,7 +32,9 @@ namespace PregunFondoSur.ViewModels
         public string Imagen
         {
             get { return imagen; }
-            set { imagen = value;
+            set
+            {
+                imagen = value;
                 logInCommand.RaiseCanExecuteChanged();
             }
         }
@@ -51,9 +57,13 @@ namespace PregunFondoSur.ViewModels
             usuario = new clsUsuario();
             logInCommand = new DelegateCommand(logInCommand_Execute, logInCommand_CanExecute);
             crearSalaCommand = new DelegateCommand(crearSalaCommand_Execute);
+
+            miConexion = new HubConnectionBuilder().WithUrl("http://localhost:5153/salasHub").Build();
+
+            recibirCrearSala();
         }
 
-     
+
 
         /// <summary>
         /// Método que revisa si el usuario ha introducido los datos necesarios en los entrys del la vista como para loggearse
@@ -85,17 +95,49 @@ namespace PregunFondoSur.ViewModels
             {
                 {"Usuario", Usuario }
             };
-            await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
+            await Shell.Current.GoToAsync("PaginaListadoSalas", navigationParameter);
         }
+
+
+
+        #region Métodos SignalR
+        private async Task crearSala(string nombreSala)
+        {
+            await miConexion.InvokeCoreAsync("crearSala", args: new[] { nombreSala });
+        }
+
+        private async Task recibirCrearSala()
+        {
+            miConexion.On<String>("recibirCrearSala", (nombreSala) =>
+            {
+                
+       
+            });
+
+            await miConexion.StartAsync();
+        }
+        #endregion
 
 
         private async void crearSalaCommand_Execute()
         {
             string nombreSala = await App.Current.MainPage.DisplayPromptAsync("Crear sala", "Introduce el nombre de la sala");
+           
+            await crearSala(nombreSala);
+
+            Usuario.userName = Nickname;
+            Usuario.imagen = Imagen;
             Usuario.nombreSala = nombreSala;
-            clsListadoSalas.ListadoSalas.Add(usuario.nombreSala);
+
+            var navigationParameter = new Dictionary<string, object>
+            {
+                {"Usuario", Usuario }
+            };
+            await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
+
         }
 
 
     }
 }
+

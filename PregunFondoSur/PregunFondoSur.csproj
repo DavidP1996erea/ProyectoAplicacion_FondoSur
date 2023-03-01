@@ -88,6 +88,9 @@
 	  <MauiXaml Update="Vistas\PaginaFinalizacion.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vistas\PaginaListadoSalas.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vistas\PaginaPregunta.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

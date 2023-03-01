@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PregunFondoSur.Vistas.PaginaListadoSalas"
+             xmlns:model="clr-namespace:PregunFondoSur.ViewModels"
+             Title="PaginaListadoSalas">
+
+    <ContentPage.BindingContext>
+        <model:clsPaginaListadoSalas/>
+    </ContentPage.BindingContext>
+    
+    
+    <VerticalStackLayout>
+
+        <ListView 
+                
+                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" WidthRequest="370" HeightRequest="400"
+                     >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+
+                        <StackLayout Margin="5">
+
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding }" ></Label>
+                            </HorizontalStackLayout>
+            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+
+    </VerticalStackLayout>
+</ContentPage>

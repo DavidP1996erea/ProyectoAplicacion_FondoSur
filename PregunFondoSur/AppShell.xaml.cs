@@ -11,6 +11,7 @@ namespace PregunFondoSur
             Routing.RegisterRoute("PaginaEleccionCategoria", typeof(EleccionCategoria));
             Routing.RegisterRoute("PaginaPregunta", typeof(PaginaPregunta));
             Routing.RegisterRoute("PaginaFinalizacion", typeof(PaginaFinalizacion));
+            Routing.RegisterRoute("PaginaListadoSalas", typeof(PaginaListadoSalas));
         }
     }
 }
