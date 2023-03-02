@@ -29,7 +29,7 @@ namespace PregunFondoSur.ViewModels
         private DelegateCommand girarRuletaCommand;
         private Color colorFondoUsuario;
 
-        private readonly HubConnection miConexion;
+        private HubConnection miConexion;
         private int categoriaDeLaRuleta;
         #endregion
 
@@ -125,15 +125,19 @@ namespace PregunFondoSur.ViewModels
 
         #region Métodos SignalR
 
+        private async Task comprobarConexion()
+        {
+            if (miConexion.State == HubConnectionState.Disconnected)
+            {
+                miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
+            }
+        }
 
         private async Task enviarUsuario()
         {
-
-            await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
-            if (miConexion.State == HubConnectionState.Disconnected)
-            {
-                await enviarUsuario();
-            }
+            await comprobarConexion();
+            await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });  
+            
         }
 
         private async Task recibirUsuario()
@@ -169,6 +173,7 @@ namespace PregunFondoSur.ViewModels
         }
         
         private async Task enviarCambiarValorTurno() {
+            await comprobarConexion();
             UsuarioLocal.tuTurno = false;
             NotifyPropertyChanged(nameof(UsuarioLocal));
             await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "true", UsuarioLocal.nombreSala });
@@ -191,6 +196,7 @@ namespace PregunFondoSur.ViewModels
 
         private async Task enviarListadoCategorias()
         {
+            await comprobarConexion();
             List<clsCategorias> listadoCategoriasEnviar= new List<clsCategorias>(); 
 
             for(int i = 0; i< ListaCategoriasLocal.Count; i++) {
