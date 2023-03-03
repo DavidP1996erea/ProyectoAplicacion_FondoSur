@@ -21,6 +21,7 @@ namespace SignalR_Proyecto.Hubs
                datosUsuario.tuTurno=true;
                clsUsuariosPartida.ListadoUsuariosPartida.Add(datosUsuario);
             }
+            clsListadoSalas.eliminarSala(datosUsuario.nombreSala);
 
             await Groups.AddToGroupAsync(Context.ConnectionId, datosUsuario.nombreSala);
             await Clients.Group(datosUsuario.nombreSala).SendAsync("recibirUsuario", datosUsuario);

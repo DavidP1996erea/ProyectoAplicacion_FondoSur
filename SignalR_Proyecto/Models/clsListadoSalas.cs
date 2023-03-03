@@ -27,5 +27,18 @@ namespace Models
 
 
 
+        public static void eliminarSala(string nombreSala)
+        {
+
+            for(int i = 0; i < listadoSalas.Count; i++)
+            {
+                if(listadoSalas[i] == nombreSala)
+                {
+                    listadoSalas.RemoveAt(i);
+                }
+            }
+
+        }
+
     }
 }
