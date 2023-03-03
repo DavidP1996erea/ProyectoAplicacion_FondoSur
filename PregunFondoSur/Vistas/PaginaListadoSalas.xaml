@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PregunFondoSur.Vistas.PaginaListadoSalas"
              xmlns:model="clr-namespace:PregunFondoSur.ViewModels"
-             Title="PaginaListadoSalas">
+             Title="PaginaListadoSalas"
+             BackgroundColor="#444444">
 
     <ContentPage.BindingContext>
         <model:clsPaginaListadoSalas/>
@@ -12,26 +13,35 @@
     
     <VerticalStackLayout>
 
+        <Label FontFamily="Lilita" FontSize="40 " HorizontalOptions="Center" Margin="0,15,0,35">Listado de salas</Label>
+
+        <Border WidthRequest="420">
         <ListView 
                 
-                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" WidthRequest="370" HeightRequest="400">
+                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" WidthRequest="420" HeightRequest="400"  
+            >
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell >
-
-                        <StackLayout Margin="5">
-
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding }" ></Label>
-                            </HorizontalStackLayout>
-            
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
+                        
+                            <ViewCell >
+                           
+                                <StackLayout >
+                                <Border>
+                                    <HorizontalStackLayout >
+                                  
+                                        <Label  Text="{Binding }"  FontSize="20" FontFamily="Lilita" ></Label>
+                                   
+                                </HorizontalStackLayout>
+                                </Border>
+                            </StackLayout>
+                            
+                        </ViewCell>
+                       
+                    </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+        </Border>
 
     </VerticalStackLayout>
 </ContentPage>
