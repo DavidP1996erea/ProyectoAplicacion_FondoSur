@@ -122,6 +122,8 @@ namespace PregunFondoSur.ViewModels
         private async void crearSalaCommand_Execute()
         {
             string nombreSala = await App.Current.MainPage.DisplayPromptAsync("Crear sala", "Introduce el nombre de la sala");
+            
+            if(nombreSala != null && nombreSala !="" && Nickname!=null && Nickname != "") { 
            
             await crearSala(nombreSala);
 
@@ -134,6 +136,8 @@ namespace PregunFondoSur.ViewModels
                 {"Usuario", Usuario }
             };
             await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
+
+            }
 
         }
 

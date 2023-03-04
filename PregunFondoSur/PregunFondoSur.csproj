@@ -32,10 +32,9 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
+		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\splash.jpg" Color="#e9f7fe" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -61,6 +60,7 @@
 	  <None Remove="Resources\Images\musicalganado.png" />
 	  <None Remove="Resources\Images\sciencebase.png" />
 	  <None Remove="Resources\Images\scienceganado.png" />
+	  <None Remove="Resources\Images\splash.jpg" />
 	  <None Remove="Resources\Images\videobase.png" />
 	  <None Remove="Resources\Images\videoganado.png" />
 	</ItemGroup>
@@ -69,6 +69,9 @@
 	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" />
+	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Entidades\Entidades.csproj" />
 	  <ProjectReference Include="..\Models\Models.csproj" />
