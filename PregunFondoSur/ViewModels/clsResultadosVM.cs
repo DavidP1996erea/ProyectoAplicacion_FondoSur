@@ -1,104 +1,64 @@
 ﻿using Entidades;
 using PregunFondoSur.models;
 using PregunFondoSur.ViewModels.Utilidades;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PregunFondoSur.ViewModels
 {
-    [QueryProperty(nameof(DatosPartida), "datosPartida")]
-    public class clsResultadosVM : clsVMBase
+    public class clsResultadosVM : clsVMBase, IQueryAttributable
     {
         #region Atributos
-        private clsDatosResultadoPartida datosPartida;
-        private clsUsuario usuarioLocal;
-        private clsUsuario usuarioRival;
+        private clsDatosResultadoPartida datosPartida { get; set; }
+        private clsUsuario usuarioGanador;
+        private clsUsuario usuarioPerdedor;
         private List<clsCategoriasMaui> listadoCategoriasLocal;
-        private List<clsCategoriasMaui> listadoCategoriasRival;
         private String mensajeGanadoPerdido;
-        private String imagenResultadoLocal;
-        private String imagenResultadoRival;
+        private Color colorMensaje;
         #endregion
 
         #region Propiedades
-        public clsDatosResultadoPartida DatosPartida
+        public clsUsuario UsuarioGanador
         {
-            get { return datosPartida; }
+            get { return usuarioGanador; }
             set
             {
-                datosPartida = value;
-                UsuarioLocal = datosPartida.usuarioLocal;
-                UsuarioRival = datosPartida.usuarioRival;
-                ListadoCategoriasLocal = datosPartida.categoriasUsuarioLocal;
-                ListadoCategoriasRival = datosPartida.categoriasUsuarioRival;
-                NotifyPropertyChanged(nameof(DatosPartida));
-            }
-        }
-        public clsUsuario UsuarioLocal
-        {
-            get { return usuarioLocal; }
-            set
-            {
-                usuarioLocal = value;
-                NotifyPropertyChanged(nameof(UsuarioLocal));
+                usuarioGanador = value;
+                NotifyPropertyChanged();
             }
         }
 
-        public clsUsuario UsuarioRival
+        public clsUsuario UsuarioPerdedor
         {
-            get { return usuarioRival; }
+            get { return usuarioPerdedor; }
             set
             {
-                usuarioRival = value;
-                NotifyPropertyChanged(nameof(UsuarioRival));
-            }
-        }
-        public List<clsCategoriasMaui> ListadoCategoriasLocal
-        {
-            get { return listadoCategoriasLocal; }
-            set
-            {
-                listadoCategoriasLocal = value;
-                NotifyPropertyChanged(nameof(ListadoCategoriasLocal));
-                comprobarGanado();
-            }
-        }
-        public List<clsCategoriasMaui> ListadoCategoriasRival
-        {
-            get { return listadoCategoriasRival; }
-            set
-            {
-                listadoCategoriasRival = value;
-                NotifyPropertyChanged(nameof(ListadoCategoriasRival));
+                usuarioPerdedor = value;
+                NotifyPropertyChanged();
             }
         }
 
         public String MensajeGanadoPerdido
         {
             get { return mensajeGanadoPerdido; }
-            set { mensajeGanadoPerdido = value; NotifyPropertyChanged(); }
+            set { mensajeGanadoPerdido = value; 
+                NotifyPropertyChanged(); }
         }
 
-        public String ImagenResultadoLocal
+        public Color ColorMensaje
         {
-            get { return imagenResultadoLocal; }
-            set { imagenResultadoLocal = value; NotifyPropertyChanged(); }
+            get { return colorMensaje; }
+            set 
+            { 
+              colorMensaje = value;
+              NotifyPropertyChanged(); 
+            }
         }
-        public String ImagenResultadoRival
-        {
-            get { return imagenResultadoRival; }
-            set { imagenResultadoRival = value; NotifyPropertyChanged(); }
-        }
+
         #endregion
 
         #region Constructores
         public clsResultadosVM()
         {
-            
+
         }
         #endregion
 
@@ -115,19 +75,24 @@ namespace PregunFondoSur.ViewModels
             }
             if (contadorCategoriasAcertadas == 5)
             {
-                MensajeGanadoPerdido = "Felicidades Has Ganado";
-                ImagenResultadoLocal = "medal.png";
-                ImagenResultadoRival = "platmedal.png";
+                MensajeGanadoPerdido = "CONGRATULATIONS YOU HAVE WON";
+                UsuarioGanador = datosPartida.usuarioLocal;
+                UsuarioPerdedor = datosPartida.usuarioRival;
+                ColorMensaje = Color.Parse("Efb810");
             }
             else{
-                MensajeGanadoPerdido = "Lo Sentimos, Has Perdido";
-                ImagenResultadoRival = "medal.png";
-                ImagenResultadoLocal = "platmedal.png";
+                MensajeGanadoPerdido = "YOU HAVE BEEN DEFEATED";
+                UsuarioPerdedor = datosPartida.usuarioLocal;
+                UsuarioGanador = datosPartida.usuarioRival;
+                ColorMensaje = Color.Parse("#DF0101");
             }
-            NotifyPropertyChanged(MensajeGanadoPerdido);
-            NotifyPropertyChanged(ImagenResultadoLocal);
-            NotifyPropertyChanged(ImagenResultadoRival);
-            
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            datosPartida = query["datosPartida"] as clsDatosResultadoPartida;
+            listadoCategoriasLocal = datosPartida.categoriasUsuarioLocal;
+            comprobarGanado();
         }
 
         #endregion

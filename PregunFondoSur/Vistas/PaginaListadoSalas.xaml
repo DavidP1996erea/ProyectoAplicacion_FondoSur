@@ -9,39 +9,20 @@
     <ContentPage.BindingContext>
         <model:clsPaginaListadoSalas/>
     </ContentPage.BindingContext>
-    
-    
     <VerticalStackLayout>
-
-        <Label FontFamily="Lilita" FontSize="40 " HorizontalOptions="Center" Margin="0,15,0,35">Listado de salas</Label>
-
-        <Border WidthRequest="420">
-        <ListView 
-                
-                      RowHeight="60" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" WidthRequest="420" HeightRequest="400"  
-            >
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                        
-                            <ViewCell >
-                           
-                                <StackLayout >
-                                <Border>
-                                    <HorizontalStackLayout >
-                                  
-                                        <Label  Text="{Binding }"  FontSize="20" FontFamily="Lilita" ></Label>
-                                   
-                                </HorizontalStackLayout>
-                                </Border>
-                            </StackLayout>
-                            
+        <Label FontFamily="Lilita" Text="AVAILABLE LOBBIES" FontSize="40" HorizontalOptions="Center" Margin="0,30,0,35"></Label>
+        <Border WidthRequest="350" StrokeShape="RoundRectangle 10, 10, 10, 10">
+            <ListView BackgroundColor="White" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" HeightRequest="500">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Border StrokeShape="RoundRectangle 4, 4, 4, 4" Margin="0, 20, 15, 20" BackgroundColor="DodgerBlue" WidthRequest="300" HeightRequest="60">
+                                <Label Text="{Binding}" FontSize="22" FontFamily="Lilita" TextColor="White" Margin="20, 0, 0, 0" VerticalOptions="Center"></Label>
+                            </Border>
                         </ViewCell>
-                       
                     </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </ListView.ItemTemplate>
+            </ListView>
         </Border>
-
     </VerticalStackLayout>
 </ContentPage>
