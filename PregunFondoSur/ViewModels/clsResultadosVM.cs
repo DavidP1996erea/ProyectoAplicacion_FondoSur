@@ -63,6 +63,10 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Metodos
+        /// <summary>
+        /// Metodo que comprueba si has ganado la partida, y segun el resultado
+        /// mostrara los datos correspondientes.
+        /// </summary>
         public void comprobarGanado()
         {
             int contadorCategoriasAcertadas = 0;
@@ -87,7 +91,6 @@ namespace PregunFondoSur.ViewModels
                 ColorMensaje = Color.Parse("#DF0101");
             }
         }
-
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             datosPartida = query["datosPartida"] as clsDatosResultadoPartida;

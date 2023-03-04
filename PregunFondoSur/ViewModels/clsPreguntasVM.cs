@@ -57,7 +57,14 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Metodos
-
+        /// <summary>
+        /// Metodo que recibe el nombre de categoria y si ha sido acertado
+        /// Este metodo llama al metodo de obtenerCategoriaPorNombre y 
+        /// si la categoria ha sido acertada, se le pondra la imagen acertada 
+        /// y estaAcertada a true
+        /// </summary>
+        /// <param name="nombreCategoria"></param>
+        /// <param name="acertado"></param>
         private void acertarCategoria(String nombreCategoria, bool acertado)
         {
 
