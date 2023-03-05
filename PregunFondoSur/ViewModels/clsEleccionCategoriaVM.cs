@@ -334,7 +334,7 @@ namespace PregunFondoSur.ViewModels
            
         }
 
-        /// <summary> 
+        /// <summary>  
         /// Método que ajusta el color del recuadro del usuario en funcion al booleano TuTurno, el cual almacena si es el turno
         /// del usuario local o no.
         /// Precondiciones: Ninguna
