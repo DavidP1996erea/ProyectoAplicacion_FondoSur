@@ -70,7 +70,7 @@
             </Border>
         </HorizontalStackLayout>
 
-        <Grid Margin="0, 30, 0, 0">
+        <Grid Margin="0, 30, 0, 0" IsVisible="{Binding BoolRuletaDisponible}">
             <Image
                     x:Name="circleImage"
                     Margin="10"
@@ -105,9 +105,11 @@
                     Command="{Binding GirarRuletaCommand}"/>
         </Grid>
 
-        <Border StrokeShape="RoundRectangle 10, 10, 10, 10"  WidthRequest="50" HeightRequest="50" BackgroundColor="DeepSkyBlue" HorizontalOptions="Start" Margin="20, 70, 0, 0">
-            <Image BackgroundColor="DeepSkyBlue" Source="salir.png" WidthRequest="40" HeightRequest="40" />
+       
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="600" HeightRequest="250" Margin="0, 70, 0, 0" IsVisible="{Binding BoolTextoEspera}">
+            <Label Text="WAIT FOR YOUR OPPONENT TO FINISH THEIR TURN" FontFamily="Lilita" TextColor="Black" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
         </Border>
+        
 
     </VerticalStackLayout>
 

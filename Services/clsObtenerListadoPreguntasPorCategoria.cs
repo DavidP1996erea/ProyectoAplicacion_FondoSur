@@ -11,6 +11,10 @@ namespace Services
 {
     public class clsObtenerListadoPreguntasPorCategoria
     {
+        /// <summary>
+        /// Metodo que recibe de la api un listado de preguntas de peliculas.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<List<clsPreguntas>> obtenerListadoPreguntasFilmDAL()
         {
 
@@ -59,6 +63,11 @@ namespace Services
             return listadoPreguntasFilm;
 
         }
+
+        /// <summary>
+        /// Es igual que el anterior pero el listado es de comida.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<List<clsPreguntas>> obtenerListadoPreguntasFoodDAL()
         {
 
@@ -107,6 +116,11 @@ namespace Services
             return listadoPreguntasFood;
 
         }
+
+        /// <summary>
+        /// Es igual que el anterior pero el listado es de musica.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<List<clsPreguntas>> obtenerListadoPreguntasMusicDAL()
         {
 
@@ -155,6 +169,11 @@ namespace Services
             return listadoPreguntasMusic;
 
         }
+
+        /// <summary>
+        /// Es igual que el anterior pero el listado es de historia.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<List<clsPreguntas>> obtenerListadoPreguntasHistoryDAL()
         {
 
@@ -203,6 +222,11 @@ namespace Services
             return listadoPreguntasHistory;
 
         }
+
+        /// <summary>
+        /// Es igual que el anterior pero el listado es de ciencia.
+        /// </summary>
+        /// <returns></returns>
         public static async Task<List<clsPreguntas>> obtenerListadoPreguntasScienceDAL()
         {
 

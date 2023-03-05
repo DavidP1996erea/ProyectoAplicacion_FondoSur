@@ -26,7 +26,11 @@ namespace Models
         #endregion
 
 
-
+        /// <summary>
+        /// Metodo que recibe el nombre de una sala y borra del listado de salas
+        /// la sala cuando el nombre sea el mismo.
+        /// </summary>
+        /// <param name="nombreSala"></param>
         public static void eliminarSala(string nombreSala)
         {
 

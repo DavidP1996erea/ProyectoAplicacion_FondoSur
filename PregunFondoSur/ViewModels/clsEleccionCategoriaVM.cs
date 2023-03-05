@@ -31,9 +31,13 @@ namespace PregunFondoSur.ViewModels
 
         private HubConnection miConexion;
         private int categoriaDeLaRuleta;
+        private bool boolRuletaDisponible;
+        private bool boolTextoEspera;
         #endregion
 
         #region Propiedades
+
+
 
         public int CategoriaDelaRuleta
         {
@@ -101,6 +105,24 @@ namespace PregunFondoSur.ViewModels
         public DelegateCommand GirarRuletaCommand
         {
             get { return girarRuletaCommand; }
+        }
+
+        public bool BoolRuletaDisponible
+        {
+            get { return boolRuletaDisponible; }
+            set { boolRuletaDisponible = value;
+                NotifyPropertyChanged(); 
+            }
+        }
+
+        public bool BoolTextoEspera
+        {
+            get { return boolTextoEspera; }
+            set
+            {
+                boolTextoEspera = value;
+                NotifyPropertyChanged();
+            }
         }
         #endregion
 
@@ -324,11 +346,15 @@ namespace PregunFondoSur.ViewModels
             {
                 ColorFondoUsuario = Color.Parse("White");
                 NotifyPropertyChanged(nameof(ColorFondoUsuario));
+                BoolRuletaDisponible = true;
+                BoolTextoEspera = false;
             }
             else
             {
                 ColorFondoUsuario = Color.Parse("Gray");
                 NotifyPropertyChanged(nameof(ColorFondoUsuario));
+                BoolRuletaDisponible = false;
+                BoolTextoEspera = true;
             }
         }
 
