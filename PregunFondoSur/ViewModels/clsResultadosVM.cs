@@ -7,7 +7,7 @@ namespace PregunFondoSur.ViewModels
     public class clsResultadosVM : clsVMBase, IQueryAttributable
     {
         #region Atributos
-        private clsDatosResultadoPartida datosPartida { get; set; }
+        private clsDatosResultadoPartida datosPartida;
         private clsUsuario usuarioGanador;
         private clsUsuario usuarioPerdedor;
         private List<clsCategoriasMaui> listadoCategoriasLocal;
@@ -82,7 +82,7 @@ namespace PregunFondoSur.ViewModels
                 MensajeGanadoPerdido = "CONGRATULATIONS YOU HAVE WON";
                 UsuarioGanador = datosPartida.usuarioLocal;
                 UsuarioPerdedor = datosPartida.usuarioRival;
-                ColorMensaje = Color.Parse("Efb810");
+                ColorMensaje = Color.Parse("#EFB810");
             }
             else{
                 MensajeGanadoPerdido = "YOU HAVE BEEN DEFEATED";
