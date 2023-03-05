@@ -58,6 +58,7 @@ namespace PregunFondoSur.ViewModels
             
             set { usuarioLocal = value;
               
+                // Se comprueba que antes de realizar las acciones el usuario no esté a null
                 if (usuarioLocal != null)
                 {
                     NotifyPropertyChanged();
@@ -106,7 +107,9 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsEleccionCategoriaVM()
         {
+            // Se rellenan todas las listas con preguntas
             obtenerListados();
+
 
             listaCategoriasLocal = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
             listaCategoriasRival = clsObtenerListadoCategorias.obtenerListadoCompletoCategorias();
@@ -236,6 +239,10 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Metodos
+        /// <summary>
+        /// Método que al ser llamado rellena los listados de las diferentes categorías llamando una clase
+        /// que conecta con la api y recoge todos los datos necesarios
+        /// </summary>
         private async void obtenerListados()
         {
             listadoPreguntasFilms = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasFilmDAL();
@@ -246,6 +253,10 @@ namespace PregunFondoSur.ViewModels
         }
 
         
+        /// <summary>
+        /// Este método se llama cuando la partida a terminado. Primero se rellena un objeto de un model que contendrá todos los datos
+        /// necesarios para la vista de partida finalizada. Luego envía a través del shell este objeto al viewmodel de la última vista
+        /// </summary>
        private async void finalizarJuego()
         {
             clsDatosResultadoPartida datosPartida=new clsDatosResultadoPartida(usuarioLocal, usuarioRival, listaCategoriasLocal, listaCategoriasRival);
@@ -258,7 +269,8 @@ namespace PregunFondoSur.ViewModels
 
 
         /// <summary>
-        /// 
+        /// Método canexecuted que controlará cuando se puede pulsar la ruleta. Siempre
+        /// que el turno del usuario sea true, podrá pulsar la ruleta
         /// </summary>
         /// <returns></returns>
         private bool girarRuletaCommand_CanExecuted()
@@ -269,27 +281,26 @@ namespace PregunFondoSur.ViewModels
             {
                 if (UsuarioLocal.tuTurno)
                 {
-
                     pulsable = true;
-
                 }
-
-            }
-           
-            
+            }                    
             return pulsable;
         }
 
+
+        /// <summary>
+        /// Método donde se genera una pregunta, y se envía a otra vista donde el usuario
+        /// deberá seleccionar la respuesta necesaria.
+        /// </summary>
         private async void girarRuletaCommand_Executed()
         {
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
             
-
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
             preguntaEnviar = generarPregunta();
-            //TODO Implementar Chuleta
+            
             var navigationParameter = new Dictionary<string, object>
             {
                 { "pregunta", preguntaEnviar }
@@ -356,6 +367,11 @@ namespace PregunFondoSur.ViewModels
             }
         }
 
+        /// <summary>
+        /// Método que devuelve un objeto de la clase clsPreguntas. Se comprueba el número seleccionado
+        /// por la ruleta y se crea una pregunta aleatoria según que categoría es
+        /// </summary>
+        /// <returns></returns>
         private clsPreguntas generarPregunta()
         {
             clsPreguntas preguntaElegida = new clsPreguntas();
@@ -386,6 +402,14 @@ namespace PregunFondoSur.ViewModels
             return preguntaElegida;
         }
 
+        /// <summary>
+        /// Devuelve una clsPreguntas y recibe como parámetro un listado de preguntas. Primero se comprueba
+        /// que la pregunta no esté respondida, para ello se usa un while donde se usa la propiedad isNiche.
+        /// Cuando se escoge una pregunta que no está respondida se setea el objeto creao anteriormente de
+        /// clsPreguntas a la pregunta escogida aleatoriamente y se devuelve.
+        /// </summary>
+        /// <param name="listadoPreguntas"></param>
+        /// <returns></returns>
         private static clsPreguntas devolverPreguntaPorCategoria(List<clsPreguntas> listadoPreguntas) {
 
             Random random = new Random();
@@ -403,6 +427,10 @@ namespace PregunFondoSur.ViewModels
             return preguntaSeleccionada;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="listaCategoria"></param>
         public void comprobarFinalizarPartida(List<clsCategoriasMaui> listaCategoria)
         {
             int contadorPreguntasAcertadas = 0;
