@@ -105,9 +105,9 @@
                     Command="{Binding GirarRuletaCommand}"/>
         </Grid>
 
-       
-        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="600" HeightRequest="250" Margin="0, 70, 0, 0" IsVisible="{Binding BoolTextoEspera}">
-            <Label Text="WAIT FOR YOUR OPPONENT TO FINISH THEIR TURN" FontFamily="Lilita" TextColor="Black" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" BackgroundColor="White" WidthRequest="{OnPlatform WinUI=600, Android=350}" HeightRequest="250" Margin="0, 70, 0, 0" IsVisible="{Binding BoolTextoEspera}">
+            <Label Text="WAIT FOR YOUR OPPONENT TO FINISH THEIR TURN" FontFamily="Lilita" TextColor="Black" FontSize="{OnPlatform WinUI=30, Android=25}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10"/>
         </Border>
         
 
