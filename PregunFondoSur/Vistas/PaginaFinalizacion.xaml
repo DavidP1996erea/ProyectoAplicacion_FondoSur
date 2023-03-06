@@ -35,10 +35,7 @@
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="Center" Margin="0, 50, 0, 0">
             <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,0,20,0" Stroke="DodgerBlue" WidthRequest="130">
-                <Button Text="PLAY AGAIN" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold"></Button>
-            </Border>
-            <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Stroke="DodgerBlue" WidthRequest="130">
-                <Button Text="EXIT GAME" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold"></Button>
+                <Button Text="PLAY AGAIN" Command="{Binding BotonMenuPrincipal}" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold"></Button>
             </Border>
         </HorizontalStackLayout>
     </VerticalStackLayout>
