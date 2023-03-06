@@ -33,6 +33,7 @@ namespace PregunFondoSur.ViewModels
         private int categoriaDeLaRuleta;
         private bool boolRuletaDisponible;
         private bool boolTextoEspera;
+        private int enviadoUsuario = 0;
         #endregion
 
         #region Propiedades
@@ -42,7 +43,9 @@ namespace PregunFondoSur.ViewModels
         public int CategoriaDelaRuleta
         {
             get { return categoriaDeLaRuleta; }
-            set { categoriaDeLaRuleta = value;
+            set
+            {
+                categoriaDeLaRuleta = value;
                 NotifyPropertyChanged();
             }
         }
@@ -58,20 +61,30 @@ namespace PregunFondoSur.ViewModels
                 asignarCategoriaAcertadaAsync();
             }
         }
-        public clsUsuario UsuarioLocal { get { return usuarioLocal; } 
-            
-            set { usuarioLocal = value;
-              
+        public clsUsuario UsuarioLocal
+        {
+            get { return usuarioLocal; }
+
+            set
+            {
+                usuarioLocal = value;
+
                 // Se comprueba que antes de realizar las acciones el usuario no esté a null
                 if (usuarioLocal != null)
                 {
+                    if (enviadoUsuario == 0)
+                    {
+                        enviadoUsuario++;
+                        enviarUsuario();
+                    }
                     NotifyPropertyChanged();
                     establecerColorFondo();
-                    enviarUsuario();
                     girarRuletaCommand.RaiseCanExecuteChanged();
                     
+
                 }
-            } }
+            }
+        }
 
         public clsUsuario UsuarioRival
         {
@@ -110,8 +123,10 @@ namespace PregunFondoSur.ViewModels
         public bool BoolRuletaDisponible
         {
             get { return boolRuletaDisponible; }
-            set { boolRuletaDisponible = value;
-                NotifyPropertyChanged(); 
+            set
+            {
+                boolRuletaDisponible = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -146,7 +161,7 @@ namespace PregunFondoSur.ViewModels
         }
 
         #endregion
-      
+
 
         #region Métodos SignalR
 
@@ -161,43 +176,39 @@ namespace PregunFondoSur.ViewModels
         private async Task enviarUsuario()
         {
             await comprobarConexion();
-            await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });  
-            
+            await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
+
         }
 
         private async Task recibirUsuario()
         {
             int cont = 2;
-            miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) => {
-                if (miConexion.State == HubConnectionState.Disconnected)
+            miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) =>
+            {
+
+                if (cont > 0)
                 {
-                    await enviarUsuario();
-                }
-                else
-                {
-                    if (cont > 0)
+                    if (UsuarioLocal.userName == datosUsuario.userName)
                     {
-                        if (UsuarioLocal.userName == datosUsuario.userName)
-                        {
-                            UsuarioLocal = datosUsuario;
-                            NotifyPropertyChanged(nameof(UsuarioLocal));
+                        UsuarioLocal = datosUsuario;
+                        NotifyPropertyChanged(nameof(UsuarioLocal));
 
-                        }
-                        else
-                        {
-                            UsuarioRival = datosUsuario;
-                            NotifyPropertyChanged(nameof(UsuarioRival));
-                        }
-                        cont--;
                     }
-
+                    else
+                    {
+                        UsuarioRival = datosUsuario;
+                        NotifyPropertyChanged(nameof(UsuarioRival));
+                    }
+                    cont--;
                 }
+
             });
             await miConexion.StartAsync();
 
         }
-        
-        private async Task enviarCambiarValorTurno() {
+
+        private async Task enviarCambiarValorTurno()
+        {
             await comprobarConexion();
             UsuarioLocal.tuTurno = false;
             NotifyPropertyChanged(nameof(UsuarioLocal));
@@ -216,18 +227,19 @@ namespace PregunFondoSur.ViewModels
 
             await miConexion.StartAsync();
         }
-        
+
 
 
         private async Task enviarListadoCategorias()
         {
             await comprobarConexion();
-            List<clsCategorias> listadoCategoriasEnviar= new List<clsCategorias>(); 
+            List<clsCategorias> listadoCategoriasEnviar = new List<clsCategorias>();
 
-            for(int i = 0; i< ListaCategoriasLocal.Count; i++) {
+            for (int i = 0; i < ListaCategoriasLocal.Count; i++)
+            {
 
                 listadoCategoriasEnviar.Add(ListaCategoriasLocal[i]);
-            
+
             }
             await miConexion.InvokeAsync("EnviarListadoCategorias", listadoCategoriasEnviar, UsuarioLocal.nombreSala);
         }
@@ -274,14 +286,14 @@ namespace PregunFondoSur.ViewModels
             listadoPreguntasScience = await clsObtenerListadoPreguntasPorCategoria.obtenerListadoPreguntasScienceDAL();
         }
 
-        
+
         /// <summary>
         /// Este método se llama cuando la partida a terminado. Primero se rellena un objeto de un model que contendrá todos los datos
         /// necesarios para la vista de partida finalizada. Luego envía a través del shell este objeto al viewmodel de la última vista
         /// </summary>
-       private async void finalizarJuego()
+        private async void finalizarJuego()
         {
-            clsDatosResultadoPartida datosPartida=new clsDatosResultadoPartida(usuarioLocal, usuarioRival, listaCategoriasLocal, listaCategoriasRival);
+            clsDatosResultadoPartida datosPartida = new clsDatosResultadoPartida(usuarioLocal, usuarioRival, listaCategoriasLocal, listaCategoriasRival);
             var navigationParameter = new Dictionary<string, object>
             {
                 { "datosPartida", datosPartida }
@@ -305,7 +317,7 @@ namespace PregunFondoSur.ViewModels
                 {
                     pulsable = true;
                 }
-            }                    
+            }
             return pulsable;
         }
 
@@ -319,10 +331,10 @@ namespace PregunFondoSur.ViewModels
             estaGirando = true;
             girarRuletaCommand.RaiseCanExecuteChanged();
 
-            
+
             await Task.Delay(TimeSpan.FromMilliseconds(2300));
             preguntaEnviar = generarPregunta();
-            
+
             var navigationParameter = new Dictionary<string, object>
             {
                 { "pregunta", preguntaEnviar }
@@ -330,8 +342,8 @@ namespace PregunFondoSur.ViewModels
             };
 
 
-            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter); 
-           
+            await Shell.Current.GoToAsync("PaginaPregunta", navigationParameter);
+
         }
 
         /// <summary>  
@@ -403,23 +415,23 @@ namespace PregunFondoSur.ViewModels
             clsPreguntas preguntaElegida = new clsPreguntas();
 
 
-            if (CategoriaDelaRuleta>=0 && CategoriaDelaRuleta <= 8)
+            if (CategoriaDelaRuleta >= 0 && CategoriaDelaRuleta <= 8)
             {
-                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntashistory);
+                preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntashistory);
             }
-            else if(CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
+            else if (CategoriaDelaRuleta >= 9 && CategoriaDelaRuleta <= 17)
             {
-                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntasScience);
+                preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasScience);
             }
-            else if(CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
+            else if (CategoriaDelaRuleta >= 18 && CategoriaDelaRuleta <= 26)
             {
-                preguntaElegida= devolverPreguntaPorCategoria(listadoPreguntasFood);
+                preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasFood);
             }
-            else if(CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
+            else if (CategoriaDelaRuleta >= 27 && CategoriaDelaRuleta <= 35)
             {
                 preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasMusic);
             }
-            else if(CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
+            else if (CategoriaDelaRuleta >= 36 && CategoriaDelaRuleta <= 44)
             {
                 preguntaElegida = devolverPreguntaPorCategoria(listadoPreguntasFilms);
             }
@@ -436,7 +448,8 @@ namespace PregunFondoSur.ViewModels
         /// </summary>
         /// <param name="listadoPreguntas"></param>
         /// <returns></returns>
-        private static clsPreguntas devolverPreguntaPorCategoria(List<clsPreguntas> listadoPreguntas) {
+        private static clsPreguntas devolverPreguntaPorCategoria(List<clsPreguntas> listadoPreguntas)
+        {
 
             Random random = new Random();
             clsPreguntas preguntaSeleccionada = new clsPreguntas();
@@ -460,14 +473,14 @@ namespace PregunFondoSur.ViewModels
         public void comprobarFinalizarPartida(List<clsCategoriasMaui> listaCategoria)
         {
             int contadorPreguntasAcertadas = 0;
-            for(int i =0; i< listaCategoria.Count; i++)
+            for (int i = 0; i < listaCategoria.Count; i++)
             {
                 if (listaCategoria[i].EstaAcertada)
                 {
                     contadorPreguntasAcertadas++;
                 }
             }
-            if(contadorPreguntasAcertadas == 5)
+            if (contadorPreguntasAcertadas == 5)
             {
                 finalizarJuego();
             }
