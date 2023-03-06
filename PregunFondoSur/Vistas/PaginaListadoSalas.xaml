@@ -10,13 +10,13 @@
         <model:clsPaginaListadoSalas/>
     </ContentPage.BindingContext>
     <VerticalStackLayout>
-        <Label FontFamily="Lilita" Text="AVAILABLE LOBBIES" FontSize="40" HorizontalOptions="Center" Margin="0,30,0,35"></Label>
+        <Label FontFamily="Lilita" Text="AVAILABLE LOBBIES" FontSize="30" HorizontalOptions="Center" Margin="0,30,0,35" TextColor="White"></Label>
         <Border WidthRequest="350" StrokeShape="RoundRectangle 10, 10, 10, 10">
-            <ListView BackgroundColor="White" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" HeightRequest="500">
+            <ListView RowHeight="{OnPlatform Android=70}" BackgroundColor="White" ItemsSource="{Binding ListadoDeSalas}" SelectedItem="{Binding SalaSelecionada}" HeightRequest="500" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Border StrokeShape="RoundRectangle 4, 4, 4, 4" Margin="0, 20, 15, 20" BackgroundColor="DodgerBlue" WidthRequest="300" HeightRequest="60">
+                            <Border Stroke="White" StrokeShape="RoundRectangle 4, 4, 4, 4" Margin="{OnPlatform WinUI='0, 20, 15,20'}" BackgroundColor="DodgerBlue" WidthRequest="{OnPlatform WinUI=300, Android=250}" HeightRequest="{OnPlatform WinUI=60, Android=40}">
                                 <Label Text="{Binding}" FontSize="22" FontFamily="Lilita" TextColor="White" Margin="20, 0, 0, 0" VerticalOptions="Center"></Label>
                             </Border>
                         </ViewCell>
