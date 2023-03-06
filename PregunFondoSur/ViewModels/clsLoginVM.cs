@@ -63,7 +63,7 @@ namespace PregunFondoSur.ViewModels
             recibirCrearSala();
         }
 
-
+        #endregion
 
         /// <summary>
         /// Método que revisa si el usuario ha introducido los datos necesarios en los entrys del la vista como para loggearse
@@ -81,8 +81,6 @@ namespace PregunFondoSur.ViewModels
             NotifyPropertyChanged("Usuario");
             return pulsable;
         }
-
-        #endregion
 
         /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
