@@ -15,9 +15,23 @@ namespace PregunFondoSur.ViewModels
         private DelegateCommand logInCommand;
         private DelegateCommand crearSalaCommand;
         private readonly HubConnection miConexion;
+        private bool boolMensajeCampos;
         #endregion
 
         #region Propiedades
+
+        public bool BoolMensajeCampos
+        {
+            get
+            {
+                return boolMensajeCampos;
+            }
+            set
+            {
+                boolMensajeCampos = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string Nickname
         {
@@ -54,8 +68,9 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsLoginVM()
         {
+            BoolMensajeCampos = false;
             usuario = new clsUsuario();
-            logInCommand = new DelegateCommand(logInCommand_Execute, logInCommand_CanExecute);
+            logInCommand = new DelegateCommand(logInCommand_Execute);
             crearSalaCommand = new DelegateCommand(crearSalaCommand_Execute);
 
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/salasHub").Build();
@@ -66,34 +81,25 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         /// <summary>
-        /// Método que revisa si el usuario ha introducido los datos necesarios en los entrys del la vista como para loggearse
-        /// Precondiciones:Ninguna
-        /// Postcondiciones:Ninguna
-        /// </summary>
-        /// <returns></returns>
-        private bool logInCommand_CanExecute()
-        {
-            bool pulsable = false;
-            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null))
-            {
-                pulsable = true;
-            }
-            NotifyPropertyChanged("Usuario");
-            return pulsable;
-        }
-
-        /// <summary>
         /// Metodo que al pulsar el botón de login, manda al usuario a la sala de espera recogiendo sus datos
         /// </summary>
         private async void logInCommand_Execute()
         {
-            Usuario.userName = Nickname;
-            Usuario.imagen = Imagen;
-            var navigationParameter = new Dictionary<string, object>
+            if ((Nickname != "" && Nickname != null) && (Imagen != "" && Imagen != null))
+            {
+                Usuario.userName = Nickname;
+                Usuario.imagen = Imagen;
+                var navigationParameter = new Dictionary<string, object>
             {
                 {"Usuario", Usuario }
             };
-            await Shell.Current.GoToAsync("PaginaListadoSalas", navigationParameter);
+                await Shell.Current.GoToAsync("PaginaListadoSalas", navigationParameter);
+                BoolMensajeCampos = false;
+            }
+            else
+            {
+                BoolMensajeCampos = true;
+            }
         }
 
 
@@ -119,27 +125,32 @@ namespace PregunFondoSur.ViewModels
 
         private async void crearSalaCommand_Execute()
         {
-            string nombreSala = await App.Current.MainPage.DisplayPromptAsync("Crear sala", "Introduce el nombre de la sala");
-            
-            if(nombreSala != null && nombreSala !="" && Nickname!=null && Nickname != "") { 
-           
-            await crearSala(nombreSala);
-
-            Usuario.userName = Nickname;
-            Usuario.imagen = Imagen;
-            Usuario.nombreSala = nombreSala;
-
-            var navigationParameter = new Dictionary<string, object>
+            if (Nickname != null && Nickname != "" && (Imagen != "" && Imagen != null))
             {
-                {"Usuario", Usuario }
-            };
-            await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
+                string nombreSala = await App.Current.MainPage.DisplayPromptAsync("Crear sala", "Introduce el nombre de la sala");
+                BoolMensajeCampos = false;
 
+                if (nombreSala != null && nombreSala != "")
+                {
+                    await crearSala(nombreSala);
+
+                    Usuario.userName = Nickname;
+                    Usuario.imagen = Imagen;
+                    Usuario.nombreSala = nombreSala;
+
+                    var navigationParameter = new Dictionary<string, object>
+                {
+                    {"Usuario", Usuario }
+                };
+                    await Shell.Current.GoToAsync("PaginaEspera", navigationParameter);
+
+                }
             }
-
+            else
+            {
+                BoolMensajeCampos = true;
+            }
         }
-
-
     }
 }
 
