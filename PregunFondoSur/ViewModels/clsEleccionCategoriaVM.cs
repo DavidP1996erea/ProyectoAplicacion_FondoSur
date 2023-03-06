@@ -72,7 +72,7 @@ namespace PregunFondoSur.ViewModels
                 // Se comprueba que antes de realizar las acciones el usuario no esté a null
                 if (usuarioLocal != null)
                 {
-                    if (enviadoUsuario <=2)
+                    if (enviadoUsuario == 0)
                     {
                         enviadoUsuario++;
                         enviarUsuario();

@@ -9,8 +9,8 @@
         <model:clsResultadosVM/>
     </ContentPage.BindingContext>
     <VerticalStackLayout HorizontalOptions="Center">
-        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="100" BackgroundColor="White">
-            <Label FontSize="48" Text="{Binding MensajeGanadoPerdido}" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="{Binding ColorMensaje}" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
+        <Border StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=600, Android=350}" Margin="0,40,0,0" HeightRequest="80" BackgroundColor="White">
+            <Label FontSize="30" Text="{Binding MensajeGanadoPerdido}" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="{Binding ColorMensaje}" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
         </Border>
 
         <HorizontalStackLayout>

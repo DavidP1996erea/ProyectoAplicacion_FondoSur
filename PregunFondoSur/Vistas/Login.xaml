@@ -12,7 +12,7 @@
 
     <VerticalStackLayout HorizontalOptions="Center">
         <Border Stroke="White"  StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=400, Android=350}" Margin="0,60,0,40" HeightRequest="100" BackgroundColor="White">
-            <Label FontSize="36" Text="PREGUNFONDOSUR" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="DodgerBlue" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
+            <Label FontSize="30" Text="PREGUNFONDOSUR" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="DodgerBlue" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
         </Border>
         <Label Text="SIGN IN" FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontFamily="Lilita"/>
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,40,0,20" HeightRequest="40" Stroke="White" BackgroundColor="White">
