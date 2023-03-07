@@ -78,7 +78,12 @@ namespace PregunFondoSur.ViewModels
 
             volverAEleccionCategoria(categoriaResultado);
         }
-
+        /// <summary>
+        /// Metodo que recibe un nombre y recorre un listado de categorias
+        /// y cuando tienen el mismo nombre returna la categoria con ese nombre.
+        /// </summary>
+        /// <param name="nombreCategoria"></param>
+        /// <returns></returns>
         private clsCategoriasMaui obtenerCategoriaPorNombre(String nombreCategoria)
         {
             clsCategoriasMaui categoriaAcertada = new clsCategoriasMaui();
@@ -94,7 +99,11 @@ namespace PregunFondoSur.ViewModels
             }
             return categoriaAcertada;
         }
-
+        /// <summary>
+        /// Metodo que te envia de vuelta a la pagina de eleccionCategoria 
+        /// returnandote la categoria.
+        /// </summary>
+        /// <param name="categoriaAcertada"></param>
         private async void volverAEleccionCategoria(clsCategoriasMaui categoriaAcertada)
         {
             var navigationParameter = new Dictionary<string, object>
@@ -104,7 +113,12 @@ namespace PregunFondoSur.ViewModels
             await Shell.Current.GoToAsync("..", navigationParameter);
         }
 
-
+        /// <summary>
+        /// Metodo que áñade a un listado de strings las 3 respuestas incorrectas 
+        /// y la respuesta correcta y llama al metodo de randomizar ¡
+        /// </summary>
+        /// <param name="listadoRespuestas"></param>
+        /// <param name="pregunta"></param>
         private void obtenerListadoRespuestas(List<String> listadoRespuestas, clsPreguntas pregunta)
         {
             listadoRespuestas.Add(pregunta.incorrectAnswers[0]);
@@ -116,7 +130,11 @@ namespace PregunFondoSur.ViewModels
             
 
         }
-
+        /// <summary>
+        /// Metodo que randomiza un listado de string.
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<string> randomizar(List<string> list)
         {
             List<string> randomizedList = new List<string>();
@@ -129,13 +147,23 @@ namespace PregunFondoSur.ViewModels
             }
             return randomizedList;
         }
-
+        /// <summary>
+        /// Metodo que recibe un parametro que son los numeros
+        /// identificadores que tiene cada boton de la vista y 
+        /// asi se comprueba si la respuesta seleccionada es la correcta.
+        /// </summary>
+        /// <param name="parametro"></param>
         private void pulsarBotonCommand_Executed(string parametro)
         {
             int posicion = int.Parse(parametro);
             respuestaSeleccionada = listadoRespuestas[posicion];
             comprobarSiCorrecto();
         }
+        /// <summary>
+        /// Metodo que segun si la respuesta seleccionada esta correcta
+        ///  envia un true y en el caso contrario un false
+        /// </summary>
+        /// <returns></returns>
         private async Task comprobarSiCorrecto()
         {
             if (respuestaSeleccionada == pregunta.correctAnswer)
