@@ -183,7 +183,7 @@ namespace PregunFondoSur.ViewModels
             await comprobarConexion();
             Thread.Sleep(1000);
             await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
-            Thread.Sleep(1000);
+            
 
         }
 
@@ -194,7 +194,6 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private async Task recibirUsuario()
         {
-            Thread.Sleep(1000);
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) =>
             {
@@ -209,8 +208,11 @@ namespace PregunFondoSur.ViewModels
                     }
                     else 
                     {
-                        UsuarioRival = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioRival));
+                        if (datosUsuario.userName != null || datosUsuario.userName != "")
+                        {
+                            UsuarioRival = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioRival));
+                        }
                     }
                     cont--;
                 }
