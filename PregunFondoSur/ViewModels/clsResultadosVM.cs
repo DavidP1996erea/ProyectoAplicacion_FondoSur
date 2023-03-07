@@ -104,7 +104,9 @@ namespace PregunFondoSur.ViewModels
             listadoCategoriasLocal = datosPartida.categoriasUsuarioLocal;
             comprobarGanado();
         }
-
+        /// <summary>
+        /// Metodo que vuelve a la pagina de login.
+        /// </summary>
         private async void botonMenuPrincipal_Executed()
         {
             await Shell.Current.GoToAsync("Login");
