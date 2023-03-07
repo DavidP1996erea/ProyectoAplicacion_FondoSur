@@ -107,7 +107,7 @@ namespace PregunFondoSur.ViewModels
 
         private async void botonMenuPrincipal_Executed()
         {
-            await Shell.Current.GoToAsync("//Login");
+            await Shell.Current.GoToAsync("Login");
         }
 
         #endregion
