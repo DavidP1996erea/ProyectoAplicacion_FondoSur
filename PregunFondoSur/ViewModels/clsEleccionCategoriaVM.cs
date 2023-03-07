@@ -149,7 +149,7 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
             // Se crea la conexión con el servidor.
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
-            Thread.Sleep(2000);
+            
 
             recibirUsuario();
             recibirListadoCategorias();
@@ -181,7 +181,9 @@ namespace PregunFondoSur.ViewModels
         private async Task enviarUsuario()
         {
             await comprobarConexion();
+            Thread.Sleep(1000);
             await miConexion.InvokeCoreAsync("enviarUsuario", args: new[] { UsuarioLocal });
+            Thread.Sleep(1000);
 
         }
 
@@ -192,6 +194,7 @@ namespace PregunFondoSur.ViewModels
         /// <returns></returns>
         private async Task recibirUsuario()
         {
+            Thread.Sleep(1000);
             int cont = 2;
             miConexion.On<clsUsuario>("recibirUsuario", async (datosUsuario) =>
             {
