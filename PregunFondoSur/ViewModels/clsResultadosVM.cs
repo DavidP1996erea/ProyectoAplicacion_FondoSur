@@ -98,6 +98,13 @@ namespace PregunFondoSur.ViewModels
                 ColorMensaje = Color.Parse("#DF0101");
             }
         }
+
+        /// <summary>
+        /// Método que recibe una query con un objeto y un string y asigna dicho objeto al atributo
+        /// privado de tipo clsDatosResultadoPartida datosPartida, llama al método que comprueba quien
+        /// es el ganador y a la listaCategoriasLocal le asigna el valor de las categorias del jugador local.
+        /// </summary>
+        /// <param name="query"></param>
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             datosPartida = query["datosPartida"] as clsDatosResultadoPartida;

@@ -103,13 +103,21 @@ namespace PregunFondoSur.ViewModels
         }
 
 
-
+        /// <summary>
+        /// Método que recibe una cadena nombreSala para pasarla por signal R y crear una nueva sala.
+        /// </summary>
+        /// <param name="nombreSala"></param>
+        /// <returns></returns>
         #region Métodos SignalR
         private async Task crearSala(string nombreSala)
         {
             await miConexion.InvokeCoreAsync("crearSala", args: new[] { nombreSala });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task recibirCrearSala()
         {
             miConexion.On<String>("recibirCrearSala", (nombreSala) =>
@@ -120,9 +128,16 @@ namespace PregunFondoSur.ViewModels
 
             await miConexion.StartAsync();
         }
+
         #endregion
 
 
+        /// <summary>
+        /// Método que comprueba que las propiedades públicas Nickname, Imagen y la propiedad privada
+        /// nombre sala no son nulas ni tienen un valor vacio para así preguntar al usuario por el nombre de la sala
+        /// y crearla, uniendose a ella y pasando a la página PaginaEspera enviandole un objeto de tipo Usuario con los
+        /// valores recogidos de la vista.
+        /// </summary>
         private async void crearSalaCommand_Execute()
         {
             if (Nickname != null && Nickname != "" && (Imagen != "" && Imagen != null))
