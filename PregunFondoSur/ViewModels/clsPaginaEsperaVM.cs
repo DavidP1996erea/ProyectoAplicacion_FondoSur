@@ -54,7 +54,7 @@ namespace PregunFondoSur.ViewModels
 
         #region MetodosSignalR
         /// <summary>
-        /// Metodos paletas2
+        /// Método que envía un usuario
         /// </summary>
         private async Task enviarBool()
         {
@@ -65,7 +65,8 @@ namespace PregunFondoSur.ViewModels
 
 
         /// <summary>
-        /// Metoddo paletas
+        /// Recibe al usuario, y en caso de que sea un nombre diferene al usuario local
+        /// significa que es el rival, por lo que se pasa de página.
         /// </summary>
         private async Task recibirBool()
         {
@@ -90,7 +91,10 @@ namespace PregunFondoSur.ViewModels
         }
         #endregion
 
-
+        /// <summary>
+        /// Método que envía un usuario a la página PaginaEleccionCategoría
+        /// </summary>
+        /// <returns></returns>
         private async Task pasarPagina()
         {
             var navigationParameter = new Dictionary<string, object>

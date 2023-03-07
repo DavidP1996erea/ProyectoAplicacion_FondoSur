@@ -14,7 +14,7 @@ namespace PregunFondoSur.ViewModels
         private readonly HubConnection miConexion;
         #endregion
 
-        #region Propieades
+        #region Propiedades
         public clsUsuario Usuario
         {
             get { return usuario; }
@@ -54,13 +54,20 @@ namespace PregunFondoSur.ViewModels
         #endregion
 
         #region Métodos SignalR
-
+        /// <summary>
+        /// Envía un listado
+        /// </summary>
+        /// <returns></returns>
         private async Task enviarListadoSalas()
         {
             List<String> lista = new List<string>();
             await miConexion.InvokeCoreAsync("enviarListadoSalas", args: new[] { lista });
         }
 
+        /// <summary>
+        /// Recibe un listado de salas
+        /// </summary>
+        /// <returns></returns>
         private async Task recibirListadoSalas()
         {
             miConexion.On<List<string>>("recibirListadoSalas", (listadoSalas) =>
@@ -78,6 +85,10 @@ namespace PregunFondoSur.ViewModels
 
         #region Metodos
 
+        /// <summary>
+        /// Envía un usuario a la página PaginaEspera
+        /// </summary>
+        /// <param name="salaSelecionada"></param>
         public async void enviarASalaEspera(string salaSelecionada)
         {
             Usuario.nombreSala= salaSelecionada;
