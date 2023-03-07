@@ -13,6 +13,7 @@ namespace PregunFondoSur.ViewModels
         private List<clsCategoriasMaui> listadoCategoriasLocal;
         private String mensajeGanadoPerdido;
         private Color colorMensaje;
+        private DelegateCommand botonMenuPrincipal;
         #endregion
 
         #region Propiedades
@@ -52,14 +53,20 @@ namespace PregunFondoSur.ViewModels
               NotifyPropertyChanged(); 
             }
         }
+        public DelegateCommand BotonMenuPrincipal
+        {
+            get { return botonMenuPrincipal; }
+            set { botonMenuPrincipal = value; }
+        }
 
         #endregion
 
         #region Constructores
         public clsResultadosVM()
         {
-
+            botonMenuPrincipal = new DelegateCommand(botonMenuPrincipal_Executed);
         }
+
         #endregion
 
         #region Metodos
@@ -96,6 +103,11 @@ namespace PregunFondoSur.ViewModels
             datosPartida = query["datosPartida"] as clsDatosResultadoPartida;
             listadoCategoriasLocal = datosPartida.categoriasUsuarioLocal;
             comprobarGanado();
+        }
+
+        private async void botonMenuPrincipal_Executed()
+        {
+            await Shell.Current.GoToAsync("Login");
         }
 
         #endregion

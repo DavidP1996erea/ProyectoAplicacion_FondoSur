@@ -11,16 +11,22 @@
     </ContentPage.BindingContext>
 
     <VerticalStackLayout HorizontalOptions="Center">
+        
         <Border Stroke="White"  StrokeShape="RoundRectangle 10, 10, 10, 10" WidthRequest="{OnPlatform WinUI=400, Android=350}" Margin="0,60,0,40" HeightRequest="100" BackgroundColor="White">
             <Label FontSize="30" Text="PREGUNFONDOSUR" FontAttributes="Bold" FontFamily="Lilita" HorizontalTextAlignment="Center" TextColor="White" BackgroundColor="DodgerBlue" VerticalTextAlignment="Center" Margin="{OnPlatform WinUI=2.5, Android= 5}"/>
         </Border>
+        
         <Label Text="SIGN IN" FontSize="30" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" FontAttributes="Bold" FontFamily="Lilita"/>
+        
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,40,0,20" HeightRequest="40" Stroke="White" BackgroundColor="White">
             <Entry Text="{Binding Nickname}" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="Nickname" FontFamily="Maven" Margin="{OnPlatform Android='10, 0, 0, 0'}"/>
         </Border>
+        
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" WidthRequest="300" Margin="0,0,0,20" HeightRequest="40" Stroke="White" BackgroundColor="White">
             <Entry Text="{Binding Imagen}" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="Center" FontSize="15" BackgroundColor="White" WidthRequest="300" HeightRequest="40" Placeholder="URL Image" FontFamily="Maven" Margin="{OnPlatform Android='10, 0, 0, 0'}"/>
         </Border>
+
+        <Label Text="MAKE SURE THE FIELDS AREN'T EMPTY" TextColor="Red" FontAttributes="Bold" HorizontalOptions="Center" IsVisible="{Binding BoolMensajeCampos}" ></Label>
 
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="150">
             <Button Text="JOIN" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Command="{Binding LogInCommand}"></Button>
@@ -29,5 +35,6 @@
         <Border StrokeShape="RoundRectangle 10, 10, 10, 10" Margin="0,20,0,20" Stroke="DodgerBlue" WidthRequest="150">
             <Button Text="CREATE LOBBY" FontFamily="Lilita" FontSize="17" BackgroundColor="DodgerBlue" TextColor="White" FontAttributes="Bold" Command="{Binding CrearSalaCommand}"></Button>
         </Border>
+        
     </VerticalStackLayout>
 </ContentPage>
