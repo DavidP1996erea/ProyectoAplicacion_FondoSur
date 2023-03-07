@@ -139,7 +139,6 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsEleccionCategoriaVM()
         {
-            Thread.Sleep(2000);
             // Se rellenan todas las listas con preguntas
             obtenerListados();
 
@@ -150,6 +149,7 @@ namespace PregunFondoSur.ViewModels
             girarRuletaCommand = new DelegateCommand(girarRuletaCommand_Executed, girarRuletaCommand_CanExecuted);
             // Se crea la conexión con el servidor.
             miConexion = new HubConnectionBuilder().WithUrl("https://proyectofondosur.azurewebsites.net/eleccionCategoriasHub").Build();
+            Thread.Sleep(2000);
 
             recibirUsuario();
             recibirListadoCategorias();
