@@ -165,6 +165,11 @@ namespace PregunFondoSur.ViewModels
 
         #region Métodos SignalR
 
+
+        /// <summary>
+        /// Comprueba que la conexión está establecida
+        /// </summary>
+        /// <returns></returns>
         private async Task comprobarConexion()
         {
             if (miConexion.State == HubConnectionState.Disconnected)
@@ -173,6 +178,10 @@ namespace PregunFondoSur.ViewModels
             }
         }
 
+        /// <summary>
+        /// Método del signalR que envía al usuario local 
+        /// </summary>
+        /// <returns></returns>
         private async Task enviarUsuario()
         {
             await comprobarConexion();
@@ -180,6 +189,11 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+        /// <summary>
+        /// Se recibe los datos del usuario local y en caso de que el nombre sea diferente, significa
+        /// que es el usuario rival, por lo que se setea el usuario rival con datosUsuario
+        /// </summary>
+        /// <returns></returns>
         private async Task recibirUsuario()
         {
             int cont = 2;
@@ -207,6 +221,10 @@ namespace PregunFondoSur.ViewModels
 
         }
 
+        /// <summary>
+        /// Método que envía el valor del turno
+        /// </summary>
+        /// <returns></returns>
         private async Task enviarCambiarValorTurno()
         {
             await comprobarConexion();
@@ -215,6 +233,10 @@ namespace PregunFondoSur.ViewModels
             await miConexion.InvokeCoreAsync("enviarCambiarValorTurno", args: new[] { "true", UsuarioLocal.nombreSala });
         }
 
+        /// <summary>
+        /// Cuando es llamado, cambia el valor del turno del usuario local a true
+        /// </summary>
+        /// <returns></returns>
         private async Task recibirCambiarTurno()
         {
             miConexion.On<String>("recibirCambiarTurno", (turno) =>
@@ -229,6 +251,10 @@ namespace PregunFondoSur.ViewModels
         }
 
 
+        /// <summary>
+        /// Método que envía el listado de categorías local
+        /// </summary>
+        /// <returns></returns>
 
         private async Task enviarListadoCategorias()
         {
@@ -244,6 +270,10 @@ namespace PregunFondoSur.ViewModels
             await miConexion.InvokeAsync("EnviarListadoCategorias", listadoCategoriasEnviar, UsuarioLocal.nombreSala);
         }
 
+        /// <summary>
+        /// Recibe el listado de categorías del rival y lo setea. También se comprueba si el rival ha ganado
+        /// </summary>
+        /// <returns></returns>
         private async Task recibirListadoCategorias()
         {
 
@@ -467,7 +497,9 @@ namespace PregunFondoSur.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Método que recibe como parámetro un listado de categorías. Lo recorre y va comprobando
+        /// en cada iteración si esa categoría está acertada, en caso de estar todas acertadas
+        /// se llamará al método finalizarJuego.
         /// </summary>
         /// <param name="listaCategoria"></param>
         public void comprobarFinalizarPartida(List<clsCategoriasMaui> listaCategoria)
@@ -486,6 +518,10 @@ namespace PregunFondoSur.ViewModels
             }
         }
 
+        /// <summary>
+        /// Igual que el método anterior pero comprueba que el rival haya ganado
+        /// </summary>
+        /// <param name="listaCategoria"></param>
         public void comprobarFinalizarPartidaRival(List<clsCategorias> listaCategoria)
         {
             int contadorPreguntasAcertadas = 0;
