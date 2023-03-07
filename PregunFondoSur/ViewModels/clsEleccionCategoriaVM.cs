@@ -33,7 +33,6 @@ namespace PregunFondoSur.ViewModels
         private int categoriaDeLaRuleta;
         private bool boolRuletaDisponible;
         private bool boolTextoEspera;
-        private int enviadoUsuario = 0;
         #endregion
 
         #region Propiedades
@@ -72,15 +71,11 @@ namespace PregunFondoSur.ViewModels
                 // Se comprueba que antes de realizar las acciones el usuario no esté a null
                 if (usuarioLocal != null)
                 {
-                    if (enviadoUsuario < 2)
-                    {
-                        enviadoUsuario++;
-                        enviarUsuario();
-                    }
+                    enviarUsuario();
                     NotifyPropertyChanged();
                     establecerColorFondo();
                     girarRuletaCommand.RaiseCanExecuteChanged();
-                    
+
 
                 }
             }
@@ -144,6 +139,7 @@ namespace PregunFondoSur.ViewModels
         #region Constructores
         public clsEleccionCategoriaVM()
         {
+            Thread.Sleep(2000);
             // Se rellenan todas las listas con preguntas
             obtenerListados();
 
@@ -208,7 +204,7 @@ namespace PregunFondoSur.ViewModels
                         NotifyPropertyChanged(nameof(UsuarioLocal));
 
                     }
-                    else
+                    else 
                     {
                         UsuarioRival = datosUsuario;
                         NotifyPropertyChanged(nameof(UsuarioRival));
