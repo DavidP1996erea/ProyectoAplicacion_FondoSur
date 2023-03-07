@@ -202,9 +202,11 @@ namespace PregunFondoSur.ViewModels
                 {
                     if (UsuarioLocal.userName == datosUsuario.userName)
                     {
-                        UsuarioLocal = datosUsuario;
-                        NotifyPropertyChanged(nameof(UsuarioLocal));
-
+                        if (UsuarioLocal.tuTurno != true)
+                        {
+                            UsuarioLocal = datosUsuario;
+                            NotifyPropertyChanged(nameof(UsuarioLocal));
+                        }
                     }
                     else 
                     {
